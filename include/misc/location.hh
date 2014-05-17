@@ -32,118 +32,116 @@
 
 /**
  ** \file location.hh
- ** Define the  ucc::parse ::location class.
+ ** Define the  ucmp::misc::location class.
  */
 
-#ifndef YY_YY_LOCATION_HH_INCLUDED
-# define YY_YY_LOCATION_HH_INCLUDED
+#ifndef UCMP_LOCATION_HH_INCLUDED
+# define UCMP_LOCATION_HH_INCLUDED
 
 # include <misc/position.hh>
 
-#line 8 "src/parse/c-parser.yy" // location.cc:291
-namespace  ucc { namespace misc  {
-#line 46 "location.hh" // location.cc:291
-  /// Abstract a location.
-  class location
-  {
-  public:
+namespace ucmp
+{
+    namespace misc  {
+        /// Abstract a location.
+        class location
+        {
+            public:
 
-    /// Initialization.
-    void initialize (const std::string* f = YY_NULLPTR,
-                     unsigned int l = 1u,
-                     unsigned int c = 1u)
-    {
-      begin.initialize (f, l, c);
-      end = begin;
-    }
+                /// Initialization.
+                void initialize (const std::string* f = YY_NULLPTR,
+                        unsigned int l = 1u,
+                        unsigned int c = 1u)
+                {
+                    begin.initialize (f, l, c);
+                    end = begin;
+                }
 
-    /** \name Line and Column related manipulators
-     ** \{ */
-  public:
-    /// Reset initial location to final location.
-    void step ()
-    {
-      begin = end;
-    }
+                /** \name Line and Column related manipulators
+                 ** \{ */
+            public:
+                /// Reset initial location to final location.
+                void step ()
+                {
+                    begin = end;
+                }
 
-    /// Extend the current location to the COUNT next columns.
-    void columns (int count = 1)
-    {
-      end += count;
-    }
+                /// Extend the current location to the COUNT next columns.
+                void columns (int count = 1)
+                {
+                    end += count;
+                }
 
-    /// Extend the current location to the COUNT next lines.
-    void lines (int count = 1)
-    {
-      end.lines (count);
-    }
-    /** \} */
+                /// Extend the current location to the COUNT next lines.
+                void lines (int count = 1)
+                {
+                    end.lines (count);
+                }
+                /** \} */
 
 
-  public:
-    /// Beginning of the located region.
-    position begin;
-    /// End of the located region.
-    position end;
-  };
+            public:
+                /// Beginning of the located region.
+                position begin;
+                /// End of the located region.
+                position end;
+        };
 
-  /// Join two location objects to create a location.
-  inline location operator+ (location res, const location& end)
-  {
-    res.end = end.end;
-    return res;
-  }
+        /// Join two location objects to create a location.
+        inline location operator+ (location res, const location& end)
+        {
+            res.end = end.end;
+            return res;
+        }
 
-  /// Change end position in place.
-  inline location& operator+= (location& res, int width)
-  {
-    res.columns (width);
-    return res;
-  }
+        /// Change end position in place.
+        inline location& operator+= (location& res, int width)
+        {
+            res.columns (width);
+            return res;
+        }
 
-  /// Change end position.
-  inline location operator+ (location res, int width)
-  {
-    return res += width;
-  }
+        /// Change end position.
+        inline location operator+ (location res, int width)
+        {
+            return res += width;
+        }
 
-  /// Change end position in place.
-  inline location& operator-= (location& res, int width)
-  {
-    return res += -width;
-  }
+        /// Change end position in place.
+        inline location& operator-= (location& res, int width)
+        {
+            return res += -width;
+        }
 
-  /// Change end position.
-  inline location operator- (const location& begin, int width)
-  {
-    return begin + -width;
-  }
+        /// Change end position.
+        inline location operator- (const location& begin, int width)
+        {
+            return begin + -width;
+        }
 
-  /** \brief Intercept output stream redirection.
-   ** \param ostr the destination output stream
-   ** \param loc a reference to the location to redirect
-   **
-   ** Avoid duplicate information.
-   */
-  template <typename YYChar>
-  inline std::basic_ostream<YYChar>&
-  operator<< (std::basic_ostream<YYChar>& ostr, const location& loc)
-  {
-    unsigned int end_col = 0 < loc.end.column ? loc.end.column - 1 : 0;
-    ostr << loc.begin// << "(" << loc.end << ") "
-;
-    if (loc.end.filename
-        && (!loc.begin.filename
-            || *loc.begin.filename != *loc.end.filename))
-      ostr << '-' << loc.end.filename << ':' << loc.end.line << '.' << end_col;
-    else if (loc.begin.line < loc.end.line)
-      ostr << '-' << loc.end.line << '.' << end_col;
-    else if (loc.begin.column < end_col)
-      ostr << '-' << end_col;
-    return ostr;
-  }
-
-#line 8 "src/parse/c-parser.yy" // location.cc:291
-} } //  ucc::misc
-#line 149 "location.hh" // location.cc:291
-#endif // !YY_YY_LOCATION_HH_INCLUDED
+        /** \brief Intercept output stream redirection.
+         ** \param ostr the destination output stream
+         ** \param loc a reference to the location to redirect
+         **
+         ** Avoid duplicate information.
+         */
+        template <typename YYChar>
+            inline std::basic_ostream<YYChar>&
+            operator<< (std::basic_ostream<YYChar>& ostr, const location& loc)
+            {
+                unsigned int end_col = 0 < loc.end.column ? loc.end.column - 1 : 0;
+                ostr << loc.begin// << "(" << loc.end << ") "
+                    ;
+                if (loc.end.filename
+                        && (!loc.begin.filename
+                            || *loc.begin.filename != *loc.end.filename))
+                    ostr << '-' << loc.end.filename << ':' << loc.end.line << '.' << end_col;
+                else if (loc.begin.line < loc.end.line)
+                    ostr << '-' << loc.end.line << '.' << end_col;
+                else if (loc.begin.column < end_col)
+                    ostr << '-' << end_col;
+                return ostr;
+            }
+    } // namespace misc
+} // namespace ucmp
+#endif // !UCMP_LOCATION_HH_INCLUDED

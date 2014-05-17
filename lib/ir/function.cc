@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <misc/indent.hh>
 #include <ir/function.hh>
 
-using namespace ucc;
+using namespace ucmp;
 using namespace ir;
 
 Function::Function(const misc::Symbol& name, FunctionType* t)

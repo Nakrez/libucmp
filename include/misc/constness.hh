@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef CONSTNESS_HH
 # define CONSTNESS_HH
 
-namespace ucc
+namespace ucmp
 {
     namespace misc
     {
@@ -35,6 +35,6 @@ namespace ucc
             typedef T type;
         };
     } // namespace misc
-} // namespace ucc
+} // namespace ucmp
 
 #endif /* !CONSTNESS_HH */

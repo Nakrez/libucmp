@@ -16,12 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_IR_GLOBAL_VARIABLE_HH
-# define UCC_IR_GLOBAL_VARIABLE_HH
+#ifndef UCMP_IR_GLOBAL_VARIABLE_HH
+# define UCMP_IR_GLOBAL_VARIABLE_HH
 
 # include <ir/global-value.hh>
 
-namespace ucc
+namespace ucmp
 {
     namespace ir
     {
@@ -50,6 +50,6 @@ namespace ucc
                 Constant* init_;
         };
     } // namespace ir
-} // namespace ucc
+} // namespace ucmp
 
-#endif /* !UCC_IR_GLOBAL_VARIABLE_HH */
+#endif /* !UCMP_IR_GLOBAL_VARIABLE_HH */

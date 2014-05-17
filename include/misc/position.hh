@@ -32,11 +32,11 @@
 
 /**
  ** \file position.hh
- ** Define the  ucc::parse ::position class.
+ ** Define the  ucmp::misc::position class.
  */
 
-#ifndef YY_YY_POSITION_HH_INCLUDED
-# define YY_YY_POSITION_HH_INCLUDED
+#ifndef UCMP_MISC_POSITION_HH_INCLUDED
+# define UCMP_MISC_POSITION_HH_INCLUDED
 
 # include <algorithm> // std::max
 # include <iostream>
@@ -50,102 +50,101 @@
 #  endif
 # endif
 
-#line 8 "src/parse/c-parser.yy" // location.cc:291
-namespace  ucc { namespace misc {
-#line 56 "position.hh" // location.cc:291
-  /// Abstract a position.
-  class position
-  {
-  public:
-    /// Initialization.
-    void initialize (const std::string* fn = YY_NULLPTR,
-                     unsigned int l = 1u,
-                     unsigned int c = 1u)
-    {
-      filename = fn;
-      line = l;
-      column = c;
-    }
-
-    /** \name Line and Column related manipulators
-     ** \{ */
-    /// (line related) Advance to the COUNT next lines.
-    void lines (int count = 1)
-    {
-      if (count)
+namespace  ucmp
+{
+    namespace misc {
+        /// Abstract a position.
+        class position
         {
-          column = 1u;
-          line = add_ (line, count, 1);
-        }
-    }
+            public:
+                /// Initialization.
+                void initialize (const std::string* fn = YY_NULLPTR,
+                        unsigned int l = 1u,
+                        unsigned int c = 1u)
+                {
+                    filename = fn;
+                    line = l;
+                    column = c;
+                }
 
-    /// (column related) Advance to the COUNT next columns.
-    void columns (int count = 1)
-    {
-      column = add_ (column, count, 1);
-    }
-    /** \} */
+                /** \name Line and Column related manipulators
+                 ** \{ */
+                /// (line related) Advance to the COUNT next lines.
+                void lines (int count = 1)
+                {
+                    if (count)
+                    {
+                        column = 1u;
+                        line = add_ (line, count, 1);
+                    }
+                }
 
-    /// File name to which this position refers.
-    const std::string* filename;
-    /// Current line number.
-    unsigned int line;
-    /// Current column number.
-    unsigned int column;
+                /// (column related) Advance to the COUNT next columns.
+                void columns (int count = 1)
+                {
+                    column = add_ (column, count, 1);
+                }
+                /** \} */
 
-  private:
-    /// Compute max(min, lhs+rhs) (provided min <= lhs).
-    static unsigned int add_ (unsigned int lhs, int rhs, unsigned int min)
-    {
-      return (0 < rhs || -static_cast<unsigned int>(rhs) < lhs
-              ? rhs + lhs
-              : min);
-    }
-  };
+                /// File name to which this position refers.
+                const std::string* filename;
+                /// Current line number.
+                unsigned int line;
+                /// Current column number.
+                unsigned int column;
 
-  /// Add and assign a position.
-  inline position&
-  operator+= (position& res, int width)
-  {
-    res.columns (width);
-    return res;
-  }
+            private:
+                /// Compute max(min, lhs+rhs) (provided min <= lhs).
+                static unsigned int add_ (unsigned int lhs, int rhs, unsigned int min)
+                {
+                    return (0 < rhs || -static_cast<unsigned int>(rhs) < lhs
+                            ? rhs + lhs
+                            : min);
+                }
+        };
 
-  /// Add two position objects.
-  inline position
-  operator+ (position res, int width)
-  {
-    return res += width;
-  }
+        /// Add and assign a position.
+        inline position&
+            operator+= (position& res, int width)
+            {
+                res.columns (width);
+                return res;
+            }
 
-  /// Add and assign a position.
-  inline position&
-  operator-= (position& res, int width)
-  {
-    return res += -width;
-  }
+        /// Add two position objects.
+        inline position
+            operator+ (position res, int width)
+            {
+                return res += width;
+            }
 
-  /// Add two position objects.
-  inline position
-  operator- (position res, int width)
-  {
-    return res -= width;
-  }
+        /// Add and assign a position.
+        inline position&
+            operator-= (position& res, int width)
+            {
+                return res += -width;
+            }
 
-  /** \brief Intercept output stream redirection.
-   ** \param ostr the destination output stream
-   ** \param pos a reference to the position to redirect
-   */
-  template <typename YYChar>
-  inline std::basic_ostream<YYChar>&
-  operator<< (std::basic_ostream<YYChar>& ostr, const position& pos)
-  {
-    if (pos.filename)
-      ostr << *pos.filename << ':';
-    return ostr << pos.line << '.' << pos.column;
-  }
+        /// Add two position objects.
+        inline position
+            operator- (position res, int width)
+            {
+                return res -= width;
+            }
 
-#line 8 "src/parse/c-parser.yy" // location.cc:291
-} } //  ucc::parse 
-#line 151 "position.hh" // location.cc:291
-#endif // !YY_YY_POSITION_HH_INCLUDED
+        /** \brief Intercept output stream redirection.
+         ** \param ostr the destination output stream
+         ** \param pos a reference to the position to redirect
+         */
+        template <typename YYChar>
+            inline std::basic_ostream<YYChar>&
+            operator<< (std::basic_ostream<YYChar>& ostr, const position& pos)
+            {
+                if (pos.filename)
+                    ostr << *pos.filename << ':';
+                return ostr << pos.line << '.' << pos.column;
+            }
+
+} // namespace misc
+} // namespace ucmp
+#endif // !UCMP_MISC_POSITION_HH_INCLUDED

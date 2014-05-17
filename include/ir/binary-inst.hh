@@ -16,13 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_IR_BINARY_INST_HH
-# define UCC_IR_BINARY_INST_HH
+#ifndef UCMP_IR_BINARY_INST_HH
+# define UCMP_IR_BINARY_INST_HH
 
 # include <ir/instruction.hh>
 # include <ir/use.hh>
 
-namespace ucc
+namespace ucmp
 {
     namespace ir
     {
@@ -50,6 +50,6 @@ namespace ucc
                 Use* op2_;
         };
     } // namespace ir
-} // namespace ucc
+} // namespace ucmp
 
-#endif /* !UCC_IR_BINARY_INST_HH */
+#endif /* !UCMP_IR_BINARY_INST_HH */

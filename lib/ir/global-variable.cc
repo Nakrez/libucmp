@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ir/global-variable.hh>
 #include <ir/constant.hh>
 
-using namespace ucc;
+using namespace ucmp;
 using namespace ir;
 
 GlobalVariable::GlobalVariable(const misc::Symbol& s,

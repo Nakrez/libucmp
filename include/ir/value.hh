@@ -16,14 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_IR_VALUE_HH
-# define UCC_IR_VALUE_HH
+#ifndef UCMP_IR_VALUE_HH
+# define UCMP_IR_VALUE_HH
 
 # include <misc/symbol.hh>
 
 # include <ir/type.hh>
 
-namespace ucc
+namespace ucmp
 {
     namespace ir
     {
@@ -62,13 +62,13 @@ namespace ucc
                 }
         };
     } // namespace ir
-} // namespace ucc
+} // namespace ucmp
 
-inline std::ostream& operator<<(std::ostream& o, const ucc::ir::Value& v)
+inline std::ostream& operator<<(std::ostream& o, const ucmp::ir::Value& v)
 {
     v.dump(o);
 
     return o;
 }
 
-#endif /* !UCC_IR_VALUE_HH */
+#endif /* !UCMP_IR_VALUE_HH */

@@ -16,12 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_MISC_SCOPE_MAP_HXX
-# define UCC_MISC_SCOPE_MAP_HXX
+#ifndef UCMP_MISC_SCOPE_MAP_HXX
+# define UCMP_MISC_SCOPE_MAP_HXX
 
 # include <misc/scope-map.hh>
 
-namespace ucc
+namespace ucmp
 {
     namespace misc
     {
@@ -95,6 +95,6 @@ namespace ucc
             map_.back()[key] = data;
         }
     } // namespace misc
-} // namespace ucc
+} // namespace ucmp
 
-#endif /* !UCC_MISC_SCOPE_MAP_HXX */
+#endif /* !UCMP_MISC_SCOPE_MAP_HXX */

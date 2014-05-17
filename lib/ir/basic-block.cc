@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ir/basic-block.hh>
 #include <ir/context.hh>
 
-using namespace ucc;
+using namespace ucmp;
 using namespace ir;
 
 BasicBlock::BasicBlock(Context& c, const misc::Symbol& s)

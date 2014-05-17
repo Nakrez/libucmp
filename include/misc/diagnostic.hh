@@ -16,12 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_MISC_DIAGNOSTIC_HH
-# define UCC_MISC_DIAGNOSTIC_HH
+#ifndef UCMP_MISC_DIAGNOSTIC_HH
+# define UCMP_MISC_DIAGNOSTIC_HH
 
 # include <misc/location.hh>
 
-namespace ucc
+namespace ucmp
 {
     namespace misc
     {
@@ -50,7 +50,7 @@ namespace ucc
                 Diagnostic(Severity s,
                            Type t,
                            const std::string &msg,
-                           const ucc::misc::location& loc)
+                           const ucmp::misc::location& loc)
                     : s_(s)
                     , t_(t)
                     , msg_(msg)
@@ -75,7 +75,7 @@ namespace ucc
                     return msg_;
                 }
 
-                const ucc::misc::location& location_get() const
+                const ucmp::misc::location& location_get() const
                 {
                     return loc_;
                 }
@@ -106,7 +106,7 @@ namespace ucc
                     return *this;
                 }
 
-                Diagnostic& operator<<(const ucc::misc::location& loc)
+                Diagnostic& operator<<(const ucmp::misc::location& loc)
                 {
                     loc_ = loc;
 
@@ -117,9 +117,9 @@ namespace ucc
                 Severity s_;
                 Type t_;
                 std::string msg_;
-                ucc::misc::location loc_;
+                ucmp::misc::location loc_;
         };
     } // namespace misc
-} // namespace ucc
+} // namespace ucmp
 
-#endif /* !UCC_MISC_DIAGNOSTIC_HH */
+#endif /* !UCMP_MISC_DIAGNOSTIC_HH */

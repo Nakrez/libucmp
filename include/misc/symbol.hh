@@ -16,13 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_MISC_SYMBOL_HH
-# define UCC_MISC_SYMBOL_HH
+#ifndef UCMP_MISC_SYMBOL_HH
+# define UCMP_MISC_SYMBOL_HH
 
 # include <string>
 # include <set>
 
-namespace ucc
+namespace ucmp
 {
     namespace misc
     {
@@ -37,9 +37,9 @@ namespace ucc
 
                 const std::string& data_get() const;
 
-                bool operator==(const ucc::misc::Symbol& s) const;
-                bool operator!=(const ucc::misc::Symbol& s) const;
-                bool operator<(const ucc::misc::Symbol& s) const;
+                bool operator==(const Symbol& s) const;
+                bool operator!=(const Symbol& s) const;
+                bool operator<(const Symbol& s) const;
 
                 Symbol fresh() const;
 
@@ -50,10 +50,10 @@ namespace ucc
                 const std::string *data_;
         };
     } // namespace misc
-} // namespace ucc
+} // namespace ucmp
 
-std::ostream& operator<<(std::ostream& o, const ucc::misc::Symbol& s);
+std::ostream& operator<<(std::ostream& o, const ucmp::misc::Symbol& s);
 
 # include <misc/symbol.hxx>
 
-#endif /* !UCC_MISC_SYMBOL_HH */
+#endif /* !UCMP_MISC_SYMBOL_HH */

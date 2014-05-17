@@ -16,8 +16,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_IR_FUNCTION_HH
-# define UCC_IR_FUNCTION_HH
+#ifndef UCMP_IR_FUNCTION_HH
+# define UCMP_IR_FUNCTION_HH
 
 # include <list>
 
@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # include <ir/basic-block.hh>
 # include <ir/function-type.hh>
 
-namespace ucc
+namespace ucmp
 {
     namespace ir
     {
@@ -71,6 +71,6 @@ namespace ucc
                 std::list<BasicBlock*> blocks_;
         };
     } // namespace ir
-} // namespace ucc
+} // namespace ucmp
 
-#endif /* !UCC_IR_FUNCTION_HH */
+#endif /* !UCMP_IR_FUNCTION_HH */

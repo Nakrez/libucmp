@@ -16,15 +16,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_IR_STRUCT_TYPE_HH
-# define UCC_IR_STRUCT_TYPE_HH
+#ifndef UCMP_IR_STRUCT_TYPE_HH
+# define UCMP_IR_STRUCT_TYPE_HH
 
 # include <list>
 
 # include <misc/symbol.hh>
 # include <ir/type.hh>
 
-namespace ucc
+namespace ucmp
 {
     namespace ir
     {
@@ -49,6 +49,6 @@ namespace ucc
 
         typedef std::shared_ptr<StructType> sStructType;
     } // namespace ir
-} // namespace ucc
+} // namespace ucmp
 
-#endif /* !UCC_IR_STRUCT_TYPE_HH */
+#endif /* !UCMP_IR_STRUCT_TYPE_HH */

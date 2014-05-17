@@ -16,14 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_MISC_ERROR_HH
-# define UCC_MISC_ERROR_HH
+#ifndef UCMP_MISC_ERROR_HH
+# define UCMP_MISC_ERROR_HH
 
 # include <string>
 # include <sstream>
 # include <iostream>
 
-namespace ucc
+namespace ucmp
 {
     namespace misc
     {
@@ -63,8 +63,8 @@ namespace ucc
                 std::stringstream msg_;
         };
     } // namespace misc
-} // namespace ucc
+} // namespace ucmp
 
 # include <misc/error.hxx>
 
-#endif /* !UCC_MISC_ERROR_HH */
+#endif /* !UCMP_MISC_ERROR_HH */

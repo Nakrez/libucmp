@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <misc/diagnostic-reporter.hh>
 
-using namespace ucc;
+using namespace ucmp;
 using namespace misc;
 
 void DiagnosticReporter::throw_on_error()

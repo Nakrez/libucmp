@@ -16,24 +16,24 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SYMBOL_HXX
-# define SYMBOL_HXX
+#ifndef UCMP_MISC_SYMBOL_HXX
+# define UCMP_MISC_SYMBOL_HXX
 
 # include <misc/symbol.hh>
 
-inline const std::string& ucc::misc::Symbol::data_get() const
+inline const std::string& ucmp::misc::Symbol::data_get() const
 {
     return *data_;
 }
 
-inline bool ucc::misc::Symbol::operator==(const ucc::misc::Symbol& s) const
+inline bool ucmp::misc::Symbol::operator==(const ucmp::misc::Symbol& s) const
 {
     return data_get() == s.data_get();
 }
 
-inline bool ucc::misc::Symbol::operator!=(const ucc::misc::Symbol& s) const
+inline bool ucmp::misc::Symbol::operator!=(const ucmp::misc::Symbol& s) const
 {
     return data_get() != s.data_get();
 }
 
-#endif /* !SYMBOL_HXX */
+#endif /* !UCMP_MISC_SYMBOL_HXX */

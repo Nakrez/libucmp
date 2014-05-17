@@ -16,15 +16,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_IR_IR_GENERATOR_HH
-# define UCC_IR_IR_GENERATOR_HH
+#ifndef UCMP_IR_IR_GENERATOR_HH
+# define UCMP_IR_IR_GENERATOR_HH
 
 # include <ir/context.hh>
 # include <ir/unit.hh>
 # include <ir/function.hh>
 # include <ir/function-type.hh>
 
-namespace ucc
+namespace ucmp
 {
     namespace ir
     {
@@ -63,6 +63,6 @@ namespace ucc
                 Function* fun_;
         };
     } // namespace ir
-} // namespace ucc
+} // namespace ucmp
 
-#endif /* !UCC_IR_IR_GENERATOR_HH */
+#endif /* !UCMP_IR_IR_GENERATOR_HH */

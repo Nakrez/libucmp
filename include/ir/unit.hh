@@ -16,13 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_IR_UNIT_HH
-# define UCC_IR_UNIT_HH
+#ifndef UCMP_IR_UNIT_HH
+# define UCMP_IR_UNIT_HH
 
 # include <list>
 # include <ostream>
 
-namespace ucc
+namespace ucmp
 {
     namespace ir
     {
@@ -65,6 +65,6 @@ namespace ucc
                 std::list<GlobalVariable*> vars_;
         };
     } // namespace ir
-} // namespace ucc
+} // namespace ucmp
 
-#endif /* !UCC_IR_UNIT_HH */
+#endif /* !UCMP_IR_UNIT_HH */

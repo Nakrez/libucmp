@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <iomanip>
 #include <ostream>
 
-namespace ucc
+namespace ucmp
 {
     namespace misc
     {
@@ -67,4 +67,4 @@ namespace ucc
             return o << iendl;
         }
     } // namespace misc
-} // namespace ucc
+} // namespace ucmp

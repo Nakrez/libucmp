@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ir/function.hh>
 #include <ir/global-variable.hh>
 
-using namespace ucc;
+using namespace ucmp;
 using namespace ir;
 
 Unit::Unit()

@@ -16,13 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCC_IR_TYPE_HH
-# define UCC_IR_TYPE_HH
+#ifndef UCMP_IR_TYPE_HH
+# define UCMP_IR_TYPE_HH
 
 # include <memory>
 # include <ostream>
 
-namespace ucc
+namespace ucmp
 {
     namespace ir
     {
@@ -59,13 +59,13 @@ namespace ucc
 
         typedef std::shared_ptr<Type> sType;
     } // namespace ir
-} // namespace ucc
+} // namespace ucmp
 
-inline std::ostream& operator<<(std::ostream& o, const ucc::ir::Type& t)
+inline std::ostream& operator<<(std::ostream& o, const ucmp::ir::Type& t)
 {
     t.dump(o);
 
     return o;
 }
 
-#endif /* !UCC_IR_TYPE_HH */
+#endif /* !UCMP_IR_TYPE_HH */

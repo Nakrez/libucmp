@@ -18,7 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <misc/symbol.hh>
 
-using namespace ucc;
+using namespace ucmp;
 using namespace misc;
 
 Symbol::Symbol(const std::string& s)
@@ -40,7 +40,7 @@ Symbol& Symbol::operator=(const Symbol& s)
     return *this;
 }
 
-bool Symbol::operator<(const ucc::misc::Symbol& s) const
+bool Symbol::operator<(const Symbol& s) const
 {
     return *data_ < *(s.data_);
 }
@@ -52,7 +52,7 @@ std::set<std::string>& Symbol::symbol_set_get()
     return set;
 }
 
-std::ostream& operator<<(std::ostream& o, const ucc::misc::Symbol& s)
+std::ostream& operator<<(std::ostream& o, const ucmp::misc::Symbol& s)
 {
     o << s.data_get();
 
