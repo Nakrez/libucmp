@@ -63,6 +63,11 @@ namespace ucmp
                     f_type_->arg_add(v->type_get());
                 }
 
+                void bb_add(BasicBlock* bb)
+                {
+                    blocks_.push_back(bb);
+                }
+
                 void dump(std::ostream& o) const;
 
             protected:

@@ -30,33 +30,27 @@ namespace ucmp
     namespace ir
     {
         class Context;
+        class Function;
 
         /// Represent a basic block
         class BasicBlock : public Value
         {
+            typedef typename std::list<Instruction*>::iterator i_iterator;
+            typedef typename std::list<Instruction*>::const_iterator
+            ci_iterator;
+
             public:
-                BasicBlock(Context& c, const misc::Symbol& s = "");
+                BasicBlock(Context& c,
+                           Function* parent = nullptr,
+                           const misc::Symbol& s = "");
                 virtual ~BasicBlock();
 
-                typename std::list<Instruction*>::iterator begin()
-                {
-                    return ins_.begin();
-                }
-
-                typename std::list<Instruction*>::iterator end()
-                {
-                    return ins_.end();
-                }
-
-                typename std::list<Instruction*>::const_iterator cbegin() const
-                {
-                    return ins_.cbegin();
-                }
-
-                typename std::list<Instruction*>::const_iterator cend() const
-                {
-                    return ins_.cend();
-                }
+                i_iterator begin()          { return ins_.begin(); }
+                i_iterator end()            { return ins_.end(); }
+                ci_iterator begin() const   { return ins_.begin(); }
+                ci_iterator end() const     { return ins_.end(); }
+                ci_iterator cbegin() const  { return ins_.cbegin(); }
+                ci_iterator cend() const    { return ins_.cend(); }
 
                 void dump(std::ostream& o) const;
 

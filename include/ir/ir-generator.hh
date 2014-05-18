@@ -38,6 +38,7 @@ namespace ucmp
                 void init();
 
                 Function* declared_function_get() { return fun_; }
+                BasicBlock* insert_pt_get() { return insert_pt_; }
 
                 void current_unit_set(Unit* u)
                 {
@@ -57,10 +58,16 @@ namespace ucmp
                     fun_ = nullptr;
                 }
 
+                void insert_pt_set(BasicBlock* bb)
+                {
+                    insert_pt_ = bb;
+                }
+
             protected:
                 Context& c_;
                 Unit* unit_;
                 Function* fun_;
+                BasicBlock* insert_pt_;
         };
     } // namespace ir
 } // namespace ucmp

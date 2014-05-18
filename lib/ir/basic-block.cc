@@ -19,13 +19,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <misc/indent.hh>
 #include <ir/basic-block.hh>
 #include <ir/context.hh>
+#include <ir/function.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-BasicBlock::BasicBlock(Context& c, const misc::Symbol& s)
+BasicBlock::BasicBlock(Context& c, Function* parent, const misc::Symbol& s)
     : Value(c.label_ty_get(), s)
-{}
+{
+    if (parent)
+        parent->bb_add(this);
+}
 
 BasicBlock::~BasicBlock()
 {

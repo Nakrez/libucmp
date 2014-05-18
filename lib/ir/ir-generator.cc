@@ -25,6 +25,7 @@ IrGenerator::IrGenerator(Context& c)
     : c_(c)
     , unit_(nullptr)
     , fun_(nullptr)
+    , insert_pt_(nullptr)
 {}
 
 void IrGenerator::init()
