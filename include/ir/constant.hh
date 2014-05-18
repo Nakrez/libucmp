@@ -30,11 +30,7 @@ namespace ucmp
         {
             public:
                 Constant(sType t)
-                    : Value(t)
-                {}
-
-                Constant(sType t, const misc::Symbol& s)
-                    : Value(t, s)
+                    : Value(t, "")
                 {}
 
                 virtual ~Constant() = default;
