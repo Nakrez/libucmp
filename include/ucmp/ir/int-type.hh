@@ -16,40 +16,41 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_GLOBAL_VARIABLE_HH
-# define UCMP_IR_GLOBAL_VARIABLE_HH
+#ifndef UCMP_IR_INT_TYPE_HH
+# define UCMP_IR_INT_TYPE_HH
 
-# include <ir/global-value.hh>
+# include <string>
+
+# include <ucmp/ir/type.hh>
 
 namespace ucmp
 {
     namespace ir
     {
-        class Constant;
-
-        class GlobalVariable : public GlobalValue
+        class IntType : public Type
         {
             public:
-                GlobalVariable(const misc::Symbol& s = "",
-                               Constant* init = nullptr);
-                virtual ~GlobalVariable() = default;
+                IntType(unsigned size)
+                    : Type(Type::IntTy)
+                    , size_(size)
+                {}
 
-                void dump(std::ostream& o) const;
+                virtual ~IntType() = default;
 
-                const Constant* init_get() const
+                unsigned size_get() const
                 {
-                    return init_;
+                    return size_;
                 }
 
-                Constant* init_get()
+                virtual void dump(std::ostream& o) const override
                 {
-                    return init_;
+                    o << "i" << std::to_string(size_);
                 }
 
             protected:
-                Constant* init_;
+                unsigned size_;
         };
     } // namespace ir
 } // namespace ucmp
 
-#endif /* !UCMP_IR_GLOBAL_VARIABLE_HH */
+#endif /* !UCMP_IR_INT_TYPE_HH */

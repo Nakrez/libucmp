@@ -16,10 +16,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_PTR_TYPE_HH
-# define UCMP_IR_PTR_TYPE_HH
+#ifndef UCMP_IR_INT_CONSTANT_HH
+# define UCMP_IR_INT_CONSTANT_HH
 
-# include <ir/type.hh>
+# include <ucmp/ir/constant.hh>
 
 namespace ucmp
 {
@@ -27,31 +27,26 @@ namespace ucmp
     {
         class Context;
 
-        class PtrType : public Type
+        class IntConstant : public Constant
         {
             public:
-                PtrType(sType pointed)
-                    : Type(Type::PtrTy)
-                    , pointed_(pointed)
-                {}
+                IntConstant(Context& c, int val);
+                virtual ~IntConstant() = default;
 
-                virtual ~PtrType() = default;
-
-                sType pointed_type_get()
+                int value_get() const
                 {
-                    return pointed_;
+                    return val_;
                 }
 
                 virtual void dump(std::ostream& o) const override
                 {
-                    pointed_->dump(o);
-                    o << "*";
+                    o << val_;
                 }
 
             protected:
-                sType pointed_;
+                int val_;
         };
     } // namespace ir
 } // namespace ucmp
 
-#endif /* !UCMP_IR_PTR_TYPE_HH */
+#endif /* !UCMP_IR_INT_CONSTANT_HH */

@@ -16,42 +16,42 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_USE_HH
-# define UCMP_IR_USE_HH
+#ifndef UCMP_IR_PTR_TYPE_HH
+# define UCMP_IR_PTR_TYPE_HH
 
-# include <ir/value.hh>
+# include <ucmp/ir/type.hh>
 
 namespace ucmp
 {
     namespace ir
     {
-        class Use
+        class Context;
+
+        class PtrType : public Type
         {
             public:
-                Use(Value* v)
-                    : val_(v)
-                    , prev_(nullptr)
-                    , next_(nullptr)
+                PtrType(sType pointed)
+                    : Type(Type::PtrTy)
+                    , pointed_(pointed)
                 {}
 
-                virtual ~Use() = default;
+                virtual ~PtrType() = default;
 
-                operator Value*() const
+                sType pointed_type_get()
                 {
-                    return val_;
+                    return pointed_;
                 }
 
-                Value* value_get() const
+                virtual void dump(std::ostream& o) const override
                 {
-                    return val_;
+                    pointed_->dump(o);
+                    o << "*";
                 }
 
             protected:
-                Value* val_;
-                Use* prev_;
-                Use* next_;
+                sType pointed_;
         };
     } // namespace ir
 } // namespace ucmp
 
-#endif /* !UCMP_IR_USE_HH */
+#endif /* !UCMP_IR_PTR_TYPE_HH */

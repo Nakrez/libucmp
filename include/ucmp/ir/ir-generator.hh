@@ -19,10 +19,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef UCMP_IR_IR_GENERATOR_HH
 # define UCMP_IR_IR_GENERATOR_HH
 
-# include <ir/context.hh>
-# include <ir/unit.hh>
-# include <ir/function.hh>
-# include <ir/function-type.hh>
+# include <ucmp/ir/context.hh>
+# include <ucmp/ir/unit.hh>
+# include <ucmp/ir/function.hh>
+# include <ucmp/ir/function-type.hh>
 
 namespace ucmp
 {

@@ -22,8 +22,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # include <list>
 # include <ostream>
 
-# include <ir/value.hh>
-# include <ir/instruction.hh>
+# include <ucmp/ir/value.hh>
+# include <ucmp/ir/instruction.hh>
 
 namespace ucmp
 {

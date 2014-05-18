@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef UCMP_MISC_SYMBOL_HXX
 # define UCMP_MISC_SYMBOL_HXX
 
-# include <misc/symbol.hh>
+# include <ucmp/misc/symbol.hh>
 
 inline const std::string& ucmp::misc::Symbol::data_get() const
 {

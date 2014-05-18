@@ -16,11 +16,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <misc/indent.hh>
+#include <ucmp/misc/indent.hh>
 
-#include <ir/unit.hh>
-#include <ir/function.hh>
-#include <ir/global-variable.hh>
+#include <ucmp/ir/unit.hh>
+#include <ucmp/ir/function.hh>
+#include <ucmp/ir/global-variable.hh>
 
 using namespace ucmp;
 using namespace ir;

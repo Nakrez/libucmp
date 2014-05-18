@@ -38,7 +38,7 @@
 #ifndef UCMP_LOCATION_HH_INCLUDED
 # define UCMP_LOCATION_HH_INCLUDED
 
-# include <misc/position.hh>
+# include <ucmp/misc/position.hh>
 
 namespace ucmp
 {

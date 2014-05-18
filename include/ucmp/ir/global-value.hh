@@ -16,59 +16,51 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_VALUE_HH
-# define UCMP_IR_VALUE_HH
+#ifndef UCMP_IR_GLOBAL_VALUE_HH
+# define UCMP_IR_GLOBAL_VALUE_HH
 
-# include <misc/symbol.hh>
-
-# include <ir/type.hh>
+# include <ucmp/ir/value.hh>
 
 namespace ucmp
 {
     namespace ir
     {
-        class Value
+        /// Represents global values
+        class GlobalValue : public Value
         {
             public:
-                Value(sType t);
-                Value(sType t, const misc::Symbol& s);
-                virtual ~Value() = default;
-
-                sType type_get() const
+                enum Linkage
                 {
-                    return type_;
+                    External,
+                    Internal
+                };
+
+                GlobalValue(sType t)
+                    : Value(t)
+                    , link_(External)
+                {}
+
+                GlobalValue(sType t, const misc::Symbol& s)
+                    : Value(t, s)
+                    , link_(External)
+                {}
+
+                virtual ~GlobalValue() = default;
+
+                Linkage linkage_get() const
+                {
+                    return link_;
                 }
 
-                const misc::Symbol name_get() const
+                void linkage_set(Linkage l)
                 {
-                    return name_;
-                }
-
-                virtual void dump(std::ostream& o) const
-                {
-                    o << *type_ << " " << name_;
+                    link_ = l;
                 }
 
             protected:
-                sType type_;
-                misc::Symbol name_;
-
-            private:
-                misc::Symbol fresh_name()
-                {
-                    static unsigned long num = 0;
-
-                    return misc::Symbol("v" + std::to_string(num++));
-                }
+                enum Linkage link_;
         };
     } // namespace ir
 } // namespace ucmp
 
-inline std::ostream& operator<<(std::ostream& o, const ucmp::ir::Value& v)
-{
-    v.dump(o);
-
-    return o;
-}
-
-#endif /* !UCMP_IR_VALUE_HH */
+#endif /* !UCMP_IR_GLOBAL_VALUE_HH */

@@ -16,41 +16,26 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_INT_TYPE_HH
-# define UCMP_IR_INT_TYPE_HH
+#ifndef UCMP_IR_CONSTANT_HH
+# define UCMP_IR_CONSTANT_HH
 
-# include <string>
-
-# include <ir/type.hh>
+# include <ucmp/ir/value.hh>
 
 namespace ucmp
 {
     namespace ir
     {
-        class IntType : public Type
+        /// Represents a constant value
+        class Constant : public Value
         {
             public:
-                IntType(unsigned size)
-                    : Type(Type::IntTy)
-                    , size_(size)
+                Constant(sType t)
+                    : Value(t, "")
                 {}
 
-                virtual ~IntType() = default;
-
-                unsigned size_get() const
-                {
-                    return size_;
-                }
-
-                virtual void dump(std::ostream& o) const override
-                {
-                    o << "i" << std::to_string(size_);
-                }
-
-            protected:
-                unsigned size_;
+                virtual ~Constant() = default;
         };
     } // namespace ir
 } // namespace ucmp
 
-#endif /* !UCMP_IR_INT_TYPE_HH */
+#endif /* !UCMP_IR_CONSTANT_HH */

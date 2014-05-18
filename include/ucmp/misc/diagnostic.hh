@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef UCMP_MISC_DIAGNOSTIC_HH
 # define UCMP_MISC_DIAGNOSTIC_HH
 
-# include <misc/location.hh>
+# include <ucmp/misc/location.hh>
 
 namespace ucmp
 {

@@ -16,47 +16,40 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_INSTRUCTION_HH
-# define UCMP_IR_INSTRUCTION_HH
+#ifndef UCMP_IR_GLOBAL_VARIABLE_HH
+# define UCMP_IR_GLOBAL_VARIABLE_HH
 
-# include <ostream>
-# include <ir/value.hh>
+# include <ucmp/ir/global-value.hh>
 
 namespace ucmp
 {
     namespace ir
     {
-        /// Base class for all IR instruction
-        class Instruction : public Value
+        class Constant;
+
+        class GlobalVariable : public GlobalValue
         {
             public:
-                enum BinOp
+                GlobalVariable(const misc::Symbol& s = "",
+                               Constant* init = nullptr);
+                virtual ~GlobalVariable() = default;
+
+                void dump(std::ostream& o) const;
+
+                const Constant* init_get() const
                 {
-                    ADD,
-                    SUB,
-                    MUL,
-                    DIV,
-                    MOD,
-                };
-            public:
-                Instruction(sType t, unsigned i_type)
-                    : Value(t)
-                    , i_type_(i_type)
-                {}
+                    return init_;
+                }
 
-                Instruction(sType t, unsigned i_type, const misc::Symbol& s)
-                    : Value(t, s)
-                    , i_type_(i_type)
-                {}
-
-                virtual ~Instruction() = default;
-
-                virtual void dump(std::ostream& o) const = 0;
+                Constant* init_get()
+                {
+                    return init_;
+                }
 
             protected:
-                unsigned i_type_;
+                Constant* init_;
         };
     } // namespace ir
 } // namespace ucmp
 
-#endif /* !UCMP_IR_INSTRUCTION_HH */
+#endif /* !UCMP_IR_GLOBAL_VARIABLE_HH */

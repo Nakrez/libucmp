@@ -19,9 +19,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef UCMP_MISC_ERROR_HH
 # define UCMP_MISC_ERROR_HH
 
-# include <string>
-# include <sstream>
-# include <iostream>
+# include <ucmp/string>
+# include <ucmp/sstream>
+# include <ucmp/iostream>
 
 namespace ucmp
 {
@@ -65,6 +65,6 @@ namespace ucmp
     } // namespace misc
 } // namespace ucmp
 
-# include <misc/error.hxx>
+# include <ucmp/misc/error.hxx>
 
 #endif /* !UCMP_MISC_ERROR_HH */

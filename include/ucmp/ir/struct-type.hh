@@ -16,26 +16,39 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_CONSTANT_HH
-# define UCMP_IR_CONSTANT_HH
+#ifndef UCMP_IR_STRUCT_TYPE_HH
+# define UCMP_IR_STRUCT_TYPE_HH
 
-# include <ir/value.hh>
+# include <list>
+
+# include <ucmp/misc/symbol.hh>
+# include <ucmp/ir/type.hh>
 
 namespace ucmp
 {
     namespace ir
     {
-        /// Represents a constant value
-        class Constant : public Value
+        class Context;
+
+        class StructType : public Type
         {
             public:
-                Constant(sType t)
-                    : Value(t, "")
-                {}
+                StructType(Context& c,
+                           const misc::Symbol& name,
+                           const std::list<sType>& types);
+                StructType(Context& c,
+                           const misc::Symbol& name);
+                virtual ~StructType() = default;
 
-                virtual ~Constant() = default;
+                void add_member(sType t)    { types_.push_back(t); }
+
+            protected:
+                misc::Symbol name_;
+                std::list<sType> types_;
         };
+
+        typedef std::shared_ptr<StructType> sStructType;
     } // namespace ir
 } // namespace ucmp
 
-#endif /* !UCMP_IR_CONSTANT_HH */
+#endif /* !UCMP_IR_STRUCT_TYPE_HH */

@@ -16,39 +16,30 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_STRUCT_TYPE_HH
-# define UCMP_IR_STRUCT_TYPE_HH
+#ifndef UCMP_IR_BINARY_INST_HH
+# define UCMP_IR_BINARY_INST_HH
 
-# include <list>
-
-# include <misc/symbol.hh>
-# include <ir/type.hh>
+# include <ucmp/ir/instruction.hh>
+# include <ucmp/ir/use.hh>
 
 namespace ucmp
 {
     namespace ir
     {
-        class Context;
-
-        class StructType : public Type
+        class BinaryInst : public Instruction
         {
             public:
-                StructType(Context& c,
-                           const misc::Symbol& name,
-                           const std::list<sType>& types);
-                StructType(Context& c,
+                BinaryInst(BinOp op, sType type, Value* op1, Value* op2);
+                BinaryInst(BinOp op, sType type, Value* op1, Value* op2,
                            const misc::Symbol& name);
-                virtual ~StructType() = default;
+                virtual ~BinaryInst();
 
-                void add_member(sType t)    { types_.push_back(t); }
-
-            protected:
-                misc::Symbol name_;
-                std::list<sType> types_;
+                virtual void dump(std::ostream& o) const override;
+            private:
+                Use op1_;
+                Use op2_;
         };
-
-        typedef std::shared_ptr<StructType> sStructType;
     } // namespace ir
 } // namespace ucmp
 
-#endif /* !UCMP_IR_STRUCT_TYPE_HH */
+#endif /* !UCMP_IR_BINARY_INST_HH */

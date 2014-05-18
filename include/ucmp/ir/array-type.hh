@@ -16,38 +16,26 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_MISC_SCOPE_MAP_HH
-# define UCMP_MISC_SCOPE_MAP_HH
+#ifndef UCMP_IR_ARRAY_TYPE_HH
+# define UCMP_IR_ARRAY_TYPE_HH
 
-# include <list>
-# include <map>
+# include <ucmp/ir/type.hh>
 
 namespace ucmp
 {
-    namespace misc
+    namespace ir
     {
-        template <class Key, class Data>
-        class ScopeMap
+        class ArrayType : public Type
         {
             public:
-                ScopeMap();
-                ~ScopeMap();
+                ArrayType(sType inner, unsigned size);
+                virtual ~ArrayType() = default;
 
-                int size() const;
-
-                void scope_begin();
-                void scope_end();
-
-                Data get(const Key& key) const;
-                Data get_scope(const Key& key) const;
-                void put(const Key& key, Data data);
-
-            private:
-                std::list<std::map<Key, Data>> map_;
+            protected:
+                sType inner_;
+                unsigned size_;
         };
-    } // namespace misc
+    } // namespace ir
 } // namespace ucmp
 
-# include <misc/scope-map.hxx>
-
-#endif /* !UCMP_MISC_SCOPE_MAP_HH */
+#endif /* !UCMP_IR_ARRAY_TYPE_HH */

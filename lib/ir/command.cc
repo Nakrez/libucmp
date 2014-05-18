@@ -16,13 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <cassert>
+#include <ucmp/cassert>
 
-#include <ucc.hh>
+#include <ucmp/ucc.hh>
 
-#include <command/command.hh>
+#include <ucmp/command/command.hh>
 
-#include <ir/context.hh>
+#include <ucmp/ir/context.hh>
 
 REGISTER_COMMAND(uir_print, "uir-print", "Print the intermediate "
                  "representation on the standard input", uir_print, "uir");

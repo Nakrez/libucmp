@@ -16,30 +16,44 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_BINARY_INST_HH
-# define UCMP_IR_BINARY_INST_HH
+#ifndef UCMP_MISC_SYMBOL_HH
+# define UCMP_MISC_SYMBOL_HH
 
-# include <ir/instruction.hh>
-# include <ir/use.hh>
+# include <string>
+# include <set>
 
 namespace ucmp
 {
-    namespace ir
+    namespace misc
     {
-        class BinaryInst : public Instruction
+        class Symbol
         {
             public:
-                BinaryInst(BinOp op, sType type, Value* op1, Value* op2);
-                BinaryInst(BinOp op, sType type, Value* op1, Value* op2,
-                           const misc::Symbol& name);
-                virtual ~BinaryInst();
+                Symbol(const std::string& s);
+                Symbol(const char* s);
+                ~Symbol();
 
-                virtual void dump(std::ostream& o) const override;
+                Symbol& operator=(const Symbol& s);
+
+                const std::string& data_get() const;
+
+                bool operator==(const Symbol& s) const;
+                bool operator!=(const Symbol& s) const;
+                bool operator<(const Symbol& s) const;
+
+                Symbol fresh() const;
+
             private:
-                Use op1_;
-                Use op2_;
+                static std::set<std::string>& symbol_set_get();
+
+            private:
+                const std::string *data_;
         };
-    } // namespace ir
+    } // namespace misc
 } // namespace ucmp
 
-#endif /* !UCMP_IR_BINARY_INST_HH */
+std::ostream& operator<<(std::ostream& o, const ucmp::misc::Symbol& s);
+
+# include <ucmp/misc/symbol.hxx>
+
+#endif /* !UCMP_MISC_SYMBOL_HH */

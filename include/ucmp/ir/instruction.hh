@@ -16,37 +16,47 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_INT_CONSTANT_HH
-# define UCMP_IR_INT_CONSTANT_HH
+#ifndef UCMP_IR_INSTRUCTION_HH
+# define UCMP_IR_INSTRUCTION_HH
 
-# include <ir/constant.hh>
+# include <ostream>
+# include <ucmp/ir/value.hh>
 
 namespace ucmp
 {
     namespace ir
     {
-        class Context;
-
-        class IntConstant : public Constant
+        /// Base class for all IR instruction
+        class Instruction : public Value
         {
             public:
-                IntConstant(Context& c, int val);
-                virtual ~IntConstant() = default;
-
-                int value_get() const
+                enum BinOp
                 {
-                    return val_;
-                }
+                    ADD,
+                    SUB,
+                    MUL,
+                    DIV,
+                    MOD,
+                };
+            public:
+                Instruction(sType t, unsigned i_type)
+                    : Value(t)
+                    , i_type_(i_type)
+                {}
 
-                virtual void dump(std::ostream& o) const override
-                {
-                    o << val_;
-                }
+                Instruction(sType t, unsigned i_type, const misc::Symbol& s)
+                    : Value(t, s)
+                    , i_type_(i_type)
+                {}
+
+                virtual ~Instruction() = default;
+
+                virtual void dump(std::ostream& o) const = 0;
 
             protected:
-                int val_;
+                unsigned i_type_;
         };
     } // namespace ir
 } // namespace ucmp
 
-#endif /* !UCMP_IR_INT_CONSTANT_HH */
+#endif /* !UCMP_IR_INSTRUCTION_HH */

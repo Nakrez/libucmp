@@ -16,10 +16,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <misc/indent.hh>
-#include <ir/basic-block.hh>
-#include <ir/context.hh>
-#include <ir/function.hh>
+#include <ucmp/misc/indent.hh>
+#include <ucmp/ir/basic-block.hh>
+#include <ucmp/ir/context.hh>
+#include <ucmp/ir/function.hh>
 
 using namespace ucmp;
 using namespace ir;
