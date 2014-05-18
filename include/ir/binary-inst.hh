@@ -29,25 +29,15 @@ namespace ucmp
         class BinaryInst : public Instruction
         {
             public:
-                enum BinOp
-                {
-                    ADD,
-                    SUB,
-                    MUL,
-                    DIV,
-                    MOD,
-                };
-            public:
-                BinaryInst(BinOp op, sType type, Use* op1, Use* op2);
-                BinaryInst(BinOp op, sType type, Use* op1, Use* op2,
+                BinaryInst(BinOp op, sType type, Value* op1, Value* op2);
+                BinaryInst(BinOp op, sType type, Value* op1, Value* op2,
                            const misc::Symbol& name);
                 virtual ~BinaryInst();
 
                 virtual void dump(std::ostream& o) const override;
             private:
-                BinOp op_;
-                Use* op1_;
-                Use* op2_;
+                Use op1_;
+                Use op2_;
         };
     } // namespace ir
 } // namespace ucmp

@@ -21,17 +21,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using namespace ucmp;
 using namespace ir;
 
-BinaryInst::BinaryInst(BinOp op, sType type, Use* op1, Use* op2)
-    : Instruction(type)
-    , op_(op)
+BinaryInst::BinaryInst(BinOp op, sType type, Value* op1, Value* op2)
+    : Instruction(type, op)
     , op1_(op1)
     , op2_(op2)
 {}
 
-BinaryInst::BinaryInst(BinOp op, sType type, Use* op1, Use* op2,
+BinaryInst::BinaryInst(BinOp op, sType type, Value* op1, Value* op2,
                        const misc::Symbol& name)
-    : Instruction(type, name)
-    , op_(op)
+    : Instruction(type, op, name)
     , op1_(op1)
     , op2_(op2)
 {}
@@ -46,7 +44,7 @@ void BinaryInst::dump(std::ostream& o) const
 {
     o << name_get().data_get() << " = ";
 
-    switch (op_)
+    switch (i_type_)
     {
         case ADD:
             o << "add";
@@ -63,7 +61,9 @@ void BinaryInst::dump(std::ostream& o) const
         case MOD:
             o << "mod";
             break;
+        default:
+            break;
     }
 
-    o << " " << **op1_ << " " << **op2_;
+    o << " " << *op1_ << " " << *op2_;
 }

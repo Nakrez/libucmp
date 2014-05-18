@@ -32,19 +32,19 @@ namespace ucmp
                     : val_(v)
                     , prev_(nullptr)
                     , next_(nullptr)
-            {}
+                {}
 
-            virtual ~Use() = default;
+                virtual ~Use() = default;
 
-            operator Value*() const
-            {
-                return val_;
-            }
+                operator Value*() const
+                {
+                    return val_;
+                }
 
-            Value* value_get() const
-            {
-                return val_;
-            }
+                Value* value_get() const
+                {
+                    return val_;
+                }
 
             protected:
                 Value* val_;

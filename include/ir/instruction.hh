@@ -30,17 +30,31 @@ namespace ucmp
         class Instruction : public Value
         {
             public:
-                Instruction(sType t)
+                enum BinOp
+                {
+                    ADD,
+                    SUB,
+                    MUL,
+                    DIV,
+                    MOD,
+                };
+            public:
+                Instruction(sType t, unsigned i_type)
                     : Value(t)
+                    , i_type_(i_type)
                 {}
 
-                Instruction(sType t, const misc::Symbol& s)
+                Instruction(sType t, unsigned i_type, const misc::Symbol& s)
                     : Value(t, s)
+                    , i_type_(i_type)
                 {}
 
                 virtual ~Instruction() = default;
 
                 virtual void dump(std::ostream& o) const = 0;
+
+            protected:
+                unsigned i_type_;
         };
     } // namespace ir
 } // namespace ucmp
