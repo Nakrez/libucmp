@@ -44,11 +44,6 @@ namespace ucmp
                     , i_type_(i_type)
                 {}
 
-                Instruction(sType t, unsigned i_type, const misc::Symbol& s)
-                    : Value(t, s)
-                    , i_type_(i_type)
-                {}
-
                 virtual ~Instruction() = default;
 
                 virtual void dump(std::ostream& o) const = 0;

@@ -24,7 +24,7 @@ using namespace ir;
 
 GlobalVariable::GlobalVariable(const misc::Symbol& s,
                                Constant* init)
-    : GlobalValue(nullptr, s)
+    : GlobalValue(nullptr)
     , init_(init)
 {}
 

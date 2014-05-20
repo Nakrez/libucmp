@@ -27,13 +27,6 @@ BinaryInst::BinaryInst(BinOp op, sType type, Value* op1, Value* op2)
     , op2_(op2)
 {}
 
-BinaryInst::BinaryInst(BinOp op, sType type, Value* op1, Value* op2,
-                       const misc::Symbol& name)
-    : Instruction(type, op, name)
-    , op1_(op1)
-    , op2_(op2)
-{}
-
 BinaryInst::~BinaryInst()
 {
     delete op1_;

@@ -54,7 +54,7 @@ namespace ucmp
 
                 void arg_add(sType t, const misc::Symbol& name)
                 {
-                    arg_add(new Value(t, name));
+                    arg_add(new Value(t));
                 }
 
                 void arg_add(Value* v)

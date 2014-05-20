@@ -40,11 +40,6 @@ namespace ucmp
                     , link_(External)
                 {}
 
-                GlobalValue(sType t, const misc::Symbol& s)
-                    : Value(t, s)
-                    , link_(External)
-                {}
-
                 virtual ~GlobalValue() = default;
 
                 Linkage linkage_get() const

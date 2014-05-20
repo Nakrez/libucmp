@@ -40,9 +40,7 @@ namespace ucmp
             ci_iterator;
 
             public:
-                BasicBlock(Context& c,
-                           Function* parent = nullptr,
-                           const misc::Symbol& s = "");
+                BasicBlock(Context& c, Function* parent = nullptr);
                 virtual ~BasicBlock();
 
                 i_iterator begin()          { return ins_.begin(); }
@@ -52,10 +50,14 @@ namespace ucmp
                 ci_iterator cbegin() const  { return ins_.cbegin(); }
                 ci_iterator cend() const    { return ins_.cend(); }
 
+                Function* parent_get()          { return parent_; }
+                void parent_set(Function* f)    { parent_ = f; }
+
                 void dump(std::ostream& o) const;
 
             protected:
                 std::list<Instruction*> ins_;
+                Function* parent_;
         };
     } // namespace ir
 } // namespace ucmp

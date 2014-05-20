@@ -30,8 +30,6 @@ namespace ucmp
         {
             public:
                 BinaryInst(BinOp op, sType type, Value* op1, Value* op2);
-                BinaryInst(BinOp op, sType type, Value* op1, Value* op2,
-                           const misc::Symbol& name);
                 virtual ~BinaryInst();
 
                 virtual void dump(std::ostream& o) const override;

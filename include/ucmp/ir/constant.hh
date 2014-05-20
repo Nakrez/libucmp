@@ -30,7 +30,7 @@ namespace ucmp
         {
             public:
                 Constant(sType t)
-                    : Value(t, "")
+                    : Value(t)
                 {}
 
                 virtual ~Constant() = default;

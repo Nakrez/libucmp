@@ -23,7 +23,7 @@ using namespace ucmp;
 using namespace ir;
 
 Function::Function(const misc::Symbol& name, FunctionType* t)
-    : GlobalValue(sType(t), name)
+    : GlobalValue(sType(t))
     , f_type_(t)
 {}
 

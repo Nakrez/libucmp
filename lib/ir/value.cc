@@ -23,10 +23,5 @@ using namespace ir;
 
 Value::Value(sType t)
     : type_(t)
-    , name_(fresh_name())
-{}
-
-Value::Value(sType t, const misc::Symbol& s)
-    : type_(t)
-    , name_(s)
+    , name_("")
 {}

@@ -63,6 +63,10 @@ namespace ucmp
                     insert_pt_ = bb;
                 }
 
+                Value* create_add(Value* l,
+                                  Value* r,
+                                  const misc::Symbol& n = "");
+
             protected:
                 Context& c_;
                 Unit* unit_;

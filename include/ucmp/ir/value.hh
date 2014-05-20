@@ -31,7 +31,6 @@ namespace ucmp
         {
             public:
                 Value(sType t);
-                Value(sType t, const misc::Symbol& s);
                 virtual ~Value() = default;
 
                 sType type_get() const
@@ -52,14 +51,6 @@ namespace ucmp
             protected:
                 sType type_;
                 misc::Symbol name_;
-
-            private:
-                misc::Symbol fresh_name()
-                {
-                    static unsigned long num = 0;
-
-                    return misc::Symbol("v" + std::to_string(num++));
-                }
         };
     } // namespace ir
 } // namespace ucmp
