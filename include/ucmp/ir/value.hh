@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # include <ucmp/misc/symbol.hh>
 
 # include <ucmp/ir/type.hh>
+# include <ucmp/ir/value-map.hh>
 
 namespace ucmp
 {
@@ -29,6 +30,7 @@ namespace ucmp
     {
         class Value
         {
+            friend class ValueMap;
             public:
                 Value(sType t);
                 virtual ~Value() = default;
@@ -43,10 +45,15 @@ namespace ucmp
                     return name_;
                 }
 
+                void name_set(const misc::Symbol& n);
+
                 virtual void dump(std::ostream& o) const
                 {
                     o << *type_ << " " << name_;
                 }
+
+            protected:
+                ValueMap* get_value_map();
 
             protected:
                 sType type_;

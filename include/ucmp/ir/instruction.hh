@@ -26,6 +26,8 @@ namespace ucmp
 {
     namespace ir
     {
+        class BasicBlock;
+
         /// Base class for all IR instruction
         class Instruction : public Value
         {
@@ -39,17 +41,16 @@ namespace ucmp
                     MOD,
                 };
             public:
-                Instruction(sType t, unsigned i_type)
-                    : Value(t)
-                    , i_type_(i_type)
-                {}
-
+                Instruction(sType t, unsigned i_type);
                 virtual ~Instruction() = default;
 
                 virtual void dump(std::ostream& o) const = 0;
 
+                BasicBlock* parent_get()        { return parent_; }
+                void parent_set(BasicBlock* bb) { parent_ = bb; }
             protected:
                 unsigned i_type_;
+                BasicBlock* parent_;
         };
     } // namespace ir
 } // namespace ucmp

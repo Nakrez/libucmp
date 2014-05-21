@@ -16,29 +16,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/value.hh>
-#include <ucmp/ir/function.hh>
-#include <ucmp/ir/unit.hh>
-#include <ucmp/ir/basic-block.hh>
 #include <ucmp/ir/instruction.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Value::Value(sType t)
-    : type_(t)
-    , name_("")
+Instruction::Instruction(sType t, unsigned i_type)
+    : Value(t)
+    , i_type_(i_type)
+    , parent_(nullptr)
 {}
-
-void Value::name_set(const misc::Symbol& n)
-{
-
-}
-
-ValueMap* Value::get_value_map()
-{
-    if (Instruction* I = dynamic_cast<Instruction*> (this))
-    {
-
-    }
-}

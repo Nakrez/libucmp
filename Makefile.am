@@ -7,6 +7,7 @@ libucmp_la_SOURCES = lib/misc/diagnostic-reporter.cc \
 					 lib/ir/value-map.cc \
 					 lib/ir/array-type.cc \
 					 lib/ir/basic-block.cc \
+					 lib/ir/instruction.cc \
 					 lib/ir/binary-inst.cc \
 					 lib/ir/context.cc \
 					 lib/ir/function.cc \

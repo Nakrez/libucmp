@@ -16,9 +16,40 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef VALUE_MAP_HH
-# define VALUE_MAP_HH
+#ifndef UCMP_IR_VALUE_MAP_HH
+# define UCMP_IR_VALUE_MAP_HH
 
+# include <map>
 
+# include <ucmp/misc/symbol.hh>
 
-#endif /* !VALUE_MAP_HH */
+namespace ucmp
+{
+    namespace ir
+    {
+        class Value;
+
+        class ValueMap
+        {
+            public:
+                ValueMap();
+                ~ValueMap();
+
+                void insert_name(Value* v, const misc::Symbol& name);
+
+                Value* get(const misc::Symbol& name);
+
+                template <class T>
+                T* get_as(const misc::Symbol& name)
+                {
+                    return dynamic_cast<T*> (get(name));
+                }
+
+            protected:
+                std::map<misc::Symbol, Value*> map_;
+                int counter_;
+        };
+    } // namespace ir
+} // namespace ucmp
+
+#endif /* !UCMP_IR_VALUE_MAP_HH */
