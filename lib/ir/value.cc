@@ -32,13 +32,24 @@ Value::Value(sType t)
 
 void Value::name_set(const misc::Symbol& n)
 {
+    ValueMap* vmap = get_value_map();
 
+    if (!vmap)
+        return;
+
+    vmap->insert_name(this, n);
 }
 
 ValueMap* Value::get_value_map()
 {
-    if (Instruction* I = dynamic_cast<Instruction*> (this))
+    if (Instruction* i = dynamic_cast<Instruction*> (this))
     {
-
+        if (BasicBlock* bb = i->parent_get())
+        {
+            if (Function* f = bb->parent_get())
+                return &f->value_map_get();
+        }
     }
+
+    return nullptr;
 }

@@ -25,6 +25,9 @@ using namespace ir;
 Function::Function(const misc::Symbol& name, FunctionType* t)
     : GlobalValue(sType(t))
     , f_type_(t)
+    , args_()
+    , blocks_()
+    , vmap_()
 {}
 
 Function::~Function()

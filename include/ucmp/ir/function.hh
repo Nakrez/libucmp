@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # include <ucmp/ir/global-value.hh>
 # include <ucmp/ir/basic-block.hh>
 # include <ucmp/ir/function-type.hh>
+# include <ucmp/ir/value-map.hh>
 
 namespace ucmp
 {
@@ -52,6 +53,8 @@ namespace ucmp
                 arg_citerator a_cbegin() const  { return args_.cbegin(); }
                 arg_citerator a_cend() const    { return args_.cend(); }
 
+                ValueMap& value_map_get()        { return vmap_; }
+
                 void arg_add(sType t, const misc::Symbol& name)
                 {
                     arg_add(new Value(t));
@@ -74,6 +77,7 @@ namespace ucmp
                 FunctionType* f_type_;
                 std::list<Value*> args_;
                 std::list<BasicBlock*> blocks_;
+                ValueMap vmap_;
         };
     } // namespace ir
 } // namespace ucmp
