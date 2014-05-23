@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <ucmp/ir/ir-generator.hh>
 
+#include <ucmp/ir/binary-inst.hh>
 using namespace ucmp;
 using namespace ir;
 
@@ -25,3 +26,12 @@ IrGenerator::IrGenerator(Context& c)
     : c_(c)
     , insert_pt_(nullptr)
 {}
+
+Value* IrGenerator::create_add(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(Instruction::ADD, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}

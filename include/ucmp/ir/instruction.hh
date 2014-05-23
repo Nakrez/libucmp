@@ -48,6 +48,7 @@ namespace ucmp
 
                 BasicBlock* parent_get()        { return parent_; }
                 void parent_set(BasicBlock* bb) { parent_ = bb; }
+
             protected:
                 unsigned i_type_;
                 BasicBlock* parent_;

@@ -35,9 +35,9 @@ namespace ucmp
         /// Represent a basic block
         class BasicBlock : public Value
         {
-            typedef typename std::list<Instruction*>::iterator i_iterator;
-            typedef typename std::list<Instruction*>::const_iterator
-            ci_iterator;
+            typedef typename std::list<Instruction*> i_list;
+            typedef typename i_list::iterator i_iterator;
+            typedef typename i_list::const_iterator ci_iterator;
 
             public:
                 BasicBlock(Context& c, Function* parent = nullptr,
@@ -50,6 +50,9 @@ namespace ucmp
                 ci_iterator end() const     { return ins_.end(); }
                 ci_iterator cbegin() const  { return ins_.cbegin(); }
                 ci_iterator cend() const    { return ins_.cend(); }
+
+                i_list& instr_list_get()                { return ins_; }
+                const i_list& instr_list_get() const    { return ins_; }
 
                 Function* parent_get()          { return parent_; }
                 void parent_set(Function* f)    { parent_ = f; }

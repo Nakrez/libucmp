@@ -42,6 +42,13 @@ namespace ucmp
                                   Value* r,
                                   const misc::Symbol& n = "");
 
+                void insert(Instruction* instr, const misc::Symbol& name = "")
+                {
+                    insert_pt_->instr_list_get().push_back(instr);
+                    instr->parent_set(insert_pt_);
+                    instr->name_set(name);
+                }
+
             protected:
                 Context& c_;
                 BasicBlock* insert_pt_;
