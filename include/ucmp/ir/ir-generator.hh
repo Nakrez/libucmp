@@ -46,6 +46,8 @@ namespace ucmp
                                   Value* r, const misc::Symbol& n = "");
                 Value* create_div(Value* l,
                                   Value* r, const misc::Symbol& n = "");
+                Value* create_mod(Value* l,
+                                  Value* r, const misc::Symbol& n = "");
 
                 void insert(Instruction* instr, const misc::Symbol& name = "")
                 {

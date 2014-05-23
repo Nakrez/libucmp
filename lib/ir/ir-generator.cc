@@ -62,3 +62,12 @@ Value* IrGenerator::create_div(Value* l, Value* r, const misc::Symbol& n)
 
     return bi;
 }
+
+Value* IrGenerator::create_mod(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(Instruction::MOD, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}
