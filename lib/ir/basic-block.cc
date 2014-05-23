@@ -24,12 +24,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using namespace ucmp;
 using namespace ir;
 
-BasicBlock::BasicBlock(Context& c, Function* parent)
+BasicBlock::BasicBlock(Context& c, Function* parent, const misc::Symbol& name)
     : Value(c.label_ty_get())
     , parent_(parent)
 {
     if (parent)
-        parent->bb_add(this);
+        parent->insert_bb(this);
+
+    name_set(name);
 }
 
 BasicBlock::~BasicBlock()

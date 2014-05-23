@@ -72,9 +72,18 @@ namespace ucmp
                     f_type_->arg_add(v->type_get());
                 }
 
-                void bb_add(BasicBlock* bb)
+                void insert_bb(BasicBlock* bb)
                 {
                     blocks_.push_back(bb);
+
+                    if (bb->name_get() == "")
+                        vmap_.insert_name(bb, "");
+                }
+
+                void insert_bb(BasicBlock* bb, const misc::Symbol& name)
+                {
+                    blocks_.push_back(bb);
+                    vmap_.insert_name(bb, name);
                 }
 
                 void dump(std::ostream& o) const;

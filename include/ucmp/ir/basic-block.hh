@@ -40,7 +40,8 @@ namespace ucmp
             ci_iterator;
 
             public:
-                BasicBlock(Context& c, Function* parent = nullptr);
+                BasicBlock(Context& c, Function* parent = nullptr,
+                           const misc::Symbol& name = "");
                 virtual ~BasicBlock();
 
                 i_iterator begin()          { return ins_.begin(); }

@@ -34,6 +34,8 @@ void ValueMap::insert_name(Value* v, const misc::Symbol& name)
 {
     misc::Symbol n = name;
 
+    map_[v->name_get()] = nullptr;
+
     if (n == "")
     {
         if (v->type_get()->type_get() == Type::LabelTy)
