@@ -39,8 +39,9 @@ namespace ucmp
                 void insert_pt_set(BasicBlock* bb)  { insert_pt_ = bb; }
 
                 Value* create_add(Value* l,
-                                  Value* r,
-                                  const misc::Symbol& n = "");
+                                  Value* r, const misc::Symbol& n = "");
+                Value* create_sub(Value* l,
+                                  Value* r, const misc::Symbol& n = "");
 
                 void insert(Instruction* instr, const misc::Symbol& name = "")
                 {

@@ -35,3 +35,12 @@ Value* IrGenerator::create_add(Value* l, Value* r, const misc::Symbol& n)
 
     return bi;
 }
+
+Value* IrGenerator::create_sub(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(Instruction::SUB, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}

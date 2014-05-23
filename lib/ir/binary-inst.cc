@@ -58,5 +58,5 @@ void BinaryInst::dump(std::ostream& o) const
             break;
     }
 
-    o << " " << *op1_ << " " << *op2_;
+    o << " " << *op1_ << ", " << *op2_;
 }
