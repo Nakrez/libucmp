@@ -19,14 +19,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/misc/indent.hh>
 
 #include <ucmp/ir/unit.hh>
+#include <ucmp/ir/context.hh>
 #include <ucmp/ir/function.hh>
 #include <ucmp/ir/global-variable.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Unit::Unit()
-{}
+Unit::Unit(Context& c)
+    : c_(c)
+{
+    c.add_unit(this);
+}
 
 Unit::~Unit()
 {

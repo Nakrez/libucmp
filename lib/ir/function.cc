@@ -18,17 +18,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <ucmp/misc/indent.hh>
 #include <ucmp/ir/function.hh>
+#include <ucmp/ir/unit.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Function::Function(const misc::Symbol& name, FunctionType* t)
+Function::Function(FunctionType* t, const misc::Symbol& name, Unit* u)
     : GlobalValue(sType(t))
     , f_type_(t)
     , args_()
     , blocks_()
     , vmap_()
-{}
+    , parent_(u)
+{
+    if (u)
+        u->functions_get().push_back(this);
+
+    name_set(name);
+}
 
 Function::~Function()
 {

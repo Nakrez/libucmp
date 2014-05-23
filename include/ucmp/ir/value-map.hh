@@ -37,6 +37,11 @@ namespace ucmp
 
                 void insert_name(Value* v, const misc::Symbol& name);
 
+                bool exists(const misc::Symbol& name)
+                {
+                    return get(name) == nullptr;
+                }
+
                 Value* get(const misc::Symbol& name);
 
                 template <class T>

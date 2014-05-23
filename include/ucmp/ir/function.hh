@@ -30,6 +30,8 @@ namespace ucmp
 {
     namespace ir
     {
+        class Unit;
+
         class Function : public GlobalValue
         {
             typedef typename std::list<BasicBlock*>::iterator bb_iterator;
@@ -40,7 +42,8 @@ namespace ucmp
             typedef typename std::list<Value*>::const_iterator arg_citerator;
 
             public:
-                Function(const misc::Symbol& name, FunctionType* t);
+                Function(FunctionType* t, const misc::Symbol& name = "",
+                         Unit* u = nullptr);
                 virtual ~Function();
 
                 bb_iterator f_begin()           { return blocks_.begin(); }
@@ -53,9 +56,12 @@ namespace ucmp
                 arg_citerator a_cbegin() const  { return args_.cbegin(); }
                 arg_citerator a_cend() const    { return args_.cend(); }
 
-                ValueMap& value_map_get()        { return vmap_; }
+                Unit* parent_get()              { return parent_; }
+                void parent_set(Unit* u)        { parent_ = u; }
 
-                void arg_add(sType t, const misc::Symbol& name)
+                ValueMap& value_map_get()       { return vmap_; }
+
+                void arg_add(sType t, const misc::Symbol&)
                 {
                     arg_add(new Value(t));
                 }
@@ -78,6 +84,7 @@ namespace ucmp
                 std::list<Value*> args_;
                 std::list<BasicBlock*> blocks_;
                 ValueMap vmap_;
+                Unit* parent_;
         };
     } // namespace ir
 } // namespace ucmp

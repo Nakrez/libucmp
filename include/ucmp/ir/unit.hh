@@ -22,25 +22,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # include <list>
 # include <ostream>
 
+# include <ucmp/ir/value-map.hh>
+
 namespace ucmp
 {
     namespace ir
     {
         class Function;
         class GlobalVariable;
+        class Context;
 
         /// Contains a hole ir file
         class Unit
         {
-            typedef typename std::list<Function*>::iterator f_iterator;
-            typedef typename std::list<Function*>::const_iterator f_citerator;
+            typedef typename std::list<Function*> f_list;
+            typedef typename std::list<GlobalVariable*> gv_list;
 
-            typedef typename std::list<GlobalVariable*>::iterator gv_iterator;
-            typedef typename std::list<GlobalVariable*>::const_iterator
-                             gv_citerator;
+            typedef typename f_list::iterator f_iterator;
+            typedef typename f_list::const_iterator f_citerator;
+
+            typedef typename gv_list::iterator gv_iterator;
+            typedef typename gv_list::const_iterator gv_citerator;
 
             public:
-                Unit();
+                Unit(Context& c);
                 virtual ~Unit();
 
                 gv_iterator var_begin()          { return vars_.begin(); }
@@ -53,16 +58,23 @@ namespace ucmp
                 f_citerator fun_cbegin() const  { return funs_.cbegin(); }
                 f_citerator fun_cend() const    { return funs_.cend(); }
 
+                ValueMap& value_map_get()       { return vmap_; }
+
+                Context& context_get()          { return c_; }
+
+                const f_list& functions_get() const { return funs_; }
+                f_list& functions_get()             { return funs_; }
+
+                const gv_list& globals_get() const  { return vars_; }
+                gv_list& globals_get()              { return vars_; }
+
                 std::ostream& dump(std::ostream& o) const;
 
-                void add_function(Function *f)
-                {
-                    funs_.push_back(f);
-                }
-
             private:
+                Context& c_;
                 std::list<Function*> funs_;
                 std::list<GlobalVariable*> vars_;
+                ValueMap vmap_;
         };
     } // namespace ir
 } // namespace ucmp

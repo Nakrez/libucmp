@@ -35,33 +35,8 @@ namespace ucmp
                 IrGenerator(Context& c);
                 virtual ~IrGenerator() = default;
 
-                void init();
-
-                Function* declared_function_get() { return fun_; }
-                BasicBlock* insert_pt_get() { return insert_pt_; }
-
-                void current_unit_set(Unit* u)
-                {
-                    c_.add_unit(u);
-
-                    unit_ = u;
-                }
-
-                void start_function(const misc::Symbol& name, sType ret_type)
-                {
-                    fun_ = new Function(name, new FunctionType(ret_type));
-                }
-
-                void end_function()
-                {
-                    unit_->add_function(fun_);
-                    fun_ = nullptr;
-                }
-
-                void insert_pt_set(BasicBlock* bb)
-                {
-                    insert_pt_ = bb;
-                }
+                BasicBlock* insert_pt_get()         { return insert_pt_; }
+                void insert_pt_set(BasicBlock* bb)  { insert_pt_ = bb; }
 
                 Value* create_add(Value* l,
                                   Value* r,
@@ -69,8 +44,6 @@ namespace ucmp
 
             protected:
                 Context& c_;
-                Unit* unit_;
-                Function* fun_;
                 BasicBlock* insert_pt_;
         };
     } // namespace ir

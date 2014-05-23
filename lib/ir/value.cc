@@ -50,6 +50,11 @@ ValueMap* Value::get_value_map()
                 return &f->value_map_get();
         }
     }
+    else if (Function* f = dynamic_cast<Function*> (this))
+    {
+        if (Unit* u = f->parent_get())
+            return &u->value_map_get();
+    }
 
     return nullptr;
 }
