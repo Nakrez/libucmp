@@ -14,6 +14,7 @@ libucmp_la_SOURCES = lib/misc/diagnostic-reporter.cc \
 					 lib/ir/function-type.cc \
 					 lib/ir/global-variable.cc \
 					 lib/ir/value.cc \
+					 lib/ir/argument.cc \
 					 lib/ir/int-constant.cc \
 					 lib/ir/ir-generator.cc \
 					 lib/ir/struct-type.cc \
