@@ -28,10 +28,7 @@ BinaryInst::BinaryInst(BinOp op, sType type, Value* op1, Value* op2)
 {}
 
 BinaryInst::~BinaryInst()
-{
-    delete op1_;
-    delete op2_;
-}
+{}
 
 void BinaryInst::dump(std::ostream& o) const
 {
