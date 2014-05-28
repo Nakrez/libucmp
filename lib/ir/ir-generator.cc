@@ -29,7 +29,7 @@ IrGenerator::IrGenerator(Context& c)
 
 Value* IrGenerator::create_add(Value* l, Value* r, const misc::Symbol& n)
 {
-    BinaryInst* bi = new BinaryInst(Instruction::ADD, l->type_get(), l, r);
+    BinaryInst* bi = new BinaryInst(BinaryInst::ADD, l->type_get(), l, r);
 
     insert(bi, n);
 
@@ -38,7 +38,7 @@ Value* IrGenerator::create_add(Value* l, Value* r, const misc::Symbol& n)
 
 Value* IrGenerator::create_sub(Value* l, Value* r, const misc::Symbol& n)
 {
-    BinaryInst* bi = new BinaryInst(Instruction::SUB, l->type_get(), l, r);
+    BinaryInst* bi = new BinaryInst(BinaryInst::SUB, l->type_get(), l, r);
 
     insert(bi, n);
 
@@ -47,7 +47,7 @@ Value* IrGenerator::create_sub(Value* l, Value* r, const misc::Symbol& n)
 
 Value* IrGenerator::create_mul(Value* l, Value* r, const misc::Symbol& n)
 {
-    BinaryInst* bi = new BinaryInst(Instruction::MUL, l->type_get(), l, r);
+    BinaryInst* bi = new BinaryInst(BinaryInst::MUL, l->type_get(), l, r);
 
     insert(bi, n);
 
@@ -56,7 +56,7 @@ Value* IrGenerator::create_mul(Value* l, Value* r, const misc::Symbol& n)
 
 Value* IrGenerator::create_div(Value* l, Value* r, const misc::Symbol& n)
 {
-    BinaryInst* bi = new BinaryInst(Instruction::DIV, l->type_get(), l, r);
+    BinaryInst* bi = new BinaryInst(BinaryInst::DIV, l->type_get(), l, r);
 
     insert(bi, n);
 
@@ -65,7 +65,7 @@ Value* IrGenerator::create_div(Value* l, Value* r, const misc::Symbol& n)
 
 Value* IrGenerator::create_mod(Value* l, Value* r, const misc::Symbol& n)
 {
-    BinaryInst* bi = new BinaryInst(Instruction::MOD, l->type_get(), l, r);
+    BinaryInst* bi = new BinaryInst(BinaryInst::MOD, l->type_get(), l, r);
 
     insert(bi, n);
 

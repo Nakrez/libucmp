@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # define UCMP_IR_INSTRUCTION_HH
 
 # include <ostream>
+# include <string>
+
 # include <ucmp/ir/value.hh>
 
 namespace ucmp
@@ -32,22 +34,25 @@ namespace ucmp
         class Instruction : public Value
         {
             public:
-                enum BinOp
+                enum InstType
                 {
-                    ADD,
-                    SUB,
-                    MUL,
-                    DIV,
-                    MOD,
+                    BINOP,
                 };
+
             public:
                 Instruction(sType t, unsigned i_type);
                 virtual ~Instruction() = default;
 
-                virtual void dump(std::ostream& o) const = 0;
-
                 BasicBlock* parent_get()        { return parent_; }
                 void parent_set(BasicBlock* bb) { parent_ = bb; }
+
+                /// Return the number of operand the instruction has
+                virtual unsigned operand_size() const = 0;
+
+                /// Get the ith operand (start at 0)
+                virtual Value* operand_get(int index) const = 0;
+
+                virtual std::string type_to_str() const;
 
             protected:
                 unsigned i_type_;

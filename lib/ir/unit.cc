@@ -37,17 +37,3 @@ Unit::~Unit()
     for (auto f : funs_)
         delete f;
 }
-
-std::ostream& Unit::dump(std::ostream& o) const
-{
-    for (auto v : vars_)
-    {
-        v->dump(o);
-        o << misc::iendl;
-    }
-
-    for (auto f : funs_)
-        f->dump(o);
-
-    return o;
-}

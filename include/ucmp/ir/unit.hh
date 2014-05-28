@@ -68,8 +68,6 @@ namespace ucmp
                 const gv_list& globals_get() const  { return vars_; }
                 gv_list& globals_get()              { return vars_; }
 
-                std::ostream& dump(std::ostream& o) const;
-
             private:
                 Context& c_;
                 std::list<Function*> funs_;

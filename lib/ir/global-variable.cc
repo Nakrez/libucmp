@@ -27,8 +27,3 @@ GlobalVariable::GlobalVariable(const misc::Symbol& s,
     : GlobalValue(nullptr)
     , init_(init)
 {}
-
-void GlobalVariable::dump(std::ostream& o) const
-{
-    o << name_get();
-}

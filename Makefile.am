@@ -20,6 +20,7 @@ libucmp_la_SOURCES = lib/misc/diagnostic-reporter.cc \
 					 lib/ir/struct-type.cc \
 					 lib/ir/type.cc \
 					 lib/ir/unit.cc \
+					 lib/ir/ir-writer.cc \
 					 lib/ir/pass-manager.cc
 
 SUBDIRS= . tools

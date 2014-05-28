@@ -61,6 +61,11 @@ namespace ucmp
 
                 ValueMap& value_map_get()       { return vmap_; }
 
+                sType return_type_get() const
+                {
+                    return f_type_->ret_type_get();
+                }
+
                 void arg_add(sType t, const misc::Symbol&)
                 {
                     arg_add(new Value(t));
@@ -85,8 +90,6 @@ namespace ucmp
                     blocks_.push_back(bb);
                     vmap_.insert_name(bb, name);
                 }
-
-                void dump(std::ostream& o) const;
 
             protected:
                 FunctionType* f_type_;

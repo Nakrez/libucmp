@@ -26,3 +26,12 @@ Instruction::Instruction(sType t, unsigned i_type)
     , i_type_(i_type)
     , parent_(nullptr)
 {}
+
+std::string Instruction::type_to_str() const
+{
+    switch (i_type_)
+    {
+        default:
+            return "";
+    }
+}

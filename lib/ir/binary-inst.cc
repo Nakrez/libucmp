@@ -22,7 +22,8 @@ using namespace ucmp;
 using namespace ir;
 
 BinaryInst::BinaryInst(BinOp op, sType type, Value* op1, Value* op2)
-    : Instruction(type, op)
+    : Instruction(type, BINOP)
+    , op_(op)
     , op1_(op1)
     , op2_(op2)
 {}
@@ -30,30 +31,31 @@ BinaryInst::BinaryInst(BinOp op, sType type, Value* op1, Value* op2)
 BinaryInst::~BinaryInst()
 {}
 
-void BinaryInst::dump(std::ostream& o) const
+Value* BinaryInst::operand_get(int index) const
 {
-    o << name_get().data_get() << " = ";
+    if (!index)
+        return op1_;
+    else if (index == 1)
+        return op2_;
+    else
+        return nullptr;
+}
 
-    switch (i_type_)
+std::string BinaryInst::type_to_str() const
+{
+    switch (op_)
     {
         case ADD:
-            o << "add";
-            break;
+            return "add";
         case SUB:
-            o << "sub";
-            break;
+            return "sub";
         case MUL:
-            o << "mul";
-            break;
+            return "mul";
         case DIV:
-            o << "div";
-            break;
+            return "div";
         case MOD:
-            o << "mod";
-            break;
-        default:
-            break;
+            return "mod";
     }
 
-    o << " " << *op1_ << ", " << *op2_;
+    return "";
 }

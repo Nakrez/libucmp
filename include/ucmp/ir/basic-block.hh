@@ -57,8 +57,6 @@ namespace ucmp
                 Function* parent_get()          { return parent_; }
                 void parent_set(Function* f)    { parent_ = f; }
 
-                void dump(std::ostream& o) const;
-
             protected:
                 std::list<Instruction*> ins_;
                 Function* parent_;

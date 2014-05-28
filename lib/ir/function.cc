@@ -42,36 +42,3 @@ Function::~Function()
     for (auto b : blocks_)
         delete b;
 }
-
-void Function::dump(std::ostream& o) const
-{
-    o << "function " << *f_type_->ret_type_get() << " " << name_get() << "(";
-
-    auto abegin = a_cbegin();
-    auto aend = a_cend();
-
-    for (auto ait = a_cbegin(); ait != aend; ++ait)
-    {
-        if (ait != abegin)
-            o << ", ";
-
-        (*ait)->dump(o);
-    }
-
-    o << ")" << misc::iendl << "{" << misc::incendl;
-
-    auto fbegin = f_cbegin();
-    auto fend = f_cend();
-
-    for (auto fit = f_cbegin(); fit != fend; ++fit)
-    {
-        if (fit != fbegin)
-            o << misc::iendl
-              << "; label: '" + (*fit)->name_get().data_get() + "'"
-              << misc::iendl;
-
-        (*fit)->dump(o);
-    }
-
-    o << misc::decendl << "}";
-}

@@ -42,15 +42,9 @@ namespace ucmp
                 arg_citerator cbegin() const    { return args_.cbegin(); }
                 arg_citerator cend() const      { return args_.cend(); }
 
-                void arg_add(sType t)
-                {
-                    args_.push_back(t);
-                }
+                void arg_add(sType t) { args_.push_back(t); }
 
-                sType ret_type_get()
-                {
-                    return ret_type_;
-                }
+                sType ret_type_get() const { return ret_type_; }
 
             protected:
                 sType ret_type_;

@@ -38,11 +38,6 @@ namespace ucmp
                     return val_;
                 }
 
-                virtual void dump(std::ostream& o) const override
-                {
-                    o << val_;
-                }
-
             protected:
                 int val_;
         };

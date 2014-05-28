@@ -34,8 +34,6 @@ namespace ucmp
                                Constant* init = nullptr);
                 virtual ~GlobalVariable() = default;
 
-                void dump(std::ostream& o) const;
-
                 const Constant* init_get() const
                 {
                     return init_;

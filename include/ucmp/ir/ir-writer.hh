@@ -16,45 +16,35 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_IR_VALUE_HH
-# define UCMP_IR_VALUE_HH
+#ifndef UCMP_IR_IR_WRITER_HH
+# define UCMP_IR_IR_WRITER_HH
 
-# include <ucmp/misc/symbol.hh>
+# include <ostream>
 
-# include <ucmp/ir/type.hh>
-# include <ucmp/ir/value-map.hh>
+# include <ucmp/ir/unit.hh>
+# include <ucmp/ir/function.hh>
+# include <ucmp/ir/value.hh>
 
 namespace ucmp
 {
     namespace ir
     {
-        class Value
+        class IrWriter
         {
-            friend class ValueMap;
             public:
-                Value(sType t);
-                virtual ~Value() = default;
+                IrWriter(std::ostream& ostr);
+                virtual ~IrWriter() = default;
 
-                sType type_get() const
-                {
-                    return type_;
-                }
-
-                const misc::Symbol name_get() const
-                {
-                    return name_;
-                }
-
-                void name_set(const misc::Symbol& n);
+                void write_unit(Unit* u);
+                void write_function(Function* f);
+                void write_basic_block(BasicBlock* bb);
+                void write_instruction(Instruction* i);
+                void write_value(Value* v);
 
             protected:
-                ValueMap* get_value_map();
-
-            protected:
-                sType type_;
-                misc::Symbol name_;
+                std::ostream& ostr_;
         };
     } // namespace ir
 } // namespace ucmp
 
-#endif /* !UCMP_IR_VALUE_HH */
+#endif /* !UCMP_IR_IR_WRITER_HH */

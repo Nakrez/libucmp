@@ -39,12 +39,3 @@ BasicBlock::~BasicBlock()
     for (auto i : ins_)
         delete i;
 }
-
-void BasicBlock::dump(std::ostream& o) const
-{
-    for (auto i : ins_)
-    {
-        i->dump(o);
-        o << misc::iendl;
-    }
-}
