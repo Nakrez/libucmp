@@ -19,12 +19,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/ir-generator.hh>
 
 #include <ucmp/ir/binary-inst.hh>
+#include <ucmp/ir/stack-alloc.hh>
+
 using namespace ucmp;
 using namespace ir;
 
 IrGenerator::IrGenerator(Context& c)
     : c_(c)
-    , insert_pt_(nullptr)
+    , bb_(nullptr)
 {}
 
 Value* IrGenerator::create_add(Value* l, Value* r, const misc::Symbol& n)
@@ -70,4 +72,13 @@ Value* IrGenerator::create_mod(Value* l, Value* r, const misc::Symbol& n)
     insert(bi, n);
 
     return bi;
+}
+
+Value* IrGenerator::create_stack_alloc(sType t, const misc::Symbol& n)
+{
+    StackAlloc* sa = new StackAlloc(t);
+
+    insert(sa, n);
+
+    return sa;
 }

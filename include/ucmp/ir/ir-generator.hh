@@ -35,8 +35,19 @@ namespace ucmp
                 IrGenerator(Context& c);
                 virtual ~IrGenerator() = default;
 
-                BasicBlock* insert_pt_get()         { return insert_pt_; }
-                void insert_pt_set(BasicBlock* bb)  { insert_pt_ = bb; }
+                BasicBlock* insert_block_get()  { return bb_; }
+
+                void insert_pt_set(BasicBlock* bb)
+                {
+                    bb_ = bb;
+                    insert_pt_ = bb->end();
+                }
+
+                void insert_pt_set(BasicBlock* bb, BasicBlock::iterator it)
+                {
+                    bb_ = bb;
+                    insert_pt_ = it;
+                }
 
                 Value* create_add(Value* l,
                                   Value* r, const misc::Symbol& n = "");
@@ -49,16 +60,19 @@ namespace ucmp
                 Value* create_mod(Value* l,
                                   Value* r, const misc::Symbol& n = "");
 
+                Value* create_stack_alloc(sType t, const misc::Symbol& n = "");
+
                 void insert(Instruction* instr, const misc::Symbol& name = "")
                 {
-                    insert_pt_->instr_list_get().push_back(instr);
-                    instr->parent_set(insert_pt_);
+                    bb_->instr_list_get().insert(insert_pt_, instr);
+                    instr->parent_set(bb_);
                     instr->name_set(name);
                 }
 
             protected:
                 Context& c_;
-                BasicBlock* insert_pt_;
+                BasicBlock* bb_;
+                BasicBlock::iterator insert_pt_;
         };
     } // namespace ir
 } // namespace ucmp

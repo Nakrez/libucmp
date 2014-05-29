@@ -37,10 +37,11 @@ namespace ucmp
                 enum InstType
                 {
                     BINOP,
+                    STACK_ALLOC,
                 };
 
             public:
-                Instruction(sType t, unsigned i_type);
+                Instruction(sType t, InstType i_type);
                 virtual ~Instruction() = default;
 
                 BasicBlock* parent_get()        { return parent_; }
@@ -52,10 +53,13 @@ namespace ucmp
                 /// Get the ith operand (start at 0)
                 virtual Value* operand_get(int index) const = 0;
 
+                /// Return the instruction type
+                InstType itype_get() const  { return i_type_; }
+
                 virtual std::string type_to_str() const;
 
             protected:
-                unsigned i_type_;
+                InstType i_type_;
                 BasicBlock* parent_;
         };
     } // namespace ir

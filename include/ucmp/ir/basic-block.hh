@@ -36,20 +36,22 @@ namespace ucmp
         class BasicBlock : public Value
         {
             typedef typename std::list<Instruction*> i_list;
-            typedef typename i_list::iterator i_iterator;
-            typedef typename i_list::const_iterator ci_iterator;
+
+            public:
+                typedef typename i_list::iterator iterator;
+                typedef typename i_list::const_iterator const_iterator;
 
             public:
                 BasicBlock(Context& c, Function* parent = nullptr,
                            const misc::Symbol& name = "");
                 virtual ~BasicBlock();
 
-                i_iterator begin()          { return ins_.begin(); }
-                i_iterator end()            { return ins_.end(); }
-                ci_iterator begin() const   { return ins_.begin(); }
-                ci_iterator end() const     { return ins_.end(); }
-                ci_iterator cbegin() const  { return ins_.cbegin(); }
-                ci_iterator cend() const    { return ins_.cend(); }
+                iterator begin()          { return ins_.begin(); }
+                iterator end()            { return ins_.end(); }
+                const_iterator begin() const   { return ins_.begin(); }
+                const_iterator end() const     { return ins_.end(); }
+                const_iterator cbegin() const  { return ins_.cbegin(); }
+                const_iterator cend() const    { return ins_.cend(); }
 
                 i_list& instr_list_get()                { return ins_; }
                 const i_list& instr_list_get() const    { return ins_; }
