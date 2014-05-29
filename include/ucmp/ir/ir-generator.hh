@@ -61,6 +61,7 @@ namespace ucmp
                                   Value* r, const misc::Symbol& n = "");
 
                 Value* create_stack_alloc(sType t, const misc::Symbol& n = "");
+                Value* create_store(Value* val, Value* mem);
 
                 void insert(Instruction* instr, const misc::Symbol& name)
                 {
