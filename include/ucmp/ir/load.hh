@@ -16,28 +16,35 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/instruction.hh>
+#ifndef UCMP_IR_LOAD_HH
+# define UCMP_IR_LOAD_HH
 
-using namespace ucmp;
-using namespace ir;
+# include <ucmp/ir/instruction.hh>
 
-Instruction::Instruction(sType t, InstType i_type)
-    : Value(t)
-    , i_type_(i_type)
-    , parent_(nullptr)
-{}
-
-std::string Instruction::type_to_str() const
+namespace ucmp
 {
-    switch (i_type_)
+    namespace ir
     {
-        case STACK_ALLOC:
-            return "stackalloc";
-        case STORE:
-            return "store";
-        case LOAD:
-            return "load";
-        default:
-            return "";
-    }
-}
+        class Load : public Instruction
+        {
+            public:
+                Load(Value* mem);
+                virtual ~Load() = default;
+
+                virtual unsigned operand_size() const override { return 1; }
+
+                virtual Value* operand_get(int index) const override
+                {
+                    if (!index)
+                        return mem_;
+
+                    return nullptr;
+                }
+
+            protected:
+                Value* mem_;
+        };
+    } // namespace ir
+} // namespace ucmp
+
+#endif /* !UCMP_IR_LOAD_HH */

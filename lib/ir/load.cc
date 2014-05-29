@@ -16,28 +16,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/instruction.hh>
+#include <ucmp/ir/load.hh>
+#include <ucmp/ir/ptr-type.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Instruction::Instruction(sType t, InstType i_type)
-    : Value(t)
-    , i_type_(i_type)
-    , parent_(nullptr)
+Load::Load(Value* mem)
+    : Instruction(dynamic_cast<PtrType*>(mem->type_get().get())->pointed_type_get(),
+                  LOAD)
+    , mem_(mem)
 {}
-
-std::string Instruction::type_to_str() const
-{
-    switch (i_type_)
-    {
-        case STACK_ALLOC:
-            return "stackalloc";
-        case STORE:
-            return "store";
-        case LOAD:
-            return "load";
-        default:
-            return "";
-    }
-}

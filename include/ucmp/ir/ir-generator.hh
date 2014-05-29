@@ -36,6 +36,7 @@ namespace ucmp
                 virtual ~IrGenerator() = default;
 
                 BasicBlock* insert_block_get()  { return bb_; }
+                BasicBlock::iterator insert_pt_get() { return insert_pt_; }
 
                 void insert_pt_set(BasicBlock* bb)
                 {
@@ -62,6 +63,7 @@ namespace ucmp
 
                 Value* create_stack_alloc(sType t, const misc::Symbol& n = "");
                 Value* create_store(Value* val, Value* mem);
+                Value* create_load(Value* mem, const misc::Symbol& n = "");
 
                 void insert(Instruction* instr, const misc::Symbol& name)
                 {

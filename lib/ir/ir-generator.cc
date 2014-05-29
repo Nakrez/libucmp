@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/binary-inst.hh>
 #include <ucmp/ir/stack-alloc.hh>
 #include <ucmp/ir/store.hh>
+#include <ucmp/ir/load.hh>
 
 using namespace ucmp;
 using namespace ir;
@@ -91,4 +92,13 @@ Value* IrGenerator::create_store(Value* val, Value* mem)
     insert(s);
 
     return s;
+}
+
+Value* IrGenerator::create_load(Value* mem, const misc::Symbol& n)
+{
+    Load* l = new Load(mem);
+
+    insert(l, n);
+
+    return l;
 }

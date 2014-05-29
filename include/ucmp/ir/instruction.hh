@@ -39,6 +39,7 @@ namespace ucmp
                     BINOP,
                     STACK_ALLOC,
                     STORE,
+                    LOAD,
                 };
 
             public:

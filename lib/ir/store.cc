@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <ucmp/ir/store.hh>
 
+#include <iostream>
 using namespace ucmp;
 using namespace ir;
 
@@ -28,7 +29,7 @@ Store::Store(sType t, Value* v, Value* mem)
     , val_(v)
     , mem_(mem)
 {
-    assert(mem->type_get()->type_get() != Type::PtrTy &&
+    assert(mem->type_get()->type_get() == Type::PtrTy &&
            "Memory operand of store MUST have a pointer type");
 }
 
