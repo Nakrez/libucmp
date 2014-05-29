@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # define UCMP_IR_STACK_ALLOC_HH
 
 # include <ucmp/ir/instruction.hh>
+# include <ucmp/ir/ptr-type.hh>
 
 namespace ucmp
 {
@@ -29,10 +30,12 @@ namespace ucmp
         {
             public:
                 StackAlloc(sType t)
-                    : Instruction(t, STACK_ALLOC)
+                    : Instruction(sType(new PtrType(t)), STACK_ALLOC)
+                    , type_(t)
                 {}
-
                 virtual ~StackAlloc() = default;
+
+                sType alloc_type_get()  { return type_; }
 
                 virtual unsigned operand_size() const override
                 {
@@ -43,6 +46,9 @@ namespace ucmp
                 {
                     return nullptr;
                 }
+
+            protected:
+                sType type_;
         };
     } // namespace ir
 } // namespace ucmp

@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <ucmp/ir/ir-writer.hh>
 #include <ucmp/ir/int-constant.hh>
+#include <ucmp/ir/stack-alloc.hh>
 
 #include <ucmp/misc/indent.hh>
 
@@ -86,6 +87,15 @@ void IrWriter::write_instruction(Instruction* i)
         ostr_ << i->name_get() << " = ";
 
     ostr_ << i->type_to_str();
+
+    if (i->itype_get() == Instruction::STACK_ALLOC)
+    {
+        StackAlloc *sa = dynamic_cast<StackAlloc*> (i);
+
+        ostr_ << " " << *sa->alloc_type_get();
+
+        return;
+    }
 
     for (unsigned j = 0; j < i->operand_size(); ++j)
     {

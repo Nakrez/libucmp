@@ -61,6 +61,7 @@ namespace ucmp
 
                 ValueMap& value_map_get()       { return vmap_; }
 
+                BasicBlock* entry_block_get()   { return blocks_.front(); }
                 sType return_type_get() const
                 {
                     return f_type_->ret_type_get();
