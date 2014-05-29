@@ -62,11 +62,17 @@ namespace ucmp
 
                 Value* create_stack_alloc(sType t, const misc::Symbol& n = "");
 
-                void insert(Instruction* instr, const misc::Symbol& name = "")
+                void insert(Instruction* instr, const misc::Symbol& name)
                 {
                     bb_->instr_list_get().insert(insert_pt_, instr);
                     instr->parent_set(bb_);
                     instr->name_set(name);
+                }
+
+                void insert(Instruction* instr)
+                {
+                    bb_->instr_list_get().insert(insert_pt_, instr);
+                    instr->parent_set(bb_);
                 }
 
             protected:
