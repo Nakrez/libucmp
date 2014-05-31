@@ -43,6 +43,7 @@ namespace ucmp
                     LOAD,
                     RET,
                     JUMP,
+                    CJUMP,
                 };
 
             public:

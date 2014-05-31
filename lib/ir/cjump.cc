@@ -16,34 +16,30 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/instruction.hh>
+#include <ucmp/ir/cjump.hh>
+#include <ucmp/ir/basic-block.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Instruction::Instruction(sType t, InstType i_type)
-    : Value(t)
-    , i_type_(i_type)
-    , parent_(nullptr)
+Cjump::Cjump(sType t, Value* v, BasicBlock* tr, BasicBlock* fa)
+    : Instruction(t, CJUMP)
+    , cond_(v)
+    , true_(tr)
+    , false_(fa)
 {}
 
-std::string Instruction::type_to_str() const
+Value* Cjump::operand_get(int index) const
 {
-    switch (i_type_)
+    switch (index)
     {
-        case STACK_ALLOC:
-            return "stackalloc";
-        case STORE:
-            return "store";
-        case LOAD:
-            return "load";
-        case RET:
-            return "ret";
-        case JUMP:
-            return "jump";
-        case CJUMP:
-            return "cjump";
+        case 0:
+            return cond_;
+        case 1:
+            return true_;
+        case 2:
+            return false_;
         default:
-            return "";
+            return nullptr;
     }
 }

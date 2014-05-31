@@ -14,6 +14,7 @@ libucmp_la_SOURCES = lib/misc/diagnostic-reporter.cc \
 					 lib/ir/load.cc \
 					 lib/ir/ret.cc \
 					 lib/ir/jump.cc \
+					 lib/ir/cjump.cc \
 					 lib/ir/context.cc \
 					 lib/ir/function.cc \
 					 lib/ir/function-type.cc \

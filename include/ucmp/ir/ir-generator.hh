@@ -82,6 +82,7 @@ namespace ucmp
                 Value* create_ret(Value* val);
 
                 Value* create_jump(BasicBlock* bb);
+                Value* create_cjump(Value* cond, BasicBlock* t, BasicBlock *f);
 
                 void insert(Instruction* instr, const misc::Symbol& name)
                 {
