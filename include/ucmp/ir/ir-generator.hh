@@ -81,6 +81,8 @@ namespace ucmp
                 Value* create_ret();
                 Value* create_ret(Value* val);
 
+                Value* create_jump(BasicBlock* bb);
+
                 void insert(Instruction* instr, const misc::Symbol& name)
                 {
                     bb_->instr_list_get().insert(insert_pt_, instr);

@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/load.hh>
 #include <ucmp/ir/cmp.hh>
 #include <ucmp/ir/ret.hh>
+#include <ucmp/ir/jump.hh>
 
 using namespace ucmp;
 using namespace ir;
@@ -175,4 +176,13 @@ Value* IrGenerator::create_ret(Value* val)
     insert(r);
 
     return r;
+}
+
+Value* IrGenerator::create_jump(BasicBlock* bb)
+{
+    Jump* j = new Jump(c_.void_ty_get(), bb);
+
+    insert(j);
+
+    return j;
 }

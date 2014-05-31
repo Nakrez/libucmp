@@ -16,32 +16,31 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/instruction.hh>
+#ifndef UCMP_IR_JUMP_HH
+# define UCMP_IR_JUMP_HH
 
-using namespace ucmp;
-using namespace ir;
+# include <ucmp/ir/instruction.hh>
 
-Instruction::Instruction(sType t, InstType i_type)
-    : Value(t)
-    , i_type_(i_type)
-    , parent_(nullptr)
-{}
-
-std::string Instruction::type_to_str() const
+namespace ucmp
 {
-    switch (i_type_)
+    namespace ir
     {
-        case STACK_ALLOC:
-            return "stackalloc";
-        case STORE:
-            return "store";
-        case LOAD:
-            return "load";
-        case RET:
-            return "ret";
-        case JUMP:
-            return "jump";
-        default:
-            return "";
-    }
-}
+        class Jump : public Instruction
+        {
+            public:
+                Jump(sType t, BasicBlock* bb);
+                virtual ~Jump() = default;
+
+                BasicBlock* bb_get() { return bb_; }
+                const BasicBlock* bb_get() const { return bb_; }
+
+                virtual unsigned operand_size() const override { return 1; }
+                virtual Value* operand_get(int index) const override;
+
+            protected:
+                BasicBlock* bb_;
+        };
+    } // namespace ir
+} // namespace ucmp
+
+#endif /* !UCMP_IR_JUMP_HH */

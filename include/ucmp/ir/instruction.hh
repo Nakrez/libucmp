@@ -42,6 +42,7 @@ namespace ucmp
                     STORE,
                     LOAD,
                     RET,
+                    JUMP,
                 };
 
             public:

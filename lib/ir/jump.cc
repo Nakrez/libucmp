@@ -16,32 +16,27 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/instruction.hh>
+#include <cassert>
+#include <ucmp/ir/jump.hh>
+#include <ucmp/ir/basic-block.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Instruction::Instruction(sType t, InstType i_type)
-    : Value(t)
-    , i_type_(i_type)
-    , parent_(nullptr)
-{}
-
-std::string Instruction::type_to_str() const
+Jump::Jump(sType t, BasicBlock* bb)
+    : Instruction(t, JUMP)
+    , bb_(bb)
 {
-    switch (i_type_)
-    {
-        case STACK_ALLOC:
-            return "stackalloc";
-        case STORE:
-            return "store";
-        case LOAD:
-            return "load";
-        case RET:
-            return "ret";
-        case JUMP:
-            return "jump";
-        default:
-            return "";
-    }
+    assert(t->type_get() == Type::VoidTy && "Jump instruction must have void "
+           "type");
+
+    assert(bb && "Jump cannot have null basic block");
+}
+
+Value* Jump::operand_get(int index) const
+{
+    if (!index)
+        return bb_;
+
+    return nullptr;
 }
