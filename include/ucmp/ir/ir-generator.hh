@@ -78,6 +78,9 @@ namespace ucmp
                 Value* create_store(Value* val, Value* mem);
                 Value* create_load(Value* mem, const misc::Symbol& n = "");
 
+                Value* create_ret();
+                Value* create_ret(Value* val);
+
                 void insert(Instruction* instr, const misc::Symbol& name)
                 {
                     bb_->instr_list_get().insert(insert_pt_, instr);

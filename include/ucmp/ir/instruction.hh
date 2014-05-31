@@ -41,6 +41,7 @@ namespace ucmp
                     STACK_ALLOC,
                     STORE,
                     LOAD,
+                    RET,
                 };
 
             public:

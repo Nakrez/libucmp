@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/store.hh>
 #include <ucmp/ir/load.hh>
 #include <ucmp/ir/cmp.hh>
+#include <ucmp/ir/ret.hh>
 
 using namespace ucmp;
 using namespace ir;
@@ -156,4 +157,22 @@ Value* IrGenerator::create_load(Value* mem, const misc::Symbol& n)
     insert(l, n);
 
     return l;
+}
+
+Value* IrGenerator::create_ret()
+{
+    Ret* r = new Ret(c_.void_ty_get());
+
+    insert(r);
+
+    return r;
+}
+
+Value* IrGenerator::create_ret(Value* val)
+{
+    Ret* r = new Ret(c_.void_ty_get(), val);
+
+    insert(r);
+
+    return r;
 }
