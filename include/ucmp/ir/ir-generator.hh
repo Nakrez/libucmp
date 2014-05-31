@@ -61,6 +61,19 @@ namespace ucmp
                 Value* create_mod(Value* l,
                                   Value* r, const misc::Symbol& n = "");
 
+                Value* create_gt(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_ge(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_le(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_lt(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_eq(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_ne(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+
                 Value* create_stack_alloc(sType t, const misc::Symbol& n = "");
                 Value* create_store(Value* val, Value* mem);
                 Value* create_load(Value* mem, const misc::Symbol& n = "");

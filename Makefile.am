@@ -9,6 +9,7 @@ libucmp_la_SOURCES = lib/misc/diagnostic-reporter.cc \
 					 lib/ir/basic-block.cc \
 					 lib/ir/instruction.cc \
 					 lib/ir/binary-inst.cc \
+					 lib/ir/cmp.cc \
 					 lib/ir/store.cc \
 					 lib/ir/load.cc \
 					 lib/ir/context.cc \

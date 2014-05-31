@@ -37,6 +37,7 @@ namespace ucmp
                 enum InstType
                 {
                     BINOP,
+                    CMP,
                     STACK_ALLOC,
                     STORE,
                     LOAD,

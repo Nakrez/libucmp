@@ -75,6 +75,7 @@ namespace ucmp
                 sType double_ty_get()   { return double_; }
                 sType label_ty_get()    { return label_; }
 
+                sType i1_ty_get()       { return i1_; }
                 sType i8_ty_get()       { return i8_; }
                 sType i16_ty_get()      { return i16_; }
                 sType i32_ty_get()      { return i32_; }
@@ -86,6 +87,7 @@ namespace ucmp
                 sType double_;
                 sType label_;
 
+                sType i1_;
                 sType i8_;
                 sType i16_;
                 sType i32_;

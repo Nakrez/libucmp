@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/stack-alloc.hh>
 #include <ucmp/ir/store.hh>
 #include <ucmp/ir/load.hh>
+#include <ucmp/ir/cmp.hh>
 
 using namespace ucmp;
 using namespace ir;
@@ -74,6 +75,60 @@ Value* IrGenerator::create_mod(Value* l, Value* r, const misc::Symbol& n)
     insert(bi, n);
 
     return bi;
+}
+
+Value* IrGenerator::create_gt(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::GT, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_ge(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::GE, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_le(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::LE, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_lt(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::LT, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_eq(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::EQ, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_ne(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::NE, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
 }
 
 Value* IrGenerator::create_stack_alloc(sType t, const misc::Symbol& n)

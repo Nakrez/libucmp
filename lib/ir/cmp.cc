@@ -16,27 +16,43 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/context.hh>
-#include <ucmp/ir/unit.hh>
-#include <ucmp/ir/int-type.hh>
+#include <ucmp/ir/cmp.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Context::Context()
-    : void_(new Type(Type::VoidTy))
-    , float_(new Type(Type::FloatTy))
-    , double_(new Type(Type::DoubleTy))
-    , label_(new Type(Type::LabelTy))
-    , i1_(new IntType(1))
-    , i8_(new IntType(8))
-    , i16_(new IntType(16))
-    , i32_(new IntType(32))
-    , i64_(new IntType(64))
+Cmp::Cmp(CmpOp op, sType t, Value* lvalue, Value* rvalue)
+    : Instruction(t, CMP)
+    , op_(op)
+    , lvalue_(lvalue)
+    , rvalue_(rvalue)
 {}
 
-Context::~Context()
+Value* Cmp::operand_get(int index) const
 {
-    for (auto u : units_)
-        delete u;
+    if (!index)
+        return lvalue_;
+    if (index == 1)
+        return rvalue_;
+
+    return nullptr;
+}
+
+std::string Cmp::type_to_str() const
+{
+    switch (op_)
+    {
+        case GT:
+            return "cmp gt";
+        case GE:
+            return "cmp ge";
+        case LT:
+            return "cmp lt";
+        case LE:
+            return "cmp le";
+        case EQ:
+            return "cmp eq";
+        case NE:
+            return "cmp ne";
+    }
 }
