@@ -53,6 +53,8 @@ namespace ucmp
                 const_iterator cbegin() const  { return ins_.cbegin(); }
                 const_iterator cend() const    { return ins_.cend(); }
 
+                unsigned size() const { return ins_.size(); }
+
                 Instruction* front() { return ins_.front(); }
                 Instruction* back() { return ins_.back(); }
 

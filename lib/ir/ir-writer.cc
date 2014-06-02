@@ -113,5 +113,9 @@ void IrWriter::write_value(Value* v)
     if (IntConstant* ic = dynamic_cast<IntConstant*> (v))
         ostr_ << ic->value_get();
     else
-        ostr_ << *v->type_get() << " " << v->name_get();
+    {
+        if (v->type_get()->type_get() != Type::LabelTy)
+            ostr_ << *v->type_get() << " ";
+        ostr_ << v->name_get();
+    }
 }
