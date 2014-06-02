@@ -16,27 +16,30 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/context.hh>
-#include <ucmp/ir/unit.hh>
-#include <ucmp/ir/int-type.hh>
+#include <ucmp/ir/cjump.hh>
+#include <ucmp/ir/basic-block.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Context::Context()
-    : void_(new Type(Type::VoidTy))
-    , float_(new Type(Type::FloatTy))
-    , double_(new Type(Type::DoubleTy))
-    , label_(new Type(Type::LabelTy))
-    , i1_(new IntType(1))
-    , i8_(new IntType(8))
-    , i16_(new IntType(16))
-    , i32_(new IntType(32))
-    , i64_(new IntType(64))
+Cjump::Cjump(sType t, Value* v, BasicBlock* tr, BasicBlock* fa)
+    : Instruction(t, CJUMP)
+    , cond_(v)
+    , true_(tr)
+    , false_(fa)
 {}
 
-Context::~Context()
+Value* Cjump::operand_get(int index) const
 {
-    for (auto u : units_)
-        delete u;
+    switch (index)
+    {
+        case 0:
+            return cond_;
+        case 1:
+            return true_;
+        case 2:
+            return false_;
+        default:
+            return nullptr;
+    }
 }

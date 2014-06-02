@@ -37,6 +37,12 @@ std::string Instruction::type_to_str() const
             return "store";
         case LOAD:
             return "load";
+        case RET:
+            return "ret";
+        case JUMP:
+            return "jump";
+        case CJUMP:
+            return "cjump";
         default:
             return "";
     }

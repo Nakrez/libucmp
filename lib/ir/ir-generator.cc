@@ -22,6 +22,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/stack-alloc.hh>
 #include <ucmp/ir/store.hh>
 #include <ucmp/ir/load.hh>
+#include <ucmp/ir/cmp.hh>
+#include <ucmp/ir/ret.hh>
+#include <ucmp/ir/jump.hh>
+#include <ucmp/ir/cjump.hh>
 
 using namespace ucmp;
 using namespace ir;
@@ -76,6 +80,60 @@ Value* IrGenerator::create_mod(Value* l, Value* r, const misc::Symbol& n)
     return bi;
 }
 
+Value* IrGenerator::create_gt(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::GT, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_ge(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::GE, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_le(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::LE, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_lt(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::LT, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_eq(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::EQ, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_ne(Value* l, Value* r, const misc::Symbol& n)
+{
+    Cmp* c = new Cmp(Cmp::NE, c_.i1_ty_get(), l, r);
+
+    insert(c, n);
+
+    return c;
+}
+
 Value* IrGenerator::create_stack_alloc(sType t, const misc::Symbol& n)
 {
     StackAlloc* sa = new StackAlloc(t);
@@ -101,4 +159,40 @@ Value* IrGenerator::create_load(Value* mem, const misc::Symbol& n)
     insert(l, n);
 
     return l;
+}
+
+Value* IrGenerator::create_ret()
+{
+    Ret* r = new Ret(c_.void_ty_get());
+
+    insert(r);
+
+    return r;
+}
+
+Value* IrGenerator::create_ret(Value* val)
+{
+    Ret* r = new Ret(c_.void_ty_get(), val);
+
+    insert(r);
+
+    return r;
+}
+
+Value* IrGenerator::create_jump(BasicBlock* bb)
+{
+    Jump* j = new Jump(c_.void_ty_get(), bb);
+
+    insert(j);
+
+    return j;
+}
+
+Value* IrGenerator::create_cjump(Value* cond, BasicBlock* t, BasicBlock *f)
+{
+    Cjump* cj = new Cjump(c_.void_ty_get(), cond, t, f);
+
+    insert(cj);
+
+    return cj;
 }

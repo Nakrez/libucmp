@@ -16,27 +16,27 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/context.hh>
-#include <ucmp/ir/unit.hh>
-#include <ucmp/ir/int-type.hh>
+#include <cassert>
+#include <ucmp/ir/jump.hh>
+#include <ucmp/ir/basic-block.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Context::Context()
-    : void_(new Type(Type::VoidTy))
-    , float_(new Type(Type::FloatTy))
-    , double_(new Type(Type::DoubleTy))
-    , label_(new Type(Type::LabelTy))
-    , i1_(new IntType(1))
-    , i8_(new IntType(8))
-    , i16_(new IntType(16))
-    , i32_(new IntType(32))
-    , i64_(new IntType(64))
-{}
-
-Context::~Context()
+Jump::Jump(sType t, BasicBlock* bb)
+    : Instruction(t, JUMP)
+    , bb_(bb)
 {
-    for (auto u : units_)
-        delete u;
+    assert(t->type_get() == Type::VoidTy && "Jump instruction must have void "
+           "type");
+
+    assert(bb && "Jump cannot have null basic block");
+}
+
+Value* Jump::operand_get(int index) const
+{
+    if (!index)
+        return bb_;
+
+    return nullptr;
 }
