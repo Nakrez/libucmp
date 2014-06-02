@@ -36,7 +36,7 @@ namespace ucmp
                 virtual ~IrGenerator() = default;
 
                 BasicBlock* insert_block_get()  { return bb_; }
-                BasicBlock::iterator insert_pt_get() { return insert_pt_; }
+                BasicBlock::iterator& insert_pt_get() { return insert_pt_; }
 
                 void insert_pt_set(BasicBlock* bb)
                 {
