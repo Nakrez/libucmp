@@ -35,8 +35,14 @@ echo "DX_RTF_FEATURE(OFF)" >> configure.ac
 echo "DX_XML_FEATURE(OFF)" >> configure.ac
 echo "DX_PDF_FEATURE(ON)" >> configure.ac
 echo "DX_PS_FEATURE(OFF)" >> configure.ac
+
+if [ -d tools/ucc ]; then
+    echo "AC_CONFIG_SUBDIRS([tools/ucc/lib/argp])" >> configure.ac
+    mkdir -p tools/ucc/lib/argp/build-aux
+fi
+
 echo "AC_CONFIG_FILES([" >> configure.ac
-find . -name "Makefile.am" | sed "s/\.\///" | sed "s/\.am//" >> configure.ac
+find . -name "Makefile.am" | sed "s/\.\///" | sed "s/\.am//" | sed "s/tools\/ucc\/lib\/argp\/Makefile//" >> configure.ac
 echo "])" >> configure.ac
 echo "AC_OUTPUT" >> configure.ac
 

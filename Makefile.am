@@ -1,4 +1,5 @@
 AM_CXXFLAGS = -Wall -Wextra -std=c++11
+ACLOCAL_AMFLAGS = -I m4
 AM_CPPFLAGS = -Iinclude
 lib_LTLIBRARIES = libucmp.la
 libucmp_la_SOURCES = lib/misc/diagnostic-reporter.cc \
