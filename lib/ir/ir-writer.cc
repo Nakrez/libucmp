@@ -43,12 +43,13 @@ void IrWriter::write_function(Function* f)
     ostr_ << "function " << *f->return_type_get() << " " << f->name_get();
     ostr_ << "(";
 
-    for (auto it = f->a_cbegin(), end = f->a_cend(); it != end; ++it)
+    for (auto it = f->a_cbegin(), begin = it, end = f->a_cend();
+         it != end; ++it)
     {
-        ostr_ << (*it)->type_get() << " " << (*it)->name_get();
-
-        if (it != end)
+        if (it != begin)
             ostr_ << ", ";
+
+        ostr_ << *(*it)->type_get() << " " << (*it)->name_get();
     }
 
     ostr_ << ")";
