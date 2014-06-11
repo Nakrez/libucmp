@@ -80,6 +80,15 @@ Value* IrGenerator::create_mod(Value* l, Value* r, const misc::Symbol& n)
     return bi;
 }
 
+Value* IrGenerator::create_xor(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(BinaryInst::XOR, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}
+
 Value* IrGenerator::create_gt(Value* l, Value* r, const misc::Symbol& n)
 {
     Cmp* c = new Cmp(Cmp::GT, c_.i1_ty_get(), l, r);

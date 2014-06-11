@@ -60,6 +60,8 @@ namespace ucmp
                                   Value* r, const misc::Symbol& n = "");
                 Value* create_mod(Value* l,
                                   Value* r, const misc::Symbol& n = "");
+                Value* create_xor(Value* l,
+                                  Value* r, const misc::Symbol& n = "");
 
                 Value* create_gt(Value* l,
                                  Value* r, const misc::Symbol& n = "");

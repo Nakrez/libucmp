@@ -36,6 +36,7 @@ namespace ucmp
                     MUL,
                     DIV,
                     MOD,
+                    XOR,
                 };
 
             public:

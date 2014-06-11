@@ -55,6 +55,8 @@ std::string BinaryInst::type_to_str() const
             return "div";
         case MOD:
             return "mod";
+        case XOR:
+            return "xor";
     }
 
     return "";
