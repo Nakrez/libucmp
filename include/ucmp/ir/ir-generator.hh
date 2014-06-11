@@ -97,6 +97,11 @@ namespace ucmp
                     instr->parent_set(bb_);
                 }
 
+                void remove(Instruction* i)
+                {
+                    bb_->instr_list_get().remove(i);
+                }
+
             protected:
                 Context& c_;
                 BasicBlock* bb_;
