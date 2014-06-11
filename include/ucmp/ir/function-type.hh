@@ -42,6 +42,7 @@ namespace ucmp
                 arg_citerator cbegin() const    { return args_.cbegin(); }
                 arg_citerator cend() const      { return args_.cend(); }
 
+                const std::list<sType>& args_get() const { return args_; }
                 void arg_add(sType t) { args_.push_back(t); }
 
                 sType ret_type_get() const { return ret_type_; }

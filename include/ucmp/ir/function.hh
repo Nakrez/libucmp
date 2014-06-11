@@ -71,7 +71,7 @@ namespace ucmp
                     return f_type_->ret_type_get();
                 }
 
-                void arg_add(sType t, const misc::Symbol& name)
+                void arg_add(sType t, const misc::Symbol& name = "")
                 {
                     Argument *a = new Argument(t, this, name);
                     arg_add(a);
@@ -80,7 +80,6 @@ namespace ucmp
                 void arg_add(Argument* v)
                 {
                     args_.push_back(v);
-                    f_type_->arg_add(v->type_get());
                 }
 
                 void insert_bb(BasicBlock* bb)

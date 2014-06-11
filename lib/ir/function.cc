@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using namespace ucmp;
 using namespace ir;
 
+#include <iostream>
 Function::Function(FunctionType* t, const misc::Symbol& name, Unit* u)
     : GlobalValue(sType(t))
     , f_type_(t)
@@ -35,6 +36,10 @@ Function::Function(FunctionType* t, const misc::Symbol& name, Unit* u)
         u->functions_get().push_back(this);
 
     name_set(name);
+
+    // Setup arguments for the function
+    for (auto it = t->begin(); it != t->end(); ++it)
+        arg_add(*it);
 }
 
 Function::~Function()
