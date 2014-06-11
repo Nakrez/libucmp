@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # include <ucmp/ir/basic-block.hh>
 # include <ucmp/ir/function-type.hh>
 # include <ucmp/ir/value-map.hh>
+# include <ucmp/ir/argument.hh>
 
 namespace ucmp
 {
@@ -38,8 +39,8 @@ namespace ucmp
             typedef typename std::list<BasicBlock*>::const_iterator
             bb_citerator;
 
-            typedef typename std::list<Value*>::iterator arg_iterator;
-            typedef typename std::list<Value*>::const_iterator arg_citerator;
+            typedef typename std::list<Argument*>::iterator arg_iterator;
+            typedef typename std::list<Argument*>::const_iterator arg_citerator;
 
             public:
                 Function(FunctionType* t, const misc::Symbol& name = "",
@@ -70,12 +71,13 @@ namespace ucmp
                     return f_type_->ret_type_get();
                 }
 
-                void arg_add(sType t, const misc::Symbol&)
+                void arg_add(sType t, const misc::Symbol& name)
                 {
-                    arg_add(new Value(t));
+                    Argument *a = new Argument(t, this, name);
+                    arg_add(a);
                 }
 
-                void arg_add(Value* v)
+                void arg_add(Argument* v)
                 {
                     args_.push_back(v);
                     f_type_->arg_add(v->type_get());
@@ -97,7 +99,7 @@ namespace ucmp
 
             protected:
                 FunctionType* f_type_;
-                std::list<Value*> args_;
+                std::list<Argument*> args_;
                 std::list<BasicBlock*> blocks_;
                 ValueMap vmap_;
                 Unit* parent_;
