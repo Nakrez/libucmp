@@ -19,6 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef UCMP_IR_IR_GENERATOR_HH
 # define UCMP_IR_IR_GENERATOR_HH
 
+# include <vector>
+
 # include <ucmp/ir/context.hh>
 # include <ucmp/ir/unit.hh>
 # include <ucmp/ir/function.hh>
@@ -85,6 +87,12 @@ namespace ucmp
 
                 Value* create_jump(BasicBlock* bb);
                 Value* create_cjump(Value* cond, BasicBlock* t, BasicBlock *f);
+
+                Value* create_call(Function* f);
+                Value* create_call(Function* f, const misc::Symbol& n);
+                Value* create_call(Function* f, const std::vector<Value*> arg);
+                Value* create_call(Function* f, const std::vector<Value*> arg,
+                                   const misc::Symbol& n);
 
                 void insert(Instruction* instr, const misc::Symbol& name)
                 {

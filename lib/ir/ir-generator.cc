@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/ret.hh>
 #include <ucmp/ir/jump.hh>
 #include <ucmp/ir/cjump.hh>
+#include <ucmp/ir/call.hh>
 
 using namespace ucmp;
 using namespace ir;
@@ -204,4 +205,41 @@ Value* IrGenerator::create_cjump(Value* cond, BasicBlock* t, BasicBlock *f)
     insert(cj);
 
     return cj;
+}
+
+Value* IrGenerator::create_call(Function* f)
+{
+    Call* c = new Call(f);
+
+    insert(c);
+
+    return c;
+}
+
+Value* IrGenerator::create_call(Function* f, const misc::Symbol& n)
+{
+    Call* c = new Call(f);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_call(Function* f, const std::vector<Value*> arg)
+{
+    Call* c = new Call(f, arg);
+
+    insert(c);
+
+    return c;
+}
+
+Value* IrGenerator::create_call(Function* f, const std::vector<Value*> arg,
+                                const misc::Symbol& n)
+{
+    Call* c = new Call(f, arg);
+
+    insert(c, n);
+
+    return c;
 }
