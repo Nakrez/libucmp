@@ -28,7 +28,7 @@ Cmp::Cmp(CmpOp op, sType t, Value* lvalue, Value* rvalue)
     , rvalue_(rvalue)
 {}
 
-Value* Cmp::operand_get(int index) const
+Value* Cmp::operand_get(unsigned index) const
 {
     if (!index)
         return lvalue_;

@@ -46,7 +46,7 @@ namespace ucmp
 
                 virtual unsigned operand_size() const override { return 2; }
 
-                virtual Value* operand_get(int index) const override;
+                virtual Value* operand_get(unsigned index) const override;
 
                 virtual std::string type_to_str() const override;
 

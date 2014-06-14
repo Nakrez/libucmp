@@ -31,7 +31,7 @@ Ret::Ret(sType t, Value* v)
     , v_(v)
 {}
 
-Value* Ret::operand_get(int index) const
+Value* Ret::operand_get(unsigned index) const
 {
     if (!v_)
         return nullptr;

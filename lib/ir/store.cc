@@ -33,7 +33,7 @@ Store::Store(sType t, Value* v, Value* mem)
            "Memory operand of store MUST have a pointer type");
 }
 
-Value* Store::operand_get(int index) const
+Value* Store::operand_get(unsigned index) const
 {
     if (!index)
         return val_;

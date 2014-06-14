@@ -34,7 +34,7 @@ namespace ucmp
 
                 virtual unsigned operand_size() const override { return !!v_; }
 
-                virtual Value* operand_get(int index) const override;
+                virtual Value* operand_get(unsigned index) const override;
 
             protected:
                 Value* v_;

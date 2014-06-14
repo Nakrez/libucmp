@@ -36,7 +36,7 @@ namespace ucmp
                 Value* cond_get() { return cond_; }
 
                 virtual unsigned operand_size() const override { return 3; }
-                virtual Value* operand_get(int index) const override;
+                virtual Value* operand_get(unsigned index) const override;
 
             protected:
                 Value* cond_;

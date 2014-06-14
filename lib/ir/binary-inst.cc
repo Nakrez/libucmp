@@ -31,7 +31,7 @@ BinaryInst::BinaryInst(BinOp op, sType type, Value* op1, Value* op2)
 BinaryInst::~BinaryInst()
 {}
 
-Value* BinaryInst::operand_get(int index) const
+Value* BinaryInst::operand_get(unsigned index) const
 {
     if (!index)
         return op1_;

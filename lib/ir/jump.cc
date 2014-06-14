@@ -33,7 +33,7 @@ Jump::Jump(sType t, BasicBlock* bb)
     assert(bb && "Jump cannot have null basic block");
 }
 
-Value* Jump::operand_get(int index) const
+Value* Jump::operand_get(unsigned index) const
 {
     if (!index)
         return bb_;

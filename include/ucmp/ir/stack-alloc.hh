@@ -42,7 +42,7 @@ namespace ucmp
                     return 0;
                 }
 
-                virtual Value* operand_get(int) const override
+                virtual Value* operand_get(unsigned) const override
                 {
                     return nullptr;
                 }

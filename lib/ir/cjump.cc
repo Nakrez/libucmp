@@ -29,7 +29,7 @@ Cjump::Cjump(sType t, Value* v, BasicBlock* tr, BasicBlock* fa)
     , false_(fa)
 {}
 
-Value* Cjump::operand_get(int index) const
+Value* Cjump::operand_get(unsigned index) const
 {
     switch (index)
     {

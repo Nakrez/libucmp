@@ -44,6 +44,7 @@ namespace ucmp
                     RET,
                     JUMP,
                     CJUMP,
+                    CALL,
                 };
 
             public:
@@ -57,7 +58,7 @@ namespace ucmp
                 virtual unsigned operand_size() const = 0;
 
                 /// Get the ith operand (start at 0)
-                virtual Value* operand_get(int index) const = 0;
+                virtual Value* operand_get(unsigned index) const = 0;
 
                 /// Return the instruction type
                 InstType itype_get() const  { return i_type_; }

@@ -33,7 +33,7 @@ namespace ucmp
 
                 virtual unsigned operand_size() const override { return 1; }
 
-                virtual Value* operand_get(int index) const override
+                virtual Value* operand_get(unsigned index) const override
                 {
                     if (!index)
                         return mem_;
