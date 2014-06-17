@@ -243,3 +243,12 @@ Value* IrGenerator::create_call(Function* f, const std::vector<Value*> arg,
 
     return c;
 }
+
+PhiNode* IrGenerator::create_phi(sType t, const misc::Symbol& n)
+{
+    PhiNode* pn = new PhiNode(t);
+
+    insert(pn, n);
+
+    return pn;
+}

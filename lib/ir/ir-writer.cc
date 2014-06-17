@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/int-constant.hh>
 #include <ucmp/ir/stack-alloc.hh>
 #include <ucmp/ir/call.hh>
+#include <ucmp/ir/phi-node.hh>
 
 #include <ucmp/misc/indent.hh>
 
@@ -117,6 +118,29 @@ void IrWriter::write_instruction(Instruction* i)
         }
 
         ostr_ << ")";
+
+        return;
+    }
+
+    if (i->itype_get() == Instruction::PHI)
+    {
+        PhiNode* pn = dynamic_cast<PhiNode*> (i);
+
+        ostr_ << " " << *pn->type_get();
+
+        for (unsigned j = 0; j < pn->size(); ++j)
+        {
+            if (j != 0)
+                ostr_ << ", ";
+            else
+                ostr_ << " ";
+
+            ostr_ << "[";
+            write_value(pn->value_get(j));
+            ostr_ << ", ";
+            write_value(pn->bb_get(j));
+            ostr_ << " ]";
+        }
 
         return;
     }

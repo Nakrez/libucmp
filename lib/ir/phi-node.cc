@@ -16,38 +16,23 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/ir/instruction.hh>
+#include <ucmp/ir/phi-node.hh>
+#include <ucmp/ir/basic-block.hh>
 
 using namespace ucmp;
 using namespace ir;
 
-Instruction::Instruction(sType t, InstType i_type)
-    : Value(t)
-    , i_type_(i_type)
-    , parent_(nullptr)
+PhiNode::PhiNode(sType t)
+    : Instruction(t, PHI)
 {}
 
-std::string Instruction::type_to_str() const
+Value* PhiNode::operand_get(unsigned index) const
 {
-    switch (i_type_)
-    {
-        case STACK_ALLOC:
-            return "stackalloc";
-        case STORE:
-            return "store";
-        case LOAD:
-            return "load";
-        case RET:
-            return "ret";
-        case JUMP:
-            return "jump";
-        case CJUMP:
-            return "cjump";
-        case CALL:
-            return "call";
-        case PHI:
-            return "phi";
-        default:
-            return "";
-    }
+    if (index >= operand_size())
+        return nullptr;
+
+    if (index & 0x1)
+        return values_.at(index / 2);
+
+    return bbs_.at(index / 2);
 }

@@ -45,6 +45,7 @@ namespace ucmp
                     JUMP,
                     CJUMP,
                     CALL,
+                    PHI,
                 };
 
             public:

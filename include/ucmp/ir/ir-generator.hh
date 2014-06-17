@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # include <ucmp/ir/unit.hh>
 # include <ucmp/ir/function.hh>
 # include <ucmp/ir/function-type.hh>
+#include <ucmp/ir/phi-node.hh>
 
 namespace ucmp
 {
@@ -93,6 +94,7 @@ namespace ucmp
                 Value* create_call(Function* f, const std::vector<Value*> arg);
                 Value* create_call(Function* f, const std::vector<Value*> arg,
                                    const misc::Symbol& n);
+                PhiNode* create_phi(sType t, const misc::Symbol& n = "");
 
                 void insert(Instruction* instr, const misc::Symbol& name)
                 {
