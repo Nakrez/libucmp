@@ -60,6 +60,11 @@ ValueMap* Value::get_value_map()
         if (Function* f = a->parent_get())
             return &f->value_map_get();
     }
+    else if (BasicBlock* bb = dynamic_cast<BasicBlock*> (this))
+    {
+        if (Function *f = bb->parent_get())
+            return &f->value_map_get();
+    }
 
     return nullptr;
 }

@@ -29,9 +29,10 @@ BasicBlock::BasicBlock(Context& c, Function* parent, const misc::Symbol& name)
     , parent_(parent)
 {
     if (parent)
+    {
+        name_set(name);
         parent->insert_bb(this);
-
-    name_set(name);
+    }
 }
 
 BasicBlock::~BasicBlock()

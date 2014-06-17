@@ -62,7 +62,7 @@ namespace ucmp
                 const i_list& instr_list_get() const    { return ins_; }
 
                 Function* parent_get()          { return parent_; }
-                void parent_set(Function* f)    { parent_ = f; }
+                void parent_set(Function* f)    { parent_ = f; name_set(""); }
 
             protected:
                 std::list<Instruction*> ins_;
