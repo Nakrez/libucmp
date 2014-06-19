@@ -46,6 +46,9 @@ namespace ucmp
                     CJUMP,
                     CALL,
                     PHI,
+                    PROMOT,
+                    DEMOT,
+                    CAST,
                 };
 
             public:

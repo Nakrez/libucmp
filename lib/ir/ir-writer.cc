@@ -145,6 +145,16 @@ void IrWriter::write_instruction(Instruction* i)
         return;
     }
 
+    if (i->itype_get() >= Instruction::PROMOT &&
+        i->itype_get() <= Instruction::CAST)
+    {
+        ostr_ << " ";
+        write_value(i->operand_get(0));
+        ostr_ << " to " << *i->type_get();
+
+        return;
+    }
+
     for (unsigned j = 0; j < i->operand_size(); ++j)
     {
         if (j != 0)

@@ -27,6 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/jump.hh>
 #include <ucmp/ir/cjump.hh>
 #include <ucmp/ir/call.hh>
+#include <ucmp/ir/cast.hh>
 
 using namespace ucmp;
 using namespace ir;
@@ -251,4 +252,31 @@ PhiNode* IrGenerator::create_phi(sType t, const misc::Symbol& n)
     insert(pn, n);
 
     return pn;
+}
+
+Value* IrGenerator::create_promot(sType t, Value* v, const misc::Symbol& n)
+{
+    Cast* c = new Cast(Instruction::PROMOT, t, v);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_demot(sType t, Value* v, const misc::Symbol& n)
+{
+    Cast* c = new Cast(Instruction::DEMOT, t, v);
+
+    insert(c, n);
+
+    return c;
+}
+
+Value* IrGenerator::create_cast(sType t, Value* v, const misc::Symbol& n)
+{
+    Cast* c = new Cast(Instruction::CAST, t, v);
+
+    insert(c, n);
+
+    return c;
 }

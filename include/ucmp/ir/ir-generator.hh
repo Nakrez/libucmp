@@ -95,6 +95,12 @@ namespace ucmp
                 Value* create_call(Function* f, const std::vector<Value*> arg,
                                    const misc::Symbol& n);
                 PhiNode* create_phi(sType t, const misc::Symbol& n = "");
+                Value* create_promot(sType t, Value* v,
+                                     const misc::Symbol& n = "");
+                Value* create_demot(sType t, Value* v,
+                                    const misc::Symbol& n = "");
+                Value* create_cast(sType t, Value* v,
+                                   const misc::Symbol& n = "");
 
                 void insert(Instruction* instr, const misc::Symbol& name)
                 {
