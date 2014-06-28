@@ -46,6 +46,7 @@ namespace ucmp
                 bool is_union() const { return !is_struct_; }
 
                 void add_member(sType t)    { types_.push_back(t); }
+                virtual void dump(std::ostream& o) const override;
 
             protected:
                 misc::Symbol name_;

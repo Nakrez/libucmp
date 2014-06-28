@@ -44,3 +44,13 @@ StructType::StructType(Context& c,
 {
     c.register_struct(name, sStructType(this));
 }
+
+void StructType::dump(std::ostream& o) const
+{
+    if (is_struct_)
+        o << "struct.";
+    else
+        o << "union.";
+
+    o << name_;
+}
