@@ -24,18 +24,23 @@ using namespace ir;
 
 StructType::StructType(Context& c,
                        const misc::Symbol& name,
-                       const std::list<sType>& types)
+                       const std::list<sType>& types,
+                       bool is_struct)
     : Type(Type::StructTy)
     , name_(name)
     , types_(types)
+    , is_struct_(is_struct)
 {
     c.register_struct(name, sStructType(this));
 }
 
 StructType::StructType(Context& c,
-                       const misc::Symbol& name)
+                       const misc::Symbol& name,
+                       bool is_struct)
     : Type(Type::StructTy)
     , name_(name)
+    , types_()
+    , is_struct_(is_struct)
 {
     c.register_struct(name, sStructType(this));
 }

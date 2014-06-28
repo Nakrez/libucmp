@@ -35,16 +35,22 @@ namespace ucmp
             public:
                 StructType(Context& c,
                            const misc::Symbol& name,
-                           const std::list<sType>& types);
+                           const std::list<sType>& types,
+                           bool is_struct = true);
                 StructType(Context& c,
-                           const misc::Symbol& name);
+                           const misc::Symbol& name,
+                           bool is_struct = true);
                 virtual ~StructType() = default;
+
+                bool is_struct() const { return is_struct_; }
+                bool is_union() const { return !is_struct_; }
 
                 void add_member(sType t)    { types_.push_back(t); }
 
             protected:
                 misc::Symbol name_;
                 std::list<sType> types_;
+                bool is_struct_;
         };
 
         typedef std::shared_ptr<StructType> sStructType;

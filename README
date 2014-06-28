@@ -1,0 +1,46 @@
+*****************************
+Libucmp: Lib micro compiler
+*****************************
+
+* Informations
+
+Libucmp is a reusable library for backend compilation. It is written in C++ 11.
+Libucmp is in early stage development.
+
+* Compilation
+
+To build libucmp you need a C++11 compliant compiler. Then just type those
+3 commands in your shell:
+
+./bootstrap
+./configure
+make
+
+* Status
+
+- Intermediate representation design (50%)
+- Intermediate representation parser (0%)
+- Intermediate representation printer (70%)
+- Optimisation (0%)
+- Bytecode generation (0%)
+- Bytecode parser (0%)
+- Machine code generation (0%)
+- JIT (0%)
+- Machine code exporter (0%)
+- X86 support (0%)
+- Mips support (0%)
+- ARM support (0%)
+...
+
+* License
+
+UCC is under GPL2. See COPYING file for more informations.
+
+* Known bugs
+
+...
+
+* Contact
+
+If you find bugs, or you have any questions, ... Feel free to can contact me
+at b.covolato AT gmail.com
