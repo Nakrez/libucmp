@@ -36,6 +36,10 @@ namespace ucmp
         {
             typedef typename std::list<Unit*>::iterator u_iterator;
             typedef typename std::list<Unit*>::const_iterator cu_iterator;
+            typedef typename std::map<misc::Symbol,
+                                      sStructType>::iterator s_iterator;
+            typedef typename std::map<misc::Symbol,
+                                      sStructType>::const_iterator cs_iterator;
 
             public:
                 Context();
@@ -69,6 +73,13 @@ namespace ucmp
                 u_iterator end()            { return units_.end(); }
                 cu_iterator cbegin() const  { return units_.cbegin(); }
                 cu_iterator cend() const    { return units_.cend(); }
+
+                s_iterator s_begin()            { return structs_.begin(); }
+                cs_iterator s_begin() const     { return structs_.begin(); }
+                s_iterator s_end()              { return structs_.end(); }
+                cs_iterator s_end() const       { return structs_.end(); }
+                cs_iterator s_cbegin() const    { return structs_.cbegin(); }
+                cs_iterator s_cend() const      { return structs_.cend(); }
 
                 sType void_ty_get()     { return void_; }
                 sType float_ty_get()    { return float_; }
