@@ -54,3 +54,26 @@ void StructType::dump(std::ostream& o) const
 
     o << name_;
 }
+
+void StructType::full_dump(std::ostream& o) const
+{
+    if (is_struct_)
+        o << "struct.";
+    else
+        o << "union.";
+
+    o << name_ << " = { ";
+
+    auto it = types_.cbegin();
+    auto begin = it;
+
+    for (; it != types_.cend(); ++it)
+    {
+        if (it != begin)
+            o << ", ";
+
+        (*it)->dump(o);
+    }
+
+    o << " }";
+}

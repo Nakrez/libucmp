@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # include <ostream>
 
 # include <ucmp/ir/value-map.hh>
+# include <ucmp/ir/context.hh>
 
 namespace ucmp
 {
@@ -30,7 +31,6 @@ namespace ucmp
     {
         class Function;
         class GlobalVariable;
-        class Context;
 
         /// Contains a hole ir file
         class Unit

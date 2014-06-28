@@ -33,6 +33,15 @@ IrWriter::IrWriter(std::ostream& ostr)
 
 void IrWriter::write_unit(Unit* u)
 {
+    auto s_it = u->context_get().s_cbegin();
+    auto s_end = u->context_get().s_cend();
+
+    for (; s_it != s_end; ++s_it)
+    {
+        s_it->second->full_dump(ostr_);
+        ostr_ << misc::iendl;
+    }
+
     auto f_it = u->fun_cbegin();
     auto f_end = u->fun_cend();
 
