@@ -39,4 +39,21 @@ Context::~Context()
 {
     for (auto u : units_)
         delete u;
+
+    for (auto c : i_constants_)
+        delete c.second;
+}
+
+IntConstant* Context::iconstant_get(int c)
+{
+    IntConstant* ic = i_constants_[c];
+
+    if (ic)
+        return ic;
+
+    ic = new IntConstant(i32_, c);
+
+    i_constants_[c] = ic;
+
+    return ic;
 }

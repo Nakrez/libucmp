@@ -30,7 +30,7 @@ namespace ucmp
         class IntConstant : public Constant
         {
             public:
-                IntConstant(Context& c, int val);
+                IntConstant(sType t, int val);
                 virtual ~IntConstant() = default;
 
                 int value_get() const

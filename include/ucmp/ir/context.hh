@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # include <ucmp/ir/type.hh>
 # include <ucmp/ir/struct-type.hh>
+# include <ucmp/ir/int-constant.hh>
 
 namespace ucmp
 {
@@ -69,6 +70,8 @@ namespace ucmp
                     return structs_.find(s) != structs_.end();
                 }
 
+                IntConstant* iconstant_get(int c);
+
                 u_iterator begin()          { return units_.begin(); }
                 u_iterator end()            { return units_.end(); }
                 cu_iterator cbegin() const  { return units_.cbegin(); }
@@ -106,6 +109,7 @@ namespace ucmp
 
                 std::list<Unit*> units_;
                 std::map<misc::Symbol, sStructType> structs_;
+                std::map<int, IntConstant*> i_constants_;
         };
     } // namespace ir
 } // namespace ucmp

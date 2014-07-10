@@ -23,7 +23,7 @@ using namespace ucmp;
 using namespace ir;
 
 
-IntConstant::IntConstant(Context& c, int val)
-    : Constant(c.i32_ty_get())
+IntConstant::IntConstant(sType t, int val)
+    : Constant(t)
     , val_(val)
 {}

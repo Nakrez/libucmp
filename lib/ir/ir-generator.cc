@@ -286,7 +286,7 @@ Value* IrGenerator::create_cast(sType t, Value* v, const misc::Symbol& n)
 Value* IrGenerator::create_data_ptr(sType t, Value* v, int member,
                                     const misc::Symbol& n)
 {
-    DataPtr* dptr = new DataPtr(t, v, new IntConstant(c_, member));
+    DataPtr* dptr = new DataPtr(t, v, c_.iconstant_get(member));
 
     insert(dptr, n);
 
