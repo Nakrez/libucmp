@@ -53,6 +53,8 @@ std::string Instruction::type_to_str() const
             return "demot";
         case CAST:
             return "cast";
+        case DATA_PTR:
+            return "dataptr";
         default:
             return "";
     }

@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <ucmp/ir/ir-generator.hh>
 
+#include <ucmp/ir/int-constant.hh>
 #include <ucmp/ir/binary-inst.hh>
 #include <ucmp/ir/stack-alloc.hh>
 #include <ucmp/ir/store.hh>
@@ -28,6 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/ir/cjump.hh>
 #include <ucmp/ir/call.hh>
 #include <ucmp/ir/cast.hh>
+#include <ucmp/ir/data-ptr.hh>
 
 using namespace ucmp;
 using namespace ir;
@@ -279,4 +281,14 @@ Value* IrGenerator::create_cast(sType t, Value* v, const misc::Symbol& n)
     insert(c, n);
 
     return c;
+}
+
+Value* IrGenerator::create_data_ptr(sType t, Value* v, int member,
+                                    const misc::Symbol& n)
+{
+    DataPtr* dptr = new DataPtr(t, v, new IntConstant(c_, member));
+
+    insert(dptr, n);
+
+    return dptr;
 }

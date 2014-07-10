@@ -101,6 +101,8 @@ namespace ucmp
                                     const misc::Symbol& n = "");
                 Value* create_cast(sType t, Value* v,
                                    const misc::Symbol& n = "");
+                Value* create_data_ptr(sType t, Value* v, int member,
+                                       const misc::Symbol& n = "");
 
                 void insert(Instruction* instr, const misc::Symbol& name)
                 {

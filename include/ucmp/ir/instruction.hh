@@ -49,6 +49,7 @@ namespace ucmp
                     PROMOT,
                     DEMOT,
                     CAST,
+                    DATA_PTR,
                 };
 
             public:

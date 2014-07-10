@@ -19,6 +19,7 @@ libucmp_la_SOURCES = lib/misc/diagnostic-reporter.cc \
 					 lib/ir/call.cc \
 					 lib/ir/phi-node.cc \
 					 lib/ir/cast.cc \
+					 lib/ir/data-ptr.cc \
 					 lib/ir/context.cc \
 					 lib/ir/function.cc \
 					 lib/ir/function-type.cc \
