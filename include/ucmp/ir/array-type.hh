@@ -31,6 +31,8 @@ namespace ucmp
                 ArrayType(sType inner, unsigned size);
                 virtual ~ArrayType() = default;
 
+                virtual void dump(std::ostream& o) const override;
+
             protected:
                 sType inner_;
                 unsigned size_;

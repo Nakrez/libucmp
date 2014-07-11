@@ -26,3 +26,8 @@ ArrayType::ArrayType(sType inner, unsigned size)
     , inner_(inner)
     , size_(size)
 {}
+
+void ArrayType::dump(std::ostream& o) const
+{
+    o << "[" << size_ << " x " << *inner_ << "]";
+}
