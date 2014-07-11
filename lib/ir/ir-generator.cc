@@ -292,3 +292,13 @@ Value* IrGenerator::create_data_ptr(sType t, Value* v, int member,
 
     return dptr;
 }
+
+Value* IrGenerator::create_data_ptr(sType t, Value* v, Value* member,
+                                    const misc::Symbol& n)
+{
+    DataPtr* dptr = new DataPtr(t, v, member);
+
+    insert(dptr, n);
+
+    return dptr;
+}

@@ -22,11 +22,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using namespace ucmp;
 using namespace ir;
 
-DataPtr::DataPtr(sType t, Value* v, IntConstant* access)
+DataPtr::DataPtr(sType t, Value* v, Value* access)
     : Instruction(t, DATA_PTR)
     , v_(v)
     , c_(access)
 {}
+
 Value* DataPtr::operand_get(unsigned index) const
 {
     if (!index)

@@ -29,7 +29,7 @@ namespace ucmp
         class DataPtr : public Instruction
         {
             public:
-                DataPtr(sType t, Value* v, IntConstant* access);
+                DataPtr(sType t, Value* v, Value* access);
                 virtual ~DataPtr() = default;
 
                 virtual unsigned operand_size() const override { return 2; }
@@ -38,7 +38,7 @@ namespace ucmp
 
             protected:
                 Value* v_;
-                IntConstant* c_;
+                Value* c_;
         };
     } // namespace ir
 } // namespace ucmp
