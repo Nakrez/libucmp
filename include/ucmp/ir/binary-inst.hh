@@ -37,6 +37,12 @@ namespace ucmp
                     DIV,
                     MOD,
                     XOR,
+                    OR,
+                    AND,
+                    LSH,
+                    RSH,
+                    ALSH,
+                    ARSH
                 };
 
             public:

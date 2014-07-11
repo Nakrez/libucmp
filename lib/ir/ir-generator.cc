@@ -93,6 +93,58 @@ Value* IrGenerator::create_xor(Value* l, Value* r, const misc::Symbol& n)
     return bi;
 }
 
+Value* IrGenerator::create_or(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(BinaryInst::OR, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}
+Value* IrGenerator::create_and(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(BinaryInst::AND, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}
+Value* IrGenerator::create_lsh(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(BinaryInst::LSH, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}
+
+Value* IrGenerator::create_rsh(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(BinaryInst::RSH, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}
+
+Value* IrGenerator::create_alsh(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(BinaryInst::ALSH, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}
+
+Value* IrGenerator::create_arsh(Value* l, Value* r, const misc::Symbol& n)
+{
+    BinaryInst* bi = new BinaryInst(BinaryInst::ARSH, l->type_get(), l, r);
+
+    insert(bi, n);
+
+    return bi;
+}
+
 Value* IrGenerator::create_gt(Value* l, Value* r, const misc::Symbol& n)
 {
     Cmp* c = new Cmp(Cmp::GT, c_.i1_ty_get(), l, r);
@@ -146,7 +198,6 @@ Value* IrGenerator::create_ne(Value* l, Value* r, const misc::Symbol& n)
 
     return c;
 }
-
 Value* IrGenerator::create_stack_alloc(sType t, const misc::Symbol& n)
 {
     StackAlloc* sa = new StackAlloc(t);

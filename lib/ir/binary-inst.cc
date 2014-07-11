@@ -57,6 +57,18 @@ std::string BinaryInst::type_to_str() const
             return "mod";
         case XOR:
             return "xor";
+        case OR:
+            return "or";
+        case AND:
+            return "and";
+        case LSH:
+            return "lsh";
+        case RSH:
+            return "rsh";
+        case ALSH:
+            return "alsh";
+        case ARSH:
+            return "arsh";
     }
 
     return "";

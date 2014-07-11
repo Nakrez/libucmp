@@ -65,6 +65,18 @@ namespace ucmp
                                   Value* r, const misc::Symbol& n = "");
                 Value* create_xor(Value* l,
                                   Value* r, const misc::Symbol& n = "");
+                Value* create_or(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_and(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_lsh(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_rsh(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_alsh(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
+                Value* create_arsh(Value* l,
+                                 Value* r, const misc::Symbol& n = "");
 
                 Value* create_gt(Value* l,
                                  Value* r, const misc::Symbol& n = "");
