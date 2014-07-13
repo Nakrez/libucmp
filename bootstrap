@@ -8,7 +8,7 @@ MAIL="b.covolato@gmail.com"
 echo "GEN tools/Makefile.am"
 
 /bin/echo -n "SUBDIRS=" > tools/Makefile.am
-ls -d tools/*/ | cut -f2 -d'/' >> tools/Makefile.am
+ls -d tools/*/ | cut -f2 -d'/' | tr '\n' ' ' >> tools/Makefile.am
 
 echo "GEN configure.ac"
 
