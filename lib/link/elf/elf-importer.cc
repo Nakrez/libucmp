@@ -16,31 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef UCMP_LINK_LINK_CONTEXT_HH
-# define UCMP_LINK_LINK_CONTEXT_HH
+#include <ucmp/link/elf/elf-importer.hh>
 
-# include <vector>
-# include <string>
-# include <memory>
+using namespace ucmp;
+using namespace link;
 
-# include <ucmp/link/core/file.hh>
-
-namespace ucmp
+bool ElfImporter::parse_file(LinkContext& lc, const std::string& path)
 {
-    namespace link
-    {
-        class LinkContext
-        {
-            public:
-                LinkContext();
-                ~LinkContext();
 
-            protected:
-                std::vector<std::unique_ptr<File>> object_files_;
-                std::vector<std::unique_ptr<File>> static_libs_;
-                std::vector<std::unique_ptr<File>> dynamic_libs_;
-        };
-    } // namespace link
-} // namespace ucmp
-
-#endif /* !UCMP_LINK_LINK_CONTEXT_HH */
+}

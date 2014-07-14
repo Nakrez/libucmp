@@ -33,6 +33,7 @@ libucmp_la_SOURCES = lib/misc/diagnostic-reporter.cc \
 					 lib/ir/unit.cc \
 					 lib/ir/ir-writer.cc \
 					 lib/ir/pass-manager.cc \
-					 lib/link/core/file.cc
+					 lib/link/core/file.cc \
+					 lib/link/elf/elf-importer.cc
 
 SUBDIRS= . tools
