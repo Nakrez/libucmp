@@ -32,8 +32,8 @@ namespace ucmp
         class LinkContext
         {
             public:
-                LinkContext();
-                ~LinkContext();
+                LinkContext() = default;
+                ~LinkContext() = default;
 
             protected:
                 std::vector<std::unique_ptr<File>> object_files_;

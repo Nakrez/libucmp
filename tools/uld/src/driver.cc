@@ -16,17 +16,31 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <iostream>
-
 #include <driver.hh>
+#include <ucmp/link/elf/elf-importer.hh>
 
-int main(int argc, char *argv[])
+Driver::Driver()
+    : format_(ELF)
+    , c_()
+{}
+
+void Driver::parse_command(int argc, char **argv)
 {
-    Driver driver;
+    // Parse command line
+    for (int i = 1; i < argc; ++i)
+        files_.push_back(argv[i]);
 
-    driver.parse_command(argc, argv);
+    // Determine specific binary format we need
+    switch (format_)
+    {
+        case ELF:
+            importer_.reset(new ucmp::link::ElfImporter());
+            break;
+    }
+}
 
-    driver.link();
-
-    return 0;
+void Driver::link()
+{
+    for (auto f : files_)
+        importer_->parse_file(c_, f);
 }

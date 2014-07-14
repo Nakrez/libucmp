@@ -16,17 +16,35 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <iostream>
+#ifndef DRIVER_HH
+# define DRIVER_HH
 
-#include <driver.hh>
+# include <vector>
+# include <memory>
 
-int main(int argc, char *argv[])
+# include <ucmp/link/core/link-context.hh>
+# include <ucmp/link/core/importer.hh>
+
+class Driver
 {
-    Driver driver;
+    public:
+        enum Format
+        {
+            ELF,
+        };
 
-    driver.parse_command(argc, argv);
+    public:
+        Driver();
+        ~Driver() = default;
 
-    driver.link();
+        void parse_command(int argc, char **argv);
+        void link();
 
-    return 0;
-}
+    protected:
+        Format format_;
+        ucmp::link::LinkContext c_;
+        std::unique_ptr<ucmp::link::Importer> importer_;
+        std::vector<std::string> files_;
+};
+
+#endif /* !DRIVER_HH */
