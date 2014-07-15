@@ -17,11 +17,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include <ucmp/link/elf/elf-importer.hh>
+#include <ucmp/misc/memory-buffer.hh>
 
 using namespace ucmp;
 using namespace link;
 
 bool ElfImporter::parse_file(LinkContext& lc, const std::string& path)
 {
+    misc::MemoryBuffer buf;
 
+    if (buf.open_file(path) < 0)
+        return false;
+
+    return true;
 }
