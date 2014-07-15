@@ -248,6 +248,89 @@ namespace ucmp
             EV_CURRENT = 1, // Current version
             EV_NUM = 2,
         };
+
+        // Elf section header
+        template <class Word, class Addr, class Off>
+        struct Elf_Shdr
+        {
+            Word sh_name; // Section name (string tbl index)
+            Word sh_type; // Section type
+            Word sh_flags; // Section flags
+            Addr sh_addr; // Section virtual addr at execution
+            Off sh_offset; // Section file offset
+            Word sh_size; // Section size in bytes
+            Word sh_link; // Link to another section
+            Word sh_info; // Additional section information
+            Word sh_addralign; // Section alignment
+            Word sh_entsize; // Entry size if section holds table
+        };
+
+        typedef Elf_Shdr<Elf32_Word, Elf32_Addr, Elf32_Off> Elf32_Shdr;
+        typedef Elf_Shdr<Elf64_Word, Elf64_Addr, Elf64_Off> Elf64_Shdr;
+
+        // Legal values for sh_type (section type)
+        enum
+        {
+            SHT_NULL = 0, // Section header table entry unused
+            SHT_PROGBITS = 1, // Program data
+            SHT_SYMTAB = 2, // Symbol table
+            SHT_STRTAB = 3, // String table
+            SHT_RELA = 4, // Relocation entries with addends
+            SHT_HASH = 5, // Symbol hash table
+            SHT_DYNAMIC = 6, // Dynamic linking information
+            SHT_NOTE = 7, // Notes
+            SHT_NOBITS = 8, // Program space with no data (bss)
+            SHT_REL = 9, // Relocation entries, no addends
+            SHT_SHLIB = 10, // Reserved
+            SHT_DYNSYM = 11, // Dynamic linker symbol table
+            SHT_INIT_ARRAY = 14, // Array of constructors
+            SHT_FINI_ARRAY = 15, // Array of destructors
+            SHT_PREINIT_ARRAY = 16, // Array of pre-constructors
+            SHT_GROUP = 17, // Section group
+            SHT_SYMTAB_SHNDX = 18, // Extended section indeces
+            SHT_NUM = 19, // Number of defined types
+            SHT_LOOS = 0x60000000, // Start OS-specific
+            SHT_GNU_ATTRIBUTES = 0x6ffffff5, // Object attributes
+            SHT_GNU_HASH = 0x6ffffff6, // GNU-style hash table
+            SHT_GNU_LIBLIST = 0x6ffffff7, // Prelink library list
+            SHT_CHECKSUM = 0x6ffffff8, // Checksum for DSO content
+            SHT_LOSUNW = 0x6ffffffa, // Sun-specific low bound
+            SHT_SUNW_move = 0x6ffffffa,
+            SHT_SUNW_COMDAT = 0x6ffffffb,
+            SHT_SUNW_syminfo = 0x6ffffffc,
+            SHT_GNU_verdef = 0x6ffffffd, // Version definition section
+            SHT_GNU_verneed = 0x6ffffffe, // Version needs section
+            SHT_GNU_versym = 0x6fffffff, // Version symbol table
+            SHT_HISUNW = 0x6fffffff, // Sun-specific high bound
+            SHT_HIOS = 0x6fffffff, // End OS-specific type
+            SHT_LOPROC = 0x70000000, // Start of processor-specific
+            SHT_HIPROC = 0x7fffffff, // End of processor-specific
+            SHT_LOUSER = 0x80000000, // Start of application-specific
+            SHT_HIUSER = 0x8fffffff, // End of application-specific
+        };
+
+        // Legal values for sh_flags (Section flags)
+        enum
+        {
+            SHF_WRITE = (1 << 0), // Writable
+            SHF_ALLOC = (1 << 1), // Occupies memory during execution
+            SHF_EXECINSTR = (1 << 2), // Executable
+            SHF_MERGE = (1 << 4), // Might be merged
+            SHF_STRINGS = (1 << 5), // Contains nul-terminated strings
+            SHF_INFO_LINK = (1 << 6), // `sh_info' contains SHT index
+            SHF_LINK_ORDER = (1 << 7), // Preserve order after combining
+            SHF_OS_NONCONFORMING = (1 << 8), // Non-standard OS specific
+                                             // handling required
+            SHF_GROUP = (1 << 9), // Section is member of a group
+            SHF_TLS = (1 << 10), // Section hold thread-local data
+            SHF_MASKOS = 0x0ff00000, // OS-specific
+            SHF_MASKPROC = 0xf0000000, // Processor-specific
+            SHF_ORDERED = (1 << 30), // Special ordering requirement (Solaris)
+            SHF_EXCLUDE = (1 << 31), // Section is excluded unless referenced
+                                     // or allocated (Solaris)
+        };
+
+
     } // namespace elf
 } // namespace ucmp
 

@@ -25,12 +25,14 @@ template <>
 struct ElfImporter::ElfTraits<LinkContext::BITS32>
 {
     typedef ELF::Elf32_Ehdr Ehdr;
+    typedef ELF::Elf32_Shdr Shdr;
 };
 
 template <>
 struct ElfImporter::ElfTraits<LinkContext::BITS64>
 {
     typedef ELF::Elf64_Ehdr Ehdr;
+    typedef ELF::Elf64_Shdr Shdr;
 };
 
 bool ElfImporter::parse_file(LinkContext& lc, const std::string& path)
