@@ -4,6 +4,7 @@ AM_CPPFLAGS = -Iinclude
 lib_LTLIBRARIES = libucmp.la
 libucmp_la_SOURCES = lib/misc/diagnostic-reporter.cc \
 					 lib/misc/indent.cc \
+					 lib/misc/memory-buffer.cc \
 					 lib/misc/symbol.cc \
 					 lib/ir/value-map.cc \
 					 lib/ir/array-type.cc \
