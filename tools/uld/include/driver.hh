@@ -29,12 +29,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Driver
 {
     public:
-        enum Format
-        {
-            ELF,
-        };
-
-    public:
         Driver();
         ~Driver() = default;
 
@@ -42,7 +36,6 @@ class Driver
         void link();
 
     protected:
-        Format format_;
         ucmp::link::LinkContext c_;
         std::unique_ptr<ucmp::link::Importer> importer_;
         std::vector<std::string> files_;

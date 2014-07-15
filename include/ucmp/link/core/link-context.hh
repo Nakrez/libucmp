@@ -32,10 +32,34 @@ namespace ucmp
         class LinkContext
         {
             public:
-                LinkContext() = default;
+                enum Class
+                {
+                    BITS32,
+                    BITS64,
+                };
+
+                enum Type
+                {
+                    ELF,
+                };
+
+            public:
+                LinkContext(Class c = BITS64, Type t = ELF)
+                    : class_(c)
+                    , type_(t)
+                {}
+
                 ~LinkContext() = default;
 
+                Class class_get() const { return class_; }
+                Type type_get() const { return type_; }
+
+                void class_set(Class c) { class_ = c; }
+                void type_set(Type t) { type_ = t; }
+
             protected:
+                Class class_;
+                Type type_;
                 std::vector<std::unique_ptr<File>> object_files_;
                 std::vector<std::unique_ptr<File>> static_libs_;
                 std::vector<std::unique_ptr<File>> dynamic_libs_;

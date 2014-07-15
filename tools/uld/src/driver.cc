@@ -20,8 +20,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <ucmp/link/elf/elf-importer.hh>
 
 Driver::Driver()
-    : format_(ELF)
-    , c_()
+    : c_()
+    , importer_()
+    , files_()
 {}
 
 void Driver::parse_command(int argc, char **argv)
@@ -31,9 +32,9 @@ void Driver::parse_command(int argc, char **argv)
         files_.push_back(std::string(argv[i]));
 
     // Determine specific binary format we need
-    switch (format_)
+    switch (c_.type_get())
     {
-        case ELF:
+        case ucmp::link::LinkContext::ELF:
             importer_.reset(new ucmp::link::ElfImporter());
             break;
     }
@@ -42,5 +43,11 @@ void Driver::parse_command(int argc, char **argv)
 void Driver::link()
 {
     for (auto f : files_)
-        importer_->parse_file(c_, f);
+    {
+        if (!importer_->parse_file(c_, f))
+        {
+            std::cerr << "Error: cannot import " << f << std::endl;;
+            return;
+        }
+    }
 }
