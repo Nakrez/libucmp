@@ -57,6 +57,21 @@ namespace ucmp
                 void class_set(Class c) { class_ = c; }
                 void type_set(Type t) { type_ = t; }
 
+                void add_object_file(std::unique_ptr<File> f)
+                {
+                    object_files_.push_back(std::move(f));
+                }
+
+                void add_static_lib(std::unique_ptr<File> f)
+                {
+                    static_libs_.push_back(std::move(f));
+                }
+
+                void add_dynamic_lib(std::unique_ptr<File> f)
+                {
+                    dynamic_libs_.push_back(std::move(f));
+                }
+
             protected:
                 Class class_;
                 Type type_;

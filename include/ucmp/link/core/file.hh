@@ -36,15 +36,13 @@ namespace ucmp
                 };
 
             public:
-                File(FileKind fk, const std::string& path);
+                File(FileKind fk);
                 ~File() = default;
 
-                const std::string& path_get() const { return path_; }
                 FileKind kind_get() const { return kind_; }
 
             protected:
                 FileKind kind_;
-                std::string path_;
         };
     } // namespace link
 } // namespace ucmp

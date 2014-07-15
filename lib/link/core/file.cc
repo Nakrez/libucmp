@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using namespace ucmp;
 using namespace link;
 
-File::File(FileKind fk, const std::string& path)
+File::File(FileKind fk)
     : kind_(fk)
-    , path_(path)
 {}

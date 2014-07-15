@@ -20,6 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # define UCMP_LINK_ELF_IMPORTER_HH
 
 # include <ucmp/link/core/importer.hh>
+# include <ucmp/misc/memory-buffer.hh>
+# include <ucmp/misc/elf.hh>
 
 namespace ucmp
 {
@@ -30,8 +32,32 @@ namespace ucmp
             public:
                 virtual bool parse_file(LinkContext& lc,
                                         const std::string& path) override;
+            protected:
+                template <LinkContext::Class>
+                struct ElfTraits
+                {
+                };
+
+                template <LinkContext::Class Elf>
+                class ElfInnerImporter
+                {
+                    typedef typename ElfTraits<Elf>::Ehdr Ehdr;
+
+                    public:
+                        File* parse_file(misc::MemoryBuffer& buf);
+
+                    private:
+                        const Ehdr* header_;
+                };
+
+                typedef ElfInnerImporter<LinkContext::BITS32>
+                        Elf32InnerImporter;
+                typedef ElfInnerImporter<LinkContext::BITS64>
+                        Elf64InnerImporter;
         };
     } // namespace link
 } // namespace ucmp
+
+# include <ucmp/link/elf/elf-importer.hxx>
 
 #endif /* !UCMP_LINK_ELF_IMPORTER_HH */
