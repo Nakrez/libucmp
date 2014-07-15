@@ -28,7 +28,7 @@ void Driver::parse_command(int argc, char **argv)
 {
     // Parse command line
     for (int i = 1; i < argc; ++i)
-        files_.push_back(argv[i]);
+        files_.push_back(std::string(argv[i]));
 
     // Determine specific binary format we need
     switch (format_)
