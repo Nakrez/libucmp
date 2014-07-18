@@ -28,12 +28,12 @@ inline const std::string& ucmp::misc::Symbol::data_get() const
 
 inline bool ucmp::misc::Symbol::operator==(const ucmp::misc::Symbol& s) const
 {
-    return data_get() == s.data_get();
+    return data_ == s.data_;
 }
 
 inline bool ucmp::misc::Symbol::operator!=(const ucmp::misc::Symbol& s) const
 {
-    return data_get() != s.data_get();
+    return data_ != s.data_;
 }
 
 #endif /* !UCMP_MISC_SYMBOL_HXX */
