@@ -25,6 +25,7 @@ using namespace link;
 Fragment::Fragment(const misc::Symbol& name, const char* data, unsigned size)
     : name_(name)
     , data_()
+    , flags_(NONE)
 {
     data_.assign(data, data + size);
 }

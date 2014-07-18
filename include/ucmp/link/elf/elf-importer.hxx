@@ -54,16 +54,61 @@ namespace ucmp
                 case ELF::SHT_NULL:
                     break;
                 case ELF::SHT_SYMTAB:
+                    parse_symtab(f, buf, section);
                     break;
                 case ELF::SHT_RELA:
                     break;
                 default:
-                    f->add_frag(new Fragment(shname_get(section->sh_name),
-                                             buf.buffer_get() +
-                                             section->sh_offset,
-                                             section->sh_size));
+                    {
+                        Fragment* frag;
+
+                        frag = new Fragment(shname_get(section->sh_name),
+                                                 buf.buffer_get() +
+                                                 section->sh_offset,
+                                                 section->sh_size);
+
+                        set_frag_flags(frag, section);
+
+                        f->add_frag(frag);
+                    }
                     break;
             }
+        }
+
+        template <LinkContext::Class Elf>
+        void
+        ElfImporter::ElfInnerImporter<Elf>::parse_symtab(File* f,
+                                                         misc::MemoryBuffer& buf,
+                                                         const Shdr* section)
+        {
+
+        }
+
+        template <LinkContext::Class Elf>
+        void
+        ElfImporter::ElfInnerImporter<Elf>::set_frag_flags(Fragment* f,
+                                                           const Shdr* section)
+        {
+            if (section->sh_flags & ELF::SHF_WRITE)
+                f->set_flag(Fragment::WRITE);
+
+            if (section->sh_flags & ELF::SHF_ALLOC)
+                f->set_flag(Fragment::ALLOC);
+
+            if (section->sh_flags & ELF::SHF_EXECINSTR)
+                f->set_flag(Fragment::EXEC);
+
+            if (section->sh_flags & ELF::SHF_MERGE)
+                f->set_flag(Fragment::MERGE);
+
+            if (section->sh_flags & ELF::SHF_STRINGS)
+                f->set_flag(Fragment::STRINGS);
+
+            if (section->sh_flags & ELF::SHF_LINK_ORDER)
+                f->set_flag(Fragment::LINK_ORDER);
+
+            if (section->sh_flags & ELF::SHF_TLS)
+                f->set_flag(Fragment::TLS);
         }
 
         template <LinkContext::Class Elf>

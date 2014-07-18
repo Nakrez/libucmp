@@ -30,6 +30,18 @@ namespace ucmp
         class Fragment
         {
             public:
+                enum Flag
+                {
+                    NONE = 0,
+                    WRITE = (1 << 0),
+                    ALLOC = (1 << 1),
+                    EXEC = (1 << 2),
+                    MERGE = (1 << 4),
+                    STRINGS = (1 << 5),
+                    LINK_ORDER = (1 << 6),
+                    TLS = (1 << 7),
+                };
+            public:
                 Fragment(const misc::Symbol& name,
                          const char* data,
                          unsigned size);
@@ -40,11 +52,14 @@ namespace ucmp
                 const std::vector<char>& data_get() const { return data_; }
                 std::vector<char>& data_get() { return data_; }
 
+                void set_flag(Flag f) { flags_ |= f; }
+
                 unsigned size_get() const { return data_.size(); }
 
             private:
                 misc::Symbol name_;
                 std::vector<char> data_;
+                unsigned flags_;
         };
     } // namespace link
 } // namespace ucmp

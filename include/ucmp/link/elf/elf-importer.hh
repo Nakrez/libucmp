@@ -52,6 +52,9 @@ namespace ucmp
                     private:
                         void parse_section(File* f, misc::MemoryBuffer& buf,
                                            const Shdr* section);
+                        void parse_symtab(File* f, misc::MemoryBuffer& buf,
+                                          const Shdr* section);
+                        void set_frag_flags(Fragment* f, const Shdr* section);
                         void locate_shstr(misc::MemoryBuffer& buf,
                                           const Ehdr* elf);
                         std::string shname_get(int index);
