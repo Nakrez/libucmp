@@ -332,6 +332,101 @@ namespace ucmp
                                      // or allocated (Solaris)
         };
 
+        // Symbol Table Entry
+        template <class Word, class Xword, class Addr, class Section>
+        struct Elf_Sym
+        {
+            Word st_name; // Symbol name (string tbl index)
+            unsigned char st_info; // Symbol type and binding
+            unsigned char st_other; // Symbol visibility
+            Section st_shndx; // Section index
+            Addr st_value; // Symbol value
+            Xword st_size; // Symbol size
+
+            unsigned char st_bind_get() const
+            {
+                return static_cast<unsigned char> (st_info) >> 4;
+            }
+
+            unsigned char st_type_get() const
+            {
+                return st_info & 0xF;
+            }
+        };
+
+        typedef Elf_Sym <Elf32_Word, Elf32_Xword, Elf32_Addr, Elf32_Section>
+                Elf32_Sym;
+
+        typedef Elf_Sym <Elf64_Word, Elf64_Xword, Elf64_Addr, Elf64_Section>
+                Elf64_Sym;
+
+        // Possible values for si_boundto
+        enum
+        {
+            SYMINFO_BT_SELF = 0xffff, // Symbol bound to self
+            SYMINFO_BT_PARENT = 0xfffe, // Symbol bound to parent
+            SYMINFO_BT_LOWRESERVE = 0xff00, // Beginning of reserved entries
+        };
+
+        // Possible bitmasks for si_flags
+        enum
+        {
+            SYMINFO_FLG_DIRECT = 0x0001, // Direct bound symbol
+            SYMINFO_FLG_PASSTHRU = 0x0002, // Pass-thru symbol for translator
+            SYMINFO_FLG_COPY = 0x0004, // Symbol is a copy-reloc
+            SYMINFO_FLG_LAZYLOAD = 0x0008, // Symbol bound to object to be lazy
+                                           // loaded
+        };
+
+        // Syminfo version values
+        enum
+        {
+            SYMINFO_NONE = 0,
+            SYMINFO_CURRENT = 1,
+            SYMINFO_NUM = 2,
+        };
+
+        // Legal values for ST_BIND subfield of st_info (symbol binding).  */
+        enum
+        {
+            STB_LOCAL = 0, // Local symbol
+            STB_GLOBAL = 1, // Global symbol
+            STB_WEAK = 2, // Weak symbol
+            STB_NUM = 3, // Number of defined types
+            STB_LOOS = 10, // Start of OS-specific
+            STB_GNU_UNIQUE = 10, // Unique symbol
+            STB_HIOS = 12, // End of OS-specific
+            STB_LOPROC = 13, // Start of processor-specific
+            STB_HIPROC = 15, // End of processor-specific
+        };
+
+        // Legal values for ST_TYPE subfield of st_info (symbol type)
+        enum
+        {
+            STT_NOTYPE = 0, // Symbol type is unspecified
+            STT_OBJECT = 1, // Symbol is a data object
+            STT_FUNC = 2, // Symbol is a code object
+            STT_SECTION = 3, // Symbol associated with a section
+            STT_FILE = 4, // Symbol's name is file name
+            STT_COMMON = 5, // Symbol is a common data object
+            STT_TLS = 6, // Symbol is thread-local data object
+            STT_NUM = 7, // Number of defined types
+            STT_LOOS = 1, // Start of OS-specific
+            STT_GNU_IFUNC = 10, // Symbol is indirect code object
+            STT_HIOS = 12, // End of OS-specific
+            STT_LOPROC = 13, // Start of processor-specific
+            STT_HIPROC = 15, // End of processor-specific
+        };
+
+        template <class Half>
+        struct Elf_Syminfo
+        {
+            Half si_boundto; // Direct bindings, symbol bound to
+            Half si_flags; // Per symbol flags
+        };
+
+        typedef Elf_Syminfo <Elf32_Half> Elf32_Syminfo;
+        typedef Elf_Syminfo <Elf64_Half> Elf64_Syminfo;
 
     } // namespace elf
 } // namespace ucmp
