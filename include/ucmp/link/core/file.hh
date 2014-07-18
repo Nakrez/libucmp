@@ -20,6 +20,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # define UCMP_LINK_FILE_HH
 
 # include <string>
+# include <map>
+# include <memory>
+
+# include <ucmp/link/core/fragment.hh>
 
 namespace ucmp
 {
@@ -41,8 +45,14 @@ namespace ucmp
 
                 FileKind kind_get() const { return kind_; }
 
+                void add_frag(Fragment* f)
+                {
+                    frags_[f->name_get()] = std::unique_ptr<Fragment> (f);
+                }
+
             protected:
                 FileKind kind_;
+                std::map<misc::Symbol, std::unique_ptr<Fragment>> frags_;
         };
     } // namespace link
 } // namespace ucmp
