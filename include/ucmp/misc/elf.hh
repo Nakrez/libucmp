@@ -250,7 +250,7 @@ namespace ucmp
         };
 
         // Elf section header
-        template <class Word, class Addr, class Off>
+        template <class Word, class Xword, class Addr, class Off>
         struct Elf_Shdr
         {
             Word sh_name; // Section name (string tbl index)
@@ -258,15 +258,17 @@ namespace ucmp
             Word sh_flags; // Section flags
             Addr sh_addr; // Section virtual addr at execution
             Off sh_offset; // Section file offset
-            Word sh_size; // Section size in bytes
+            Xword sh_size; // Section size in bytes
             Word sh_link; // Link to another section
             Word sh_info; // Additional section information
-            Word sh_addralign; // Section alignment
-            Word sh_entsize; // Entry size if section holds table
+            Xword sh_addralign; // Section alignment
+            Xword sh_entsize; // Entry size if section holds table
         };
 
-        typedef Elf_Shdr<Elf32_Word, Elf32_Addr, Elf32_Off> Elf32_Shdr;
-        typedef Elf_Shdr<Elf64_Word, Elf64_Addr, Elf64_Off> Elf64_Shdr;
+        typedef Elf_Shdr<Elf32_Word, Elf32_Xword, Elf32_Addr, Elf32_Off>
+                Elf32_Shdr;
+        typedef Elf_Shdr<Elf64_Word, Elf64_Xword, Elf64_Addr, Elf64_Off>
+                Elf64_Shdr;
 
         // Legal values for sh_type (section type)
         enum

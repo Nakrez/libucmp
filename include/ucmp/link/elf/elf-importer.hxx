@@ -36,7 +36,6 @@ namespace ucmp
                     continue;
 
                 parse_section(f, buf, section);
-
             }
 
             return f;
