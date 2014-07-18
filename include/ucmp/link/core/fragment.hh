@@ -19,6 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef UCMP_LINK_FRAGMENT_HH
 # define UCMP_LINK_FRAGMENT_HH
 
+# include <vector>
+
 # include <ucmp/misc/symbol.hh>
 
 namespace ucmp
@@ -35,15 +37,14 @@ namespace ucmp
 
                 const misc::Symbol& name_get() { return name_; }
 
-                const char* data_get() const { return data_; }
-                char* data_get() { return data_; }
+                const std::vector<char>& data_get() const { return data_; }
+                std::vector<char>& data_get() { return data_; }
 
-                unsigned size_get() const { return size_; }
+                unsigned size_get() const { return data_.size(); }
 
             private:
                 misc::Symbol name_;
-                char* data_;
-                unsigned size_;
+                std::vector<char> data_;
         };
     } // namespace link
 } // namespace ucmp

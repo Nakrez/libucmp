@@ -24,13 +24,10 @@ using namespace link;
 
 Fragment::Fragment(const misc::Symbol& name, const char* data, unsigned size)
     : name_(name)
-    , data_(new char[size])
-    , size_(size)
+    , data_()
 {
-    memcpy(data_, data, size_);
+    data_.assign(data, data + size);
 }
 
 Fragment::~Fragment()
-{
-    delete[] data_;
-}
+{}
