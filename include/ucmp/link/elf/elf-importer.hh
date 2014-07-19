@@ -45,6 +45,7 @@ namespace ucmp
                 {
                     typedef typename ElfTraits<Elf>::Ehdr Ehdr;
                     typedef typename ElfTraits<Elf>::Shdr Shdr;
+                    typedef typename ElfTraits<Elf>::Sym Sym;
 
                     public:
                         File* parse_file(misc::MemoryBuffer& buf);
@@ -57,10 +58,14 @@ namespace ucmp
                         void set_frag_flags(Fragment* f, const Shdr* section);
                         void locate_shstr(misc::MemoryBuffer& buf,
                                           const Ehdr* elf);
-                        std::string shname_get(int index);
+                        void locate_strtab(misc::MemoryBuffer& buf,
+                                           const Ehdr* elf);
+                        misc::Symbol shname_get(int index);
+                        misc::Symbol strname_get(int index);
 
                     private:
-                        const char *shstrtab_;
+                        const char* shstrtab_;
+                        const char* strtab_;
                 };
 
                 typedef ElfInnerImporter<LinkContext::BITS32>

@@ -23,6 +23,7 @@ namespace ucmp
                 f = new File(File::Object);
 
             locate_shstr(buf, header);
+            locate_strtab(buf, header);
 
             const Shdr *section;
 
@@ -81,7 +82,13 @@ namespace ucmp
                                                          misc::MemoryBuffer& buf,
                                                          const Shdr* section)
         {
+            const char* sh_buffer = buf.buffer_get() + section->sh_offset;
+            const char* sh_buffer_end = sh_buffer + section->sh_size;
+            const Sym* s = reinterpret_cast<const Sym*> (sh_buffer);
 
+            for (; reinterpret_cast<const char*>(s) < sh_buffer_end; ++s)
+            {
+            }
         }
 
         template <LinkContext::Class Elf>
@@ -127,9 +134,36 @@ namespace ucmp
         }
 
         template <LinkContext::Class Elf>
-        std::string ElfImporter::ElfInnerImporter<Elf>::shname_get(int index)
+        void
+        ElfImporter::ElfInnerImporter<Elf>::locate_strtab(misc::MemoryBuffer& buf,
+                                                          const Ehdr* elf)
+        {
+            const Shdr* strtab_section;
+            misc::Symbol sh_name = ".strtab";
+
+            strtab_section = reinterpret_cast<const Shdr*> (buf.buffer_get() +
+                                                            elf->e_shoff);
+
+            for (unsigned i = 0; i < elf->e_shnum; ++i, ++strtab_section)
+            {
+                if (shname_get(strtab_section->sh_name) == sh_name)
+                {
+                    strtab_ = buf.buffer_get() + strtab_section->sh_offset;
+                    break;
+                }
+            }
+        }
+
+        template <LinkContext::Class Elf>
+        misc::Symbol ElfImporter::ElfInnerImporter<Elf>::shname_get(int index)
         {
             return std::string(shstrtab_ + index);
+        }
+
+        template <LinkContext::Class Elf>
+        misc::Symbol ElfImporter::ElfInnerImporter<Elf>::strname_get(int index)
+        {
+            return std::string(strtab_ + index);
         }
     } // namespace link
 } // namespace ucmp
