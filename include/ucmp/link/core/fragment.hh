@@ -36,10 +36,10 @@ namespace ucmp
                     WRITE = (1 << 0),
                     ALLOC = (1 << 1),
                     EXEC = (1 << 2),
-                    MERGE = (1 << 4),
-                    STRINGS = (1 << 5),
-                    LINK_ORDER = (1 << 6),
-                    TLS = (1 << 7),
+                    MERGE = (1 << 3),
+                    STRINGS = (1 << 4),
+                    LINK_ORDER = (1 << 5),
+                    TLS = (1 << 6),
                 };
             public:
                 Fragment(const misc::Symbol& name,
@@ -55,6 +55,8 @@ namespace ucmp
                 void set_flag(Flag f) { flags_ |= f; }
 
                 unsigned size_get() const { return data_.size(); }
+
+                void dump(std::ostream& o) const;
 
             private:
                 misc::Symbol name_;

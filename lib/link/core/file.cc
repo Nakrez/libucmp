@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include <ucmp/link/core/file.hh>
 #include <iostream>
+
 using namespace ucmp;
 using namespace link;
 
@@ -25,3 +26,19 @@ File::File(const misc::Symbol& name, FileKind fk)
     : name_(name)
     , kind_(fk)
 {}
+
+void File::dump(std::ostream& o) const
+{
+    o << "File: " << name_ << std::endl;
+
+    o << std::endl;
+
+    o << "Fragments:" << std::endl;
+
+    for (auto f = frags_.begin(); f != frags_.end(); ++f)
+    {
+        f->second->dump(o);
+
+        o << std::endl;
+    }
+}

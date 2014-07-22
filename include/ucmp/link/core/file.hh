@@ -57,6 +57,8 @@ namespace ucmp
                     frags_[f->name_get()] = std::unique_ptr<Fragment> (f);
                 }
 
+                void dump(std::ostream& o) const;
+
             protected:
                 misc::Symbol name_;
                 FileKind kind_;
@@ -65,5 +67,12 @@ namespace ucmp
         };
     } // namespace link
 } // namespace ucmp
+
+inline std::ostream& operator<<(std::ostream& o, const ucmp::link::File& f)
+{
+    f.dump(o);
+
+    return o;
+}
 
 #endif /* !FILE_HH */

@@ -50,4 +50,9 @@ void Driver::link()
             return;
         }
     }
+
+    for (auto f = c_.object_cbegin(); f != c_.object_cend(); ++f)
+    {
+        std::cout << **f;
+    }
 }

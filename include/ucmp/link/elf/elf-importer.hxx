@@ -65,9 +65,9 @@ namespace ucmp
                         Fragment* frag;
 
                         frag = new Fragment(shname_get(section->sh_name),
-                                                 buf.buffer_get() +
-                                                 section->sh_offset,
-                                                 section->sh_size);
+                                            buf.buffer_get() +
+                                            section->sh_offset,
+                                            section->sh_size);
 
                         set_frag_flags(frag, section);
 
