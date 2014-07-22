@@ -441,6 +441,43 @@ namespace ucmp
         typedef Elf_Syminfo <Elf32_Half> Elf32_Syminfo;
         typedef Elf_Syminfo <Elf64_Half> Elf64_Syminfo;
 
+        struct Elf32_Rel
+        {
+            Elf32_Addr r_offset;
+            Elf32_Word r_info;
+
+            Elf32_Word sym_get() const { return r_info >> 8; }
+            unsigned char type_get() const { return r_info & 0xFF; }
+        };
+
+        struct Elf32_Rela
+        {
+            Elf32_Addr r_offset;
+            Elf32_Word r_info;
+            Elf32_Sword r_addend;
+
+            Elf32_Word sym_get() const { return r_info >> 8; }
+            unsigned char type_get() const { return r_info & 0xFF; }
+        };
+
+        struct Elf64_Rel
+        {
+            Elf64_Addr r_offset;
+            Elf64_Xword r_info;
+
+            Elf64_Word sym_get() const { return r_info >> 32; }
+            Elf64_Word type_get() const { return r_info & 0xFFFFFFFF; }
+        };
+
+        struct Elf64_Rela
+        {
+            Elf64_Addr r_offset;
+            Elf64_Xword r_info;
+            Elf64_Sxword r_addend;
+
+            Elf64_Word sym_get() const { return r_info >> 32; }
+            Elf64_Word type_get() const { return r_info & 0xFFFFFFFF; }
+        };
     } // namespace elf
 } // namespace ucmp
 
