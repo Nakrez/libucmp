@@ -31,6 +31,10 @@ namespace ucmp
     {
         class LinkContext
         {
+            typedef std::vector<std::unique_ptr<File>>::const_iterator
+                    cit_file;
+            typedef std::vector<std::unique_ptr<File>>::iterator it_file;
+
             public:
                 enum Class
                 {
@@ -56,6 +60,13 @@ namespace ucmp
 
                 void class_set(Class c) { class_ = c; }
                 void type_set(Type t) { type_ = t; }
+
+                it_file object_begin() { return object_files_.begin(); }
+                cit_file object_begin() const { return object_files_.cbegin(); }
+                it_file object_end() { return object_files_.end(); }
+                cit_file object_end() const { return object_files_.cend(); }
+                cit_file object_cbegin() const { return object_files_.cbegin(); }
+                cit_file object_cend() const { return object_files_.cend(); }
 
                 void add_object_file(std::unique_ptr<File> f)
                 {
