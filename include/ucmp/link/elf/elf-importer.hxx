@@ -79,21 +79,6 @@ namespace ucmp
 
         template <LinkContext::Class Elf>
         void
-        ElfImporter::ElfInnerImporter<Elf>::parse_symtab(File* f,
-                                                         misc::MemoryBuffer& buf,
-                                                         const Shdr* section)
-        {
-            const char* sh_buffer = buf.buffer_get() + section->sh_offset;
-            const char* sh_buffer_end = sh_buffer + section->sh_size;
-            const Sym* s = reinterpret_cast<const Sym*> (sh_buffer);
-
-            for (; reinterpret_cast<const char*>(s) < sh_buffer_end; ++s)
-            {
-            }
-        }
-
-        template <LinkContext::Class Elf>
-        void
         ElfImporter::ElfInnerImporter<Elf>::set_frag_flags(Fragment* f,
                                                            const Shdr* section)
         {
@@ -117,6 +102,77 @@ namespace ucmp
 
             if (section->sh_flags & ELF::SHF_TLS)
                 f->set_flag(Fragment::TLS);
+        }
+
+        template <LinkContext::Class Elf>
+        void
+        ElfImporter::ElfInnerImporter<Elf>::parse_symtab(File* f,
+                                                         misc::MemoryBuffer& buf,
+                                                         const Shdr* section)
+        {
+            const char* sh_buffer = buf.buffer_get() + section->sh_offset;
+            const char* sh_buffer_end = sh_buffer + section->sh_size;
+            const Sym* s = reinterpret_cast<const Sym*> (sh_buffer);
+            Symbol::Type type = Symbol::T_NONE;
+            Symbol* sym;
+
+            for (; reinterpret_cast<const char*>(s) < sh_buffer_end; ++s)
+            {
+                type = sym_type_get(s);
+
+                if (type == Symbol::T_NONE)
+                    continue;
+
+                sym = new Symbol(strname_get(s->st_value), s->st_value,
+                                 s->st_size, shname_get(s->st_shndx),
+                                 type, sym_bind_get(s));
+
+                f->sym_tab_get().symbol_add(sym);
+            }
+        }
+
+        template <LinkContext::Class Elf>
+        Symbol::Type
+        ElfImporter::ElfInnerImporter<Elf>::sym_type_get(const Sym* s)
+        {
+            switch (s->st_type_get())
+            {
+                case ELF::STT_NOTYPE:
+                    return Symbol::T_NONE;
+                case ELF::STT_OBJECT:
+                    return Symbol::T_OBJ;
+                case ELF::STT_FUNC:
+                    return Symbol::T_CODE;
+                case ELF::STT_SECTION:
+                    return Symbol::T_FRAG;
+                case ELF::STT_COMMON:
+                    return Symbol::T_COMMON;
+                case ELF::STT_TLS:
+                    return Symbol::T_TLS;
+                default:
+                    return Symbol::T_NONE;
+            }
+
+            return Symbol::T_NONE;
+        }
+
+        template <LinkContext::Class Elf>
+        Symbol::Binding
+        ElfImporter::ElfInnerImporter<Elf>::sym_bind_get(const Sym* s)
+        {
+            switch (s->st_bind_get())
+            {
+                case ELF::STB_LOCAL:
+                    return Symbol::B_LOCAL;
+                case ELF::STB_GLOBAL:
+                    return Symbol::B_GLOBAL;
+                case ELF::STB_WEAK:
+                    return Symbol::B_WEAK;
+                default:
+                    return Symbol::B_NONE;
+            }
+
+            return Symbol::B_NONE;
         }
 
         template <LinkContext::Class Elf>

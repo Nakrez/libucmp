@@ -36,6 +36,8 @@ namespace ucmp
                     T_OBJ,
                     T_CODE,
                     T_FRAG,
+                    T_COMMON,
+                    T_TLS,
                 };
 
                 enum Binding

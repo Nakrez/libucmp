@@ -35,15 +35,15 @@ const Symbol* SymbolTable::symbol_get(const misc::Symbol& name) const
 
 bool SymbolTable::symbol_add(Symbol* sym)
 {
-    auto ret = table_.insert(std::make_pair(sym->name_get(),
-                                            std::shared_ptr<Symbol> (sym)));
+    // Create shared ptr -> delete ptr if merged (not needed anymore)
+    std::shared_ptr<Symbol> ssym = std::shared_ptr<Symbol> (sym);
+
+    auto ret = table_.insert(std::make_pair(sym->name_get(), ssym));
 
     if (ret.second)
         return true;
 
-    bool merge = (*ret.first).second->merge_symbol(*sym);
-
-    delete sym;
+    bool merge = (*ret.first).second->merge_symbol(*ssym);
 
     return merge;
 }

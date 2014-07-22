@@ -333,15 +333,14 @@ namespace ucmp
         };
 
         // Symbol Table Entry
-        template <class Word, class Xword, class Addr, class Section>
-        struct Elf_Sym
+        struct Elf32_Sym
         {
-            Word st_name; // Symbol name (string tbl index)
-            Addr st_value; // Symbol value
-            Xword st_size; // Symbol size
+            Elf32_Word st_name; // Symbol name (string tbl index)
+            Elf32_Addr st_value; // Symbol value
+            Elf32_Word st_size; // Symbol size
             unsigned char st_info; // Symbol type and binding
             unsigned char st_other; // Symbol visibility
-            Section st_shndx; // Section index
+            Elf32_Half st_shndx; // Section index
 
             unsigned char st_bind_get() const
             {
@@ -354,11 +353,25 @@ namespace ucmp
             }
         };
 
-        typedef Elf_Sym <Elf32_Word, Elf32_Xword, Elf32_Addr, Elf32_Section>
-                Elf32_Sym;
+        struct Elf64_Sym
+        {
+            Elf64_Word st_name; // Symbol name (string tbl index)
+            unsigned char st_info; // Symbol type and binding
+            unsigned char st_other; // Symbol visibility
+            Elf64_Half st_shndx; // Section index
+            Elf64_Addr st_value; // Symbol value
+            Elf64_Xword st_size; // Symbol size
 
-        typedef Elf_Sym <Elf64_Word, Elf64_Xword, Elf64_Addr, Elf64_Section>
-                Elf64_Sym;
+            unsigned char st_bind_get() const
+            {
+                return st_info >> 4;
+            }
+
+            unsigned char st_type_get() const
+            {
+                return st_info & 0xF;
+            }
+        };
 
         // Possible values for si_boundto
         enum

@@ -54,13 +54,18 @@ namespace ucmp
                     private:
                         void parse_section(File* f, misc::MemoryBuffer& buf,
                                            const Shdr* section);
+                        void set_frag_flags(Fragment* f, const Shdr* section);
+
                         void parse_symtab(File* f, misc::MemoryBuffer& buf,
                                           const Shdr* section);
-                        void set_frag_flags(Fragment* f, const Shdr* section);
+                        Symbol::Type sym_type_get(const Sym* s);
+                        Symbol::Binding sym_bind_get(const Sym* s);
+
                         void locate_shstr(misc::MemoryBuffer& buf,
                                           const Ehdr* elf);
                         void locate_strtab(misc::MemoryBuffer& buf,
                                            const Ehdr* elf);
+
                         misc::Symbol shname_get(int index);
                         misc::Symbol strname_get(int index);
 

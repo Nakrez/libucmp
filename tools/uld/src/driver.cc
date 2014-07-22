@@ -53,6 +53,6 @@ void Driver::link()
 
     for (auto f = c_.object_cbegin(); f != c_.object_cend(); ++f)
     {
-        std::cout << **f;
+        std::cout << **f << std::endl;
     }
 }
