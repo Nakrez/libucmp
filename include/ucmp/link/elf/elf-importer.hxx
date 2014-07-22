@@ -14,27 +14,25 @@ namespace ucmp
         {
             File* f = nullptr;
 
-            const Ehdr *header;
+            ehdr_ = reinterpret_cast<const Ehdr*> (buf.buffer_get());
 
-            header = reinterpret_cast<const Ehdr*> (buf.buffer_get());
-
-            if (header->e_type == ELF::ET_DYN)
+            if (ehdr_->e_type == ELF::ET_DYN)
                 f = new File(name, File::DynLib);
             else
                 f = new File(name, File::Object);
 
-            locate_shstr(buf, header);
-            locate_strtab(buf, header);
+            locate_shstr(buf);
+            locate_strtab(buf);
 
             const Shdr *section;
 
             section = reinterpret_cast<const Shdr*> (buf.buffer_get() +
-                                                     header->e_shoff);
+                                                     ehdr_->e_shoff);
 
-            for (int i = 0; i < header->e_shnum; ++i, ++section)
+            for (int i = 0; i < ehdr_->e_shnum; ++i, ++section)
             {
                 // Don't import shstrtab, it's useless
-                if (i == header->e_shstrndx)
+                if (i == ehdr_->e_shstrndx)
                     continue;
 
                 parse_section(f, buf, section);
@@ -57,6 +55,8 @@ namespace ucmp
                     break;
                 case ELF::SHT_SYMTAB:
                     parse_symtab(f, buf, section);
+                    break;
+                case ELF::SHT_REL:
                     break;
                 case ELF::SHT_RELA:
                     break;
@@ -115,6 +115,7 @@ namespace ucmp
             const Sym* s = reinterpret_cast<const Sym*> (sh_buffer);
             Symbol::Type type = Symbol::T_NONE;
             Symbol* sym;
+            const Shdr* rel_sect;
 
             for (; reinterpret_cast<const char*>(s) < sh_buffer_end; ++s)
             {
@@ -123,8 +124,14 @@ namespace ucmp
                 if (type == Symbol::T_NONE && (s->st_shndx || !s->st_name))
                     continue;
 
+                rel_sect = reinterpret_cast<const Shdr*> (buf.buffer_get() +
+                                                          ehdr_->e_shoff +
+                                                          s->st_shndx *
+                                                          sizeof (Shdr));
+
+
                 sym = new Symbol(strname_get(s->st_name), s->st_value,
-                                 s->st_size, shname_get(s->st_shndx),
+                                 s->st_size, shname_get(rel_sect->sh_name),
                                  type, sym_bind_get(s));
 
                 if (!s->st_shndx)
@@ -178,14 +185,13 @@ namespace ucmp
 
         template <LinkContext::Class Elf>
         void
-        ElfImporter::ElfInnerImporter<Elf>::locate_shstr(misc::MemoryBuffer& buf,
-                                                         const Ehdr* elf)
+        ElfImporter::ElfInnerImporter<Elf>::locate_shstr(misc::MemoryBuffer& buf)
         {
             const Shdr *shstr_section;
 
             shstr_section = reinterpret_cast<const Shdr*> (buf.buffer_get() +
-                                                           elf->e_shoff +
-                                                           elf->e_shstrndx *
+                                                           ehdr_->e_shoff +
+                                                           ehdr_->e_shstrndx *
                                                            sizeof (Shdr));
 
             shstrtab_ = buf.buffer_get() + shstr_section->sh_offset;
@@ -193,16 +199,15 @@ namespace ucmp
 
         template <LinkContext::Class Elf>
         void
-        ElfImporter::ElfInnerImporter<Elf>::locate_strtab(misc::MemoryBuffer& buf,
-                                                          const Ehdr* elf)
+        ElfImporter::ElfInnerImporter<Elf>::locate_strtab(misc::MemoryBuffer& buf)
         {
             const Shdr* strtab_section;
             misc::Symbol sh_name = ".strtab";
 
             strtab_section = reinterpret_cast<const Shdr*> (buf.buffer_get() +
-                                                            elf->e_shoff);
+                                                            ehdr_->e_shoff);
 
-            for (unsigned i = 0; i < elf->e_shnum; ++i, ++strtab_section)
+            for (unsigned i = 0; i < ehdr_->e_shnum; ++i, ++strtab_section)
             {
                 if (shname_get(strtab_section->sh_name) == sh_name)
                 {

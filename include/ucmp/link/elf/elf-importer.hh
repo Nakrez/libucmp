@@ -61,10 +61,8 @@ namespace ucmp
                         Symbol::Type sym_type_get(const Sym* s);
                         Symbol::Binding sym_bind_get(const Sym* s);
 
-                        void locate_shstr(misc::MemoryBuffer& buf,
-                                          const Ehdr* elf);
-                        void locate_strtab(misc::MemoryBuffer& buf,
-                                           const Ehdr* elf);
+                        void locate_shstr(misc::MemoryBuffer& buf);
+                        void locate_strtab(misc::MemoryBuffer& buf);
 
                         misc::Symbol shname_get(int index);
                         misc::Symbol strname_get(int index);
@@ -72,6 +70,7 @@ namespace ucmp
                     private:
                         const char* shstrtab_;
                         const char* strtab_;
+                        const Ehdr* ehdr_;
                 };
 
                 typedef ElfInnerImporter<LinkContext::BITS32>
