@@ -33,6 +33,7 @@ Symbol::Symbol(const misc::Symbol& name,
     , size_(size)
     , type_(type)
     , binding_(binding)
+    , undef_(false)
 {}
 
 bool Symbol::merge_symbol(const Symbol& sym)

@@ -35,7 +35,6 @@ namespace ucmp
                     T_NONE,
                     T_OBJ,
                     T_CODE,
-                    T_FRAG,
                     T_COMMON,
                     T_TLS,
                 };
@@ -71,6 +70,8 @@ namespace ucmp
 
                 bool merge_symbol(const Symbol& sym);
 
+                void undefined_set() { undef_ = true; }
+
             private:
                 misc::Symbol name_;
                 misc::Symbol frag_name_;
@@ -82,6 +83,8 @@ namespace ucmp
 
                 Type type_;
                 Binding binding_;
+
+                bool undef_;
         };
     } // namespace link
 } // namespace ucmp

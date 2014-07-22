@@ -120,12 +120,15 @@ namespace ucmp
             {
                 type = sym_type_get(s);
 
-                if (type == Symbol::T_NONE)
+                if (type == Symbol::T_NONE && s->st_shndx)
                     continue;
 
-                sym = new Symbol(strname_get(s->st_value), s->st_value,
+                sym = new Symbol(strname_get(s->st_name), s->st_value,
                                  s->st_size, shname_get(s->st_shndx),
                                  type, sym_bind_get(s));
+
+                if (!s->st_shndx)
+                    sym->undefined_set();
 
                 f->sym_tab_get().symbol_add(sym);
             }
@@ -143,8 +146,6 @@ namespace ucmp
                     return Symbol::T_OBJ;
                 case ELF::STT_FUNC:
                     return Symbol::T_CODE;
-                case ELF::STT_SECTION:
-                    return Symbol::T_FRAG;
                 case ELF::STT_COMMON:
                     return Symbol::T_COMMON;
                 case ELF::STT_TLS:
