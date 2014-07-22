@@ -48,7 +48,8 @@ namespace ucmp
                     typedef typename ElfTraits<Elf>::Sym Sym;
 
                     public:
-                        File* parse_file(misc::MemoryBuffer& buf);
+                        File* parse_file(misc::MemoryBuffer& buf,
+                                         const std::string& name);
 
                     private:
                         void parse_section(File* f, misc::MemoryBuffer& buf,

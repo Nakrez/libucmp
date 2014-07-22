@@ -9,7 +9,8 @@ namespace ucmp
     {
         template <LinkContext::Class Elf>
         File*
-        ElfImporter::ElfInnerImporter<Elf>::parse_file(misc::MemoryBuffer& buf)
+        ElfImporter::ElfInnerImporter<Elf>::parse_file(misc::MemoryBuffer& buf,
+                                                       const std::string& name)
         {
             File* f = nullptr;
 
@@ -18,9 +19,9 @@ namespace ucmp
             header = reinterpret_cast<const Ehdr*> (buf.buffer_get());
 
             if (header->e_type == ELF::ET_DYN)
-                f = new File(File::DynLib);
+                f = new File(name, File::DynLib);
             else
-                f = new File(File::Object);
+                f = new File(name, File::Object);
 
             locate_shstr(buf, header);
             locate_strtab(buf, header);

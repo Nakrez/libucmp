@@ -21,8 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 using namespace ucmp;
 using namespace link;
 
-File::File(FileKind fk)
-    : kind_(fk)
-{
-    std::cout << st_.symbol_get("suce") << std::endl;
-}
+File::File(const misc::Symbol& name, FileKind fk)
+    : name_(name)
+    , kind_(fk)
+{}

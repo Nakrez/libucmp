@@ -59,13 +59,13 @@ bool ElfImporter::parse_file(LinkContext& lc, const std::string& path)
     {
         Elf32InnerImporter importer;
 
-        f = importer.parse_file(buf);
+        f = importer.parse_file(buf, path);
     }
     else if (elf_header->class_get() == ELF::ELFCLASS64)
     {
         Elf64InnerImporter importer;
 
-        f = importer.parse_file(buf);
+        f = importer.parse_file(buf, path);
     }
     else
         return false;

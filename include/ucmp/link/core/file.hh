@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # include <map>
 # include <memory>
 
+# include <ucmp/misc/symbol.hh>
 # include <ucmp/link/core/fragment.hh>
 # include <ucmp/link/core/symbol-table.hh>
 
@@ -41,10 +42,12 @@ namespace ucmp
                 };
 
             public:
-                File(FileKind fk);
+                File(const misc::Symbol& name, FileKind fk);
                 ~File() = default;
 
                 FileKind kind_get() const { return kind_; }
+
+                const misc::Symbol& name_get() const { return name_; }
 
                 const SymbolTable& sym_tab_get() const { return st_; }
                 SymbolTable& sym_tab_get() { return st_; }
@@ -55,6 +58,7 @@ namespace ucmp
                 }
 
             protected:
+                misc::Symbol name_;
                 FileKind kind_;
                 std::map<misc::Symbol, std::unique_ptr<Fragment>> frags_;
                 SymbolTable st_;
