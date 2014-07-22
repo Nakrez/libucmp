@@ -34,3 +34,20 @@ Symbol::Symbol(const misc::Symbol& name,
     , type_(type)
     , binding_(binding)
 {}
+
+bool Symbol::merge_symbol(const Symbol& sym)
+{
+    if (sym.binding_get() == B_WEAK)
+        return true;
+
+    if (binding_ != B_WEAK)
+        return false;
+
+    frag_name_ = sym.frag_name_get();
+    value_ = sym.value_get();
+    size_ = sym.size_get();
+    type_ = sym.type_get();
+    binding_ = sym.binding_get();
+
+    return true;
+}

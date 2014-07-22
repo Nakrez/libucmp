@@ -16,13 +16,34 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/link/core/file.hh>
-#include <iostream>
-using namespace ucmp;
-using namespace link;
+#ifndef UCMP_LINK_SYMBOL_TABLE_HH
+# define UCMP_LINK_SYMBOL_TABLE_HH
 
-File::File(FileKind fk)
-    : kind_(fk)
+# include <map>
+# include <memory>
+
+# include <ucmp/link/core/symbol.hh>
+
+namespace ucmp
 {
-    std::cout << st_.symbol_get("suce") << std::endl;
-}
+    namespace link
+    {
+        class SymbolTable
+        {
+            public:
+                SymbolTable() = default;
+                ~SymbolTable() = default;
+
+                // Get the symbol named @a name. nullptr is returned if it does
+                // no exist
+                const Symbol* symbol_get(const misc::Symbol& name) const;
+
+                bool symbol_add(Symbol* sym);
+
+            private:
+                std::map<misc::Symbol, std::shared_ptr<Symbol>> table_;
+        };
+    } // namespace link
+} // namespace ucmp
+
+#endif /* !UCMP_LINK_SYMBOL_TABLE_HH */

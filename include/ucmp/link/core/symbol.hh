@@ -67,6 +67,8 @@ namespace ucmp
                 Type type_get() const { return type_; }
                 Binding binding_get() const { return binding_; }
 
+                bool merge_symbol(const Symbol& sym);
+
             private:
                 misc::Symbol name_;
                 misc::Symbol frag_name_;

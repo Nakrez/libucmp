@@ -16,13 +16,34 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <ucmp/link/core/file.hh>
-#include <iostream>
+#include <ucmp/link/core/symbol-table.hh>
+
 using namespace ucmp;
 using namespace link;
 
-File::File(FileKind fk)
-    : kind_(fk)
+const Symbol* SymbolTable::symbol_get(const misc::Symbol& name) const
 {
-    std::cout << st_.symbol_get("suce") << std::endl;
+    try
+    {
+        return table_.at(name).get();
+    }
+    catch (std::out_of_range&)
+    {
+        return nullptr;
+    }
+}
+
+bool SymbolTable::symbol_add(Symbol* sym)
+{
+    auto ret = table_.insert(std::make_pair(sym->name_get(),
+                                            std::shared_ptr<Symbol> (sym)));
+
+    if (ret.second)
+        return true;
+
+    bool merge = (*ret.first).second->merge_symbol(*sym);
+
+    delete sym;
+
+    return merge;
 }
