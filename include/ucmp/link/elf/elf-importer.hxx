@@ -120,7 +120,7 @@ namespace ucmp
             {
                 type = sym_type_get(s);
 
-                if (type == Symbol::T_NONE && s->st_shndx)
+                if (type == Symbol::T_NONE && (s->st_shndx || !s->st_name))
                     continue;
 
                 sym = new Symbol(strname_get(s->st_name), s->st_value,
