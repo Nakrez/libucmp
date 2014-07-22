@@ -337,15 +337,15 @@ namespace ucmp
         struct Elf_Sym
         {
             Word st_name; // Symbol name (string tbl index)
+            Addr st_value; // Symbol value
+            Xword st_size; // Symbol size
             unsigned char st_info; // Symbol type and binding
             unsigned char st_other; // Symbol visibility
             Section st_shndx; // Section index
-            Addr st_value; // Symbol value
-            Xword st_size; // Symbol size
 
             unsigned char st_bind_get() const
             {
-                return static_cast<unsigned char> (st_info) >> 4;
+                return st_info >> 4;
             }
 
             unsigned char st_type_get() const
