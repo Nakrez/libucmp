@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # include <map>
 # include <memory>
+# include <iostream>
 
 # include <ucmp/link/core/symbol.hh>
 
@@ -39,6 +40,15 @@ namespace ucmp
                 const Symbol* symbol_get(const misc::Symbol& name) const;
 
                 bool symbol_add(Symbol* sym);
+
+                void dump(std::ostream& o) const
+                {
+                    for (auto s : table_)
+                    {
+                        s.second->dump(o);
+                        o << std::endl;
+                    }
+                }
 
             private:
                 std::map<misc::Symbol, std::shared_ptr<Symbol>> table_;

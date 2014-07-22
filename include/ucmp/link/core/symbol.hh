@@ -72,6 +72,8 @@ namespace ucmp
 
                 void undefined_set() { undef_ = true; }
 
+                void dump(std::ostream& o) const;
+
             private:
                 misc::Symbol name_;
                 misc::Symbol frag_name_;

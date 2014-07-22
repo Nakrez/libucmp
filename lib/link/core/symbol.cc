@@ -17,6 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include <ucmp/link/core/symbol.hh>
+#include <iostream>
 
 using namespace ucmp;
 using namespace link;
@@ -51,4 +52,52 @@ bool Symbol::merge_symbol(const Symbol& sym)
     binding_ = sym.binding_get();
 
     return true;
+}
+
+void Symbol::dump(std::ostream& o) const
+{
+    o << name_ << " (";
+
+    if (undef_)
+        o << "UNDEFINED";
+    else
+        o << frag_name_;
+
+    o << ") : ";
+    o << std::hex << "0x" << value_ << " / " << std::dec << size_ << ", ";
+
+    switch (type_)
+    {
+        case T_NONE:
+            o << "T_NONE | ";
+            break;
+        case T_OBJ:
+            o << "T_OBJ | ";
+            break;
+        case T_CODE:
+            o << "T_CODE | ";
+            break;
+        case T_COMMON:
+            o << "T_COMMON | ";
+            break;
+        case T_TLS:
+            o << "T_TLS | ";
+            break;
+    }
+
+    switch (binding_)
+    {
+        case B_NONE:
+            o << "B_NONE";
+            break;
+        case B_GLOBAL:
+            o << "B_GLOBAL";
+            break;
+        case B_LOCAL:
+            o << "B_LOCAL";
+            break;
+        case B_WEAK:
+            o << "B_WEAK";
+            break;
+    }
 }

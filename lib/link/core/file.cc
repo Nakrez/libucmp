@@ -41,4 +41,10 @@ void File::dump(std::ostream& o) const
 
         o << std::endl;
     }
+
+    o << std::endl;
+    o << "Symbol Table: NAME (SECTION) : VALUE / SIZE, TYPE / BINDING"
+      << std::endl;
+
+    st_.dump(o);
 }
